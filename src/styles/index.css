@@ -52,13 +52,14 @@ body {
     line-height: 0.95;
   }
 
-  /* Fluid hero — never overflows. Scales from 320px to 1920px viewports. */
+  /* Fluid hero — tuned to fit headline + CTAs above the fold on every laptop.
+     Was 9.2vw / 8.5rem max which forced 3-line wraps at 1366px. */
   .display-hero {
     font-family: 'Inter', system-ui, sans-serif;
     font-weight: 600;
-    letter-spacing: -0.045em;
-    line-height: 0.92;
-    font-size: clamp(2.6rem, 9.2vw, 8.5rem);
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    font-size: clamp(2.4rem, 7vw, 6.5rem);
   }
 
   .display-xl {
