@@ -51,62 +51,47 @@ export default function Trust() {
           </p>
         </div>
 
-        {/* Logo wall — real favicons pulled from each client domain */}
-        <div className="mt-10 md:mt-12">
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+        {/* Client logotype strip — single line, premium, no duplication of Work section */}
+        <div className="mt-10 md:mt-14">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
             <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/45">
-              {projects.length} live products · click any to verify
+              {projects.length} live products · 5 industries
             </p>
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/30 hidden sm:block">
-              Hover for details →
-            </p>
+            <a
+              href="#work"
+              className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/45 hover:text-accent-lime transition"
+            >
+              See projects ↓
+            </a>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {projects.map((c, i) => (
-              <motion.a
-                key={c.id}
-                href={c.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cursor="hover"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.45, delay: i * 0.04 }}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-4 md:p-5 hover:border-accent-lime/40 hover:bg-white/[0.04] transition"
-              >
-                <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-accent-lime/0 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="relative -mx-6 md:-mx-10 lg:-mx-16 overflow-hidden border-y border-white/[0.06] bg-white/[0.015]">
+            {/* Edge fades */}
+            <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 md:w-32 bg-gradient-to-r from-ink-950 to-transparent" />
+            <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 md:w-32 bg-gradient-to-l from-ink-950 to-transparent" />
 
-                <div className="flex items-center gap-3">
-                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/[0.05] border border-white/10 overflow-hidden">
-                    <SmartImage
-                      sources={[c.favicon]}
-                      alt={`${c.title} icon`}
-                      className="h-6 w-6"
-                      imgClassName="h-6 w-6 object-contain transition group-hover:scale-110"
-                    />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="truncate text-sm md:text-base font-semibold tracking-tight text-white">
-                      {c.title.split(' — ')[0]}
-                    </p>
-                    <p className="truncate font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">
-                      {c.domain}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="font-mono text-[10px] text-white/40">{c.host}</span>
-                  <span className="grid h-6 w-6 place-items-center rounded-full bg-white/[0.05] text-white/60 group-hover:bg-accent-lime group-hover:text-ink-950 transition">
-                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                      <path d="M3 9L9 3M9 3H4.5M9 3V7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+            <div className="flex w-[200%] animate-marquee items-center gap-12 md:gap-16 py-7 md:py-9 whitespace-nowrap">
+              {[...projects, ...projects].map((c, i) => (
+                <a
+                  key={i}
+                  href={c.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="hover"
+                  className="group inline-flex shrink-0 items-center gap-3 px-2 transition-opacity"
+                >
+                  <SmartImage
+                    sources={[c.favicon]}
+                    alt=""
+                    className="h-6 w-6 md:h-7 md:w-7"
+                    imgClassName="h-6 w-6 md:h-7 md:w-7 object-contain opacity-70 group-hover:opacity-100 transition-opacity"
+                  />
+                  <span className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-white/55 group-hover:text-white transition-colors">
+                    {c.title.split(' — ')[0]}
                   </span>
-                </div>
-              </motion.a>
-            ))}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
