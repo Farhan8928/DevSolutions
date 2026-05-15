@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import Cursor from './components/Cursor.jsx'
+import Loader from './components/Loader.jsx'
+import ProgressRail from './components/ProgressRail.jsx'
 import Nav from './components/Nav.jsx'
 import Hero from './sections/Hero.jsx'
 import Marquee from './sections/Marquee.jsx'
@@ -19,7 +21,9 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-ink-950 text-white overflow-hidden">
+      <Loader />
       <Cursor />
+      <ProgressRail />
       <Nav />
       <main>
         <Hero />

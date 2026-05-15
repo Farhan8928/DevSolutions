@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Quote } from 'lucide-react'
 
 const quotes = [
@@ -23,8 +24,20 @@ const quotes = [
 ]
 
 export default function Testimonials() {
+  const [i, setI] = useState(0)
+
+  useEffect(() => {
+    const id = setInterval(() => setI((v) => (v + 1) % quotes.length), 6000)
+    return () => clearInterval(id)
+  }, [])
+
+  const q = quotes[i]
+
   return (
-    <section className="relative py-24 md:py-32 border-t border-white/[0.06]">
+    <section className="relative border-t border-white/[0.06] py-28 md:py-36 overflow-hidden">
+      <div aria-hidden className="absolute inset-0 -z-10">
+        <div className="absolute left-1/2 top-1/2 h-[120%] w-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.18),transparent_60%)] blur-3xl" />
+      </div>
       <div className="container-x">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
@@ -33,28 +46,52 @@ export default function Testimonials() {
               Trusted by founders <span className="gradient-text">who ship.</span>
             </h2>
           </div>
+          <div className="flex items-center gap-2">
+            {quotes.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setI(idx)}
+                aria-label={`Show testimonial ${idx + 1}`}
+                className={`h-1.5 rounded-full transition-all ${
+                  i === idx ? 'w-10 bg-accent-lime' : 'w-3 bg-white/20 hover:bg-white/40'
+                }`}
+              />
+            ))}
+          </div>
         </div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
-          {quotes.map((q, i) => (
-            <motion.figure
+        <div className="mt-14 mx-auto max-w-4xl">
+          <Quote size={36} className="text-accent-lime" />
+          <AnimatePresence mode="wait">
+            <motion.blockquote
               key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.5, delay: i * 0.07 }}
-              className="card p-7 md:p-8 flex flex-col gap-6"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-6 display text-3xl md:text-5xl leading-[1.1] text-white"
             >
-              <Quote size={22} className="text-accent-lime" />
-              <blockquote className="text-lg leading-relaxed text-white/85">
-                {q.body}
-              </blockquote>
-              <figcaption className="mt-auto pt-6 border-t border-white/10">
-                <div className="text-sm font-medium">{q.name}</div>
-                <div className="text-sm text-white/55">{q.org}</div>
-              </figcaption>
-            </motion.figure>
-          ))}
+              “{q.body}”
+            </motion.blockquote>
+          </AnimatePresence>
+          <AnimatePresence mode="wait">
+            <motion.figcaption
+              key={i + '-c'}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="mt-8 flex items-center gap-4 text-sm text-white/65"
+            >
+              <span className="grid h-10 w-10 place-items-center rounded-full bg-white/[0.06] border border-white/10 font-mono">
+                {q.name.split(' ').map((p) => p[0]).slice(0, 2).join('')}
+              </span>
+              <span>
+                <span className="block text-white">{q.name}</span>
+                <span className="block text-white/55">{q.org}</span>
+              </span>
+            </motion.figcaption>
+          </AnimatePresence>
         </div>
       </div>
     </section>

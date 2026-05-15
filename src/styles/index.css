@@ -94,21 +94,37 @@ body {
   }
 }
 
-/* Magnetic / cursor utilities */
-.cursor-dot {
+/* Custom cursor */
+.cursor-dot,
+.cursor-ring {
   position: fixed;
   top: 0; left: 0;
-  width: 10px; height: 10px;
-  background: #C8FF00;
-  border-radius: 999px;
   pointer-events: none;
-  mix-blend-mode: difference;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: width 200ms ease, height 200ms ease, background 200ms ease;
+  will-change: transform;
 }
-.cursor-dot.hovered { width: 44px; height: 44px; background: rgba(200,255,0,0.85); }
+.cursor-dot {
+  width: 6px; height: 6px;
+  background: #C8FF00;
+  border-radius: 999px;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.45);
+  transition: width 240ms cubic-bezier(.22,1,.36,1),
+              height 240ms cubic-bezier(.22,1,.36,1),
+              background-color 240ms ease,
+              border-color 240ms ease;
+}
+.cursor-ring.hovered {
+  width: 64px; height: 64px;
+  border-color: rgba(200,255,0,0.6);
+  background: rgba(200,255,0,0.08);
+}
 
-@media (max-width: 768px) {
-  .cursor-dot { display: none; }
+@media (max-width: 768px), (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none; }
 }

@@ -1,35 +1,36 @@
 import { useEffect, useRef } from 'react'
 
 export default function Cursor() {
-  const ref = useRef(null)
+  const dot = useRef(null)
+  const ring = useRef(null)
 
   useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    let raf = 0
-    let x = window.innerWidth / 2
-    let y = window.innerHeight / 2
-    let tx = x, ty = y
+    if (window.matchMedia('(pointer: coarse)').matches) return
 
-    const move = (e) => {
-      tx = e.clientX
-      ty = e.clientY
-    }
+    let raf = 0
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2
+    let dx = mx, dy = my
+    let rx = mx, ry = my
+
+    const move = (e) => { mx = e.clientX; my = e.clientY }
     const enter = (e) => {
       if (e.target.closest('a, button, [data-cursor="hover"]')) {
-        el.classList.add('hovered')
+        ring.current?.classList.add('hovered')
       }
     }
     const leave = (e) => {
       if (e.target.closest('a, button, [data-cursor="hover"]')) {
-        el.classList.remove('hovered')
+        ring.current?.classList.remove('hovered')
       }
     }
 
     const tick = () => {
-      x += (tx - x) * 0.18
-      y += (ty - y) * 0.18
-      el.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`
+      dx += (mx - dx) * 0.55
+      dy += (my - dy) * 0.55
+      rx += (mx - rx) * 0.16
+      ry += (my - ry) * 0.16
+      if (dot.current) dot.current.style.transform = `translate(${dx}px, ${dy}px) translate(-50%, -50%)`
+      if (ring.current) ring.current.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`
       raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
@@ -44,5 +45,10 @@ export default function Cursor() {
     }
   }, [])
 
-  return <div ref={ref} className="cursor-dot" aria-hidden />
+  return (
+    <>
+      <div ref={dot} className="cursor-dot" aria-hidden />
+      <div ref={ring} className="cursor-ring" aria-hidden />
+    </>
+  )
 }
