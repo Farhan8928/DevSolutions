@@ -1,24 +1,59 @@
-import { useEffect, useRef } from 'react'
-import { motion, useInView, useMotionValue, animate } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { motion, animate } from 'framer-motion'
 import { TrendingUp, Users2, Gauge, Calendar } from 'lucide-react'
 
+/**
+ * Counter — uses a plain IntersectionObserver instead of Framer's useInView
+ * (which has timing edge cases on mobile when the parent has staggered enter
+ * animations, causing some counters to stick at 0).
+ */
 function Counter({ to, suffix = '', duration = 1.6 }) {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-  const value = useMotionValue(0)
   const node = useRef(null)
+  const [started, setStarted] = useState(false)
 
+  // Watch for entry — once visible, kick off the count up.
   useEffect(() => {
-    if (!inView) return
-    const controls = animate(value, to, {
+    if (started || !ref.current) return
+
+    // Reduced-motion users: snap to final value, skip animation.
+    const reduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    if (reduced) {
+      if (node.current) node.current.textContent = to.toString() + suffix
+      setStarted(true)
+      return
+    }
+
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          setStarted(true)
+          obs.disconnect()
+        }
+      },
+      { threshold: 0.2 }
+    )
+    obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [started, to, suffix])
+
+  // Run the animation when started flips
+  useEffect(() => {
+    if (!started || !node.current) return
+    const c = animate(0, to, {
       duration,
       ease: [0.22, 1, 0.36, 1],
       onUpdate: (v) => {
         if (node.current) node.current.textContent = Math.round(v).toString() + suffix
+      },
+      onComplete: () => {
+        if (node.current) node.current.textContent = to.toString() + suffix
       }
     })
-    return () => controls.stop()
-  }, [inView, to, duration, suffix, value])
+    return () => c.stop()
+  }, [started, to, duration, suffix])
 
   return (
     <span ref={ref} className="display-xl">
