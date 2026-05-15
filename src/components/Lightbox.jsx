@@ -69,11 +69,11 @@ export default function Lightbox({ project, onClose }) {
             </div>
 
             {/* Image */}
-            <div className="bg-ink-800">
+            <div className="bg-ink-800 grid place-items-center">
               <img
                 src={project.local}
                 alt={`${project.title} — full preview`}
-                className="block h-auto w-full max-h-[70vh] sm:max-h-[78vh] object-contain bg-ink-950"
+                className="block h-auto w-full max-h-[68vh] sm:max-h-[72vh] object-contain"
               />
             </div>
 

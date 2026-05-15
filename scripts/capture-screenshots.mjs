@@ -28,9 +28,9 @@ const projects = [
   { id: 'autopart',       url: 'https://autopart-web.vercel.app/' }
 ]
 
-// Match the showcase modal's 4:5 aspect ratio. We capture larger and let the
-// browser downscale crisply.
-const VIEWPORT = { width: 1280, height: 1600 }
+// Match the standard desktop browser hero ratio (16:10 landscape).
+// Real agency sites use landscape preview shots — they read as "real product".
+const VIEWPORT = { width: 1600, height: 1000 }
 
 const outDir = path.join(__root, 'public', 'projects')
 

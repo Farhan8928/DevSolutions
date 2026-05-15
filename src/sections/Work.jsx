@@ -153,7 +153,7 @@ export default function Work() {
                   type="button"
                   onClick={() => setZoom(current)}
                   data-cursor="hover"
-                  className="relative block aspect-[4/5] w-full overflow-hidden bg-ink-800 group"
+                  className="relative block aspect-[16/10] w-full overflow-hidden bg-ink-800 group"
                   aria-label={`Open ${current.title} preview at full size`}
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${current.accent} pointer-events-none`} />
