@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ArrowUpRight, Mail, MessageCircle, Linkedin, Github } from 'lucide-react'
+import { contact, studio } from '../data/studio.js'
+import { LogoMark } from './Logo.jsx'
 
 export default function Footer() {
   const [now, setNow] = useState(new Date())
@@ -96,19 +98,19 @@ export default function Footer() {
             <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/40">Channels</p>
             <ul className="mt-3 space-y-2">
               <li>
-                <a href="mailto:hello@devsolutions.dev" className="group flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5 hover:border-accent-lime/40 transition">
-                  <span className="inline-flex items-center gap-2.5 text-sm text-white/85">
-                    <Mail size={14} className="text-accent-lime" />
-                    hello@devsolutions.dev
+                <a href={contact.mailto} className="group flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5 hover:border-accent-lime/40 transition">
+                  <span className="inline-flex items-center gap-2.5 text-sm text-white/85 truncate">
+                    <Mail size={14} className="text-accent-lime shrink-0" />
+                    <span className="truncate">{contact.emailLabel}</span>
                   </span>
-                  <ArrowUpRight size={13} className="text-white/40 group-hover:text-accent-lime transition" />
+                  <ArrowUpRight size={13} className="text-white/40 group-hover:text-accent-lime transition shrink-0" />
                 </a>
               </li>
               <li>
-                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5 hover:border-accent-lime/40 transition">
+                <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5 hover:border-accent-lime/40 transition">
                   <span className="inline-flex items-center gap-2.5 text-sm text-white/85">
                     <MessageCircle size={14} className="text-accent-lime" />
-                    WhatsApp
+                    WhatsApp · {contact.whatsappLabel}
                   </span>
                   <ArrowUpRight size={13} className="text-white/40 group-hover:text-accent-lime transition" />
                 </a>
@@ -136,10 +138,12 @@ export default function Footer() {
         {/* Bottom legal strip */}
         <div className="mt-10 flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-3 border-t border-white/[0.06] pt-6 text-xs text-white/45">
           <div className="flex items-center gap-2">
-            <span className="grid h-7 w-7 place-items-center rounded-lg bg-accent-lime text-ink-950 text-xs font-bold">
-              D
+            <span
+              className="grid h-7 w-7 place-items-center rounded-lg bg-accent-lime text-ink-950"
+            >
+              <LogoMark size={18} strokeWidth={2.6} />
             </span>
-            <span>© {new Date().getFullYear()} DevSolutions. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} {studio.name}. All rights reserved.</span>
           </div>
           <div className="font-mono uppercase tracking-[0.18em] text-[10px]">
             Built with React · Vite · Tailwind · Framer Motion

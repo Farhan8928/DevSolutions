@@ -4,6 +4,7 @@ import {
   Clock, Lock, Award
 } from 'lucide-react'
 import { projects } from '../data/projects.js'
+import { contact, studio } from '../data/studio.js'
 import SmartImage from '../components/SmartImage.jsx'
 
 const guarantees = [
@@ -113,7 +114,7 @@ export default function Trust() {
               </div>
               <div>
                 <p className="text-[11px] uppercase tracking-[0.22em] text-white/50 font-mono">Founder</p>
-                <p className="text-lg font-semibold">Farhan · DevSolutions</p>
+                <p className="text-lg font-semibold">{studio.founder} · {studio.name}</p>
               </div>
             </div>
 
@@ -125,7 +126,7 @@ export default function Trust() {
 
             <div className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
               <a
-                href="https://wa.me/"
+                href={contact.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="hover"
@@ -138,7 +139,7 @@ export default function Trust() {
                 <span className="font-mono text-xs text-white/55">Direct</span>
               </a>
               <a
-                href="mailto:hello@devsolutions.dev"
+                href={contact.mailto}
                 data-cursor="hover"
                 className="inline-flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] p-4 hover:border-accent-lime/40 transition"
               >
@@ -152,7 +153,7 @@ export default function Trust() {
 
             <div className="mt-5 flex items-center gap-2 text-xs text-white/50">
               <MapPin size={12} className="text-accent-lime" />
-              Mumbai, India · serving teams worldwide
+              {studio.city}, {studio.country} · serving teams worldwide
             </div>
           </motion.div>
 

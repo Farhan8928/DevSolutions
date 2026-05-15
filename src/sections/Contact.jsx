@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   ArrowUpRight, CheckCircle2, Mail, MapPin, Calendar, Clock,
-  ShieldCheck
+  ShieldCheck, MessageCircle
 } from 'lucide-react'
+import { contact, studio } from '../data/studio.js'
 
 const projectTypes = [
   'Web platform', 'Mobile app', 'CRM', 'E‑commerce',
@@ -65,23 +66,44 @@ export default function Contact() {
             </ul>
 
             {/* Direct contact */}
-            <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.02] p-5">
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/45">
-                Prefer email?
-              </p>
+            <div className="mt-10 space-y-3">
               <a
-                href="mailto:hello@devsolutions.dev"
-                className="mt-2 flex items-center justify-between gap-3 text-white hover:text-accent-lime transition"
+                href={contact.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between gap-3 rounded-3xl border border-white/10 bg-white/[0.02] p-5 hover:border-accent-lime/40 transition"
               >
-                <span className="inline-flex items-center gap-2">
-                  <Mail size={15} />
-                  hello@devsolutions.dev
-                </span>
-                <ArrowUpRight size={14} />
+                <div className="min-w-0">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/45">
+                    WhatsApp · fastest reply
+                  </p>
+                  <p className="mt-2 inline-flex items-center gap-2 text-white truncate">
+                    <MessageCircle size={15} className="text-accent-lime" />
+                    {contact.whatsappLabel}
+                  </p>
+                </div>
+                <ArrowUpRight size={16} className="text-white/40 group-hover:text-accent-lime transition shrink-0" />
               </a>
-              <div className="mt-4 flex items-center gap-2 text-xs text-white/55">
+
+              <a
+                href={contact.mailto}
+                className="group flex items-center justify-between gap-3 rounded-3xl border border-white/10 bg-white/[0.02] p-5 hover:border-accent-lime/40 transition"
+              >
+                <div className="min-w-0">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/45">
+                    Email
+                  </p>
+                  <p className="mt-2 inline-flex items-center gap-2 text-white truncate">
+                    <Mail size={15} className="text-accent-lime shrink-0" />
+                    <span className="truncate">{contact.emailLabel}</span>
+                  </p>
+                </div>
+                <ArrowUpRight size={16} className="text-white/40 group-hover:text-accent-lime transition shrink-0" />
+              </a>
+
+              <div className="flex items-center gap-2 px-1 text-xs text-white/55">
                 <MapPin size={12} className="text-accent-lime" />
-                Mumbai, India · serving teams worldwide
+                {studio.city}, {studio.country} · serving teams worldwide
               </div>
             </div>
           </div>

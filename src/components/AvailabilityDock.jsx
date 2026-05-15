@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageCircle, X } from 'lucide-react'
+import { contact } from '../data/studio.js'
 
 /**
  * Floating availability dock — appears after the user has scrolled past
@@ -49,7 +50,7 @@ export default function AvailabilityDock() {
             </span>
 
             <a
-              href="https://wa.me/"
+              href={contact.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="hover"

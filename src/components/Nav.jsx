@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
+import { LogoLockup } from './Logo.jsx'
 
 const links = [
   { href: '#services', label: 'Services' },
@@ -35,13 +36,8 @@ export default function Nav() {
               : 'bg-ink-900/30 backdrop-blur-md'
           }`}
         >
-          <a href="#top" className="flex items-center gap-2.5 group">
-            <span className="grid h-8 w-8 place-items-center rounded-xl bg-accent-lime text-ink-950 font-bold">
-              D
-            </span>
-            <span className="text-sm md:text-base font-semibold tracking-tight">
-              DevSolutions
-            </span>
+          <a href="#top" className="flex items-center group" aria-label="DevSolutions home">
+            <LogoLockup size={32} />
           </a>
 
           <nav className="hidden md:flex items-center gap-1 text-sm">

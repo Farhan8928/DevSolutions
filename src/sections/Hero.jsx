@@ -7,6 +7,7 @@ import InteractiveDots from '../components/InteractiveDots.jsx'
 import Magnetic from '../components/Magnetic.jsx'
 import RotatingStamp from '../components/RotatingStamp.jsx'
 import StudioStatusCard from '../components/StudioStatusCard.jsx'
+import { contact } from '../data/studio.js'
 
 export default function Hero() {
   return (
@@ -113,7 +114,7 @@ export default function Hero() {
           </span>
           <span className="hidden sm:inline-block h-4 w-px bg-white/15" />
           <a
-            href="https://wa.me/" target="_blank" rel="noopener noreferrer"
+            href={contact.whatsapp} target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-white/85 hover:text-white"
           >
             <MessageCircle size={14} className="text-accent-lime" />
