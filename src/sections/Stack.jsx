@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { stackGroups, stackFlat } from '../data/stack.js'
 import SmartImage from '../components/SmartImage.jsx'
 
@@ -16,7 +16,6 @@ export default function Stack() {
 
   return (
     <section id="stack" className="relative py-16 md:py-32 border-t border-white/[0.06] overflow-hidden">
-      {/* Soft accent glow behind the section */}
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-1/3 h-[480px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.12),transparent_60%)] blur-3xl" />
       </div>
@@ -58,98 +57,94 @@ export default function Stack() {
           ))}
         </div>
 
-        {/* Stack groups — premium logo grid */}
+        {/* Stack groups — premium logo grid with in-tile "why" reveal */}
         <div className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] md:grid-cols-2 lg:grid-cols-4">
           {stackGroups.map((g, gi) => (
-            <div
-              key={g.label}
-              className="bg-ink-950/85 p-5 md:p-6"
-            >
+            <div key={g.label} className="bg-ink-950/85 p-5 md:p-6">
               <div className="flex items-center justify-between">
                 <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/45">
                   {g.label}
                 </p>
-                <p className="font-mono text-[10px] text-white/30">
-                  0{gi + 1}
-                </p>
+                <p className="font-mono text-[10px] text-white/30">0{gi + 1}</p>
               </div>
 
               <ul className="mt-5 grid grid-cols-3 gap-2.5">
-                {g.items.map((tool, i) => (
-                  <motion.li
-                    key={tool.name}
-                    variants={fadeUp}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: '-60px' }}
-                    custom={i}
-                    onMouseEnter={() => setHovered(tool.name)}
-                    onMouseLeave={() => setHovered(null)}
-                    className="group relative aspect-square"
-                  >
-                    <div
-                      className={`relative grid h-full w-full place-items-center rounded-xl border bg-white/[0.02] transition ${
-                        hovered === tool.name
-                          ? 'border-accent-lime/50 bg-white/[0.06]'
-                          : 'border-white/[0.06] hover:border-white/15'
-                      }`}
-                      title={`${tool.name} — ${tool.why}`}
+                {g.items.map((tool, i) => {
+                  const isActive = hovered === tool.name
+                  return (
+                    <motion.li
+                      key={tool.name}
+                      variants={fadeUp}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: true, margin: '-60px' }}
+                      custom={i}
+                      onMouseEnter={() => setHovered(tool.name)}
+                      onMouseLeave={() => setHovered(null)}
+                      className="group relative aspect-square"
                     >
-                      <SmartImage
-                        sources={[tool.logo]}
-                        alt={tool.name}
-                        className="h-7 w-7 md:h-8 md:w-8"
-                        imgClassName="h-7 w-7 md:h-8 md:w-8 object-contain transition group-hover:scale-110"
-                      />
-
-                      {/* Tooltip on desktop */}
                       <div
-                        className={`pointer-events-none absolute left-1/2 z-10 hidden md:block bottom-[calc(100%+8px)] -translate-x-1/2 whitespace-nowrap rounded-lg border border-white/10 bg-ink-950 px-2.5 py-1.5 text-[11px] text-white shadow-lg transition ${
-                          hovered === tool.name
-                            ? 'opacity-100 translate-y-0'
-                            : 'opacity-0 translate-y-1'
+                        className={`relative h-full w-full overflow-hidden rounded-xl border bg-white/[0.02] transition ${
+                          isActive
+                            ? 'border-accent-lime/50 bg-white/[0.06]'
+                            : 'border-white/[0.06] hover:border-white/15'
                         }`}
                       >
-                        <span className="font-medium">{tool.name}</span>
+                        {/* Logo — fades + scales out when active */}
+                        <div
+                          className={`absolute inset-0 grid place-items-center transition-all duration-300 ${
+                            isActive ? 'opacity-0 scale-90' : 'opacity-100 scale-100'
+                          }`}
+                        >
+                          <SmartImage
+                            sources={[tool.logo]}
+                            alt={tool.name}
+                            className="h-7 w-7 md:h-8 md:w-8"
+                            imgClassName="h-7 w-7 md:h-8 md:w-8 object-contain"
+                          />
+                        </div>
+
+                        {/* "Why" content — fades in inside the tile */}
+                        <div
+                          className={`absolute inset-0 flex flex-col justify-between p-2 md:p-2.5 transition-all duration-300 ${
+                            isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1 pointer-events-none'
+                          }`}
+                        >
+                          <p className="text-[10px] font-semibold leading-tight text-accent-lime">
+                            {tool.name}
+                          </p>
+                          <p className="text-[9px] leading-tight text-white/75 line-clamp-3">
+                            {tool.why}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </motion.li>
-                ))}
+                    </motion.li>
+                  )
+                })}
               </ul>
             </div>
           ))}
         </div>
 
-        {/* Hovered tool detail strip — replaces the bullet list */}
+        {/* Active tool deep-line — supplementary, full-width */}
         <div className="mt-6 min-h-[44px] flex items-center justify-center">
-          <AnimatePresence mode="wait">
-            {hovered ? (
-              <motion.div
-                key={hovered}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.25 }}
-                className="text-sm text-white/70"
-              >
-                <span className="text-white font-medium">{hovered}</span>
-                <span className="mx-2 text-white/30">·</span>
-                <span>
-                  {stackFlat.find((t) => t.name === hovered)?.why}
-                </span>
-              </motion.div>
-            ) : (
-              <motion.span
-                key="hint"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="font-mono text-xs uppercase tracking-[0.22em] text-white/30"
-              >
-                Hover any tool for the why
-              </motion.span>
-            )}
-          </AnimatePresence>
+          {hovered ? (
+            <motion.div
+              key={hovered}
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25 }}
+              className="text-sm text-white/70"
+            >
+              <span className="text-white font-medium">{hovered}</span>
+              <span className="mx-2 text-white/30">·</span>
+              <span>{stackFlat.find((t) => t.name === hovered)?.why}</span>
+            </motion.div>
+          ) : (
+            <span className="font-mono text-xs uppercase tracking-[0.22em] text-white/30">
+              Hover any tool for the why
+            </span>
+          )}
         </div>
 
         {/* Infinite logo marquee */}
