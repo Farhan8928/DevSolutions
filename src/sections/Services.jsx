@@ -102,27 +102,45 @@ export default function Services() {
           {/* Engagement model — wide tile */}
           <motion.article
             variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} custom={6}
-            className="card relative md:col-span-6 overflow-hidden p-7 md:p-9"
+            className="card relative md:col-span-6 overflow-hidden p-6 md:p-9"
           >
+            <div className="absolute -top-20 right-10 h-48 w-48 rounded-full bg-accent-lime/10 blur-3xl" aria-hidden />
+
             <div className="grid gap-6 md:grid-cols-12 items-center">
-              <div className="md:col-span-7">
+              <div className="md:col-span-5">
                 <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-[0.22em] text-white/50">
                   <Sparkles size={14} className="text-accent-lime" />
                   Engagement model
                 </div>
                 <h3 className="display-lg mt-4">
-                  Fixed‑scope sprints, monthly retainers, or fully embedded teams — pick the model that fits your roadmap.
+                  Sprint, retainer, or embedded — we shape to your roadmap.
                 </h3>
               </div>
-              <div className="md:col-span-5 grid grid-cols-3 gap-3 text-sm">
+
+              {/* Pricing trio */}
+              <div className="md:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {[
-                  { k: 'Sprint', v: '2–6 wks' },
-                  { k: 'Retainer', v: 'Monthly' },
-                  { k: 'Embedded', v: 'Quarterly' }
+                  { k: 'Sprint',   v: '2–6 wks', d: 'Fixed scope', from: 'from $8k' },
+                  { k: 'Retainer', v: 'Monthly', d: 'Always-on team', from: 'from $12k/mo', highlight: true },
+                  { k: 'Embedded', v: 'Quarterly', d: 'Inside your team', from: 'from $30k/qtr' }
                 ].map((m) => (
-                  <div key={m.k} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-white/45">{m.k}</p>
-                    <p className="mt-2 text-white">{m.v}</p>
+                  <div
+                    key={m.k}
+                    className={`relative rounded-2xl border p-4 ${
+                      m.highlight
+                        ? 'border-accent-lime/50 bg-accent-lime/[0.04]'
+                        : 'border-white/10 bg-white/[0.03]'
+                    }`}
+                  >
+                    {m.highlight && (
+                      <span className="absolute -top-2 right-3 rounded-full bg-accent-lime px-2 py-0.5 text-[9px] font-mono uppercase tracking-[0.22em] text-ink-950">
+                        Popular
+                      </span>
+                    )}
+                    <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/45">{m.k}</p>
+                    <p className="display-lg mt-2">{m.v}</p>
+                    <p className="mt-1 text-xs text-white/55">{m.d}</p>
+                    <p className="mt-3 text-sm text-white/85">{m.from}</p>
                   </div>
                 ))}
               </div>

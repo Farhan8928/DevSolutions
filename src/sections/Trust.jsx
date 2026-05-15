@@ -52,34 +52,62 @@ export default function Trust() {
         </div>
 
         {/* Logo wall — real favicons pulled from each client domain */}
-        <div className="mt-10 md:mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]">
-          {projects.map((c, i) => (
-            <motion.a
-              key={c.id}
-              href={c.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="hover"
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.45, delay: i * 0.04 }}
-              className="group relative flex h-24 sm:h-28 flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-3 bg-ink-950/80 px-3 sm:px-4 transition active:bg-ink-900 hover:bg-ink-900"
-            >
-              <SmartImage
-                sources={[c.favicon]}
-                alt={`${c.title} icon`}
-                className="h-7 w-7 sm:h-8 sm:w-8 shrink-0"
-                imgClassName="h-7 w-7 sm:h-8 sm:w-8 object-contain transition group-hover:scale-110"
-              />
-              <span className="text-sm sm:text-base md:text-lg font-semibold tracking-tight text-white/65 transition group-hover:text-white text-center sm:text-left">
-                {c.title.split(' — ')[0]}
-              </span>
-              <span className="hidden md:block absolute right-3 top-3 text-[10px] font-mono uppercase tracking-[0.18em] text-white/30 group-hover:text-accent-lime transition">
-                {c.host}
-              </span>
-            </motion.a>
-          ))}
+        <div className="mt-10 md:mt-12">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/45">
+              {projects.length} live products · click any to verify
+            </p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/30 hidden sm:block">
+              Hover for details →
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            {projects.map((c, i) => (
+              <motion.a
+                key={c.id}
+                href={c.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="hover"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.45, delay: i * 0.04 }}
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-4 md:p-5 hover:border-accent-lime/40 hover:bg-white/[0.04] transition"
+              >
+                <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-accent-lime/0 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                <div className="flex items-center gap-3">
+                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/[0.05] border border-white/10 overflow-hidden">
+                    <SmartImage
+                      sources={[c.favicon]}
+                      alt={`${c.title} icon`}
+                      className="h-6 w-6"
+                      imgClassName="h-6 w-6 object-contain transition group-hover:scale-110"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="truncate text-sm md:text-base font-semibold tracking-tight text-white">
+                      {c.title.split(' — ')[0]}
+                    </p>
+                    <p className="truncate font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">
+                      {c.domain}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex items-center justify-between">
+                  <span className="font-mono text-[10px] text-white/40">{c.host}</span>
+                  <span className="grid h-6 w-6 place-items-center rounded-full bg-white/[0.05] text-white/60 group-hover:bg-accent-lime group-hover:text-ink-950 transition">
+                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                      <path d="M3 9L9 3M9 3H4.5M9 3V7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </div>
+              </motion.a>
+            ))}
+          </div>
         </div>
 
         {/* Founder + guarantees */}

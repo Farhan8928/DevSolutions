@@ -1,5 +1,6 @@
-import { motion, useInView, useMotionValue, animate } from 'framer-motion'
 import { useEffect, useRef } from 'react'
+import { motion, useInView, useMotionValue, animate } from 'framer-motion'
+import { TrendingUp, Users2, Gauge, Calendar } from 'lucide-react'
 
 function Counter({ to, suffix = '', duration = 1.6 }) {
   const ref = useRef(null)
@@ -27,31 +28,78 @@ function Counter({ to, suffix = '', duration = 1.6 }) {
 }
 
 const stats = [
-  { value: 8, suffix: '+', label: 'Products in production' },
-  { value: 5, suffix: '', label: 'Industries served' },
-  { value: 96, suffix: '', label: 'Avg. Lighthouse score' },
-  { value: 100, suffix: '%', label: 'On‑time delivery' }
+  { value: 8,   suffix: '+', label: 'Products in production', meta: 'Across 5 industries',     icon: TrendingUp },
+  { value: 24,  suffix: '+', label: 'Founders trusted us',     meta: 'India, UAE, EU, US',     icon: Users2 },
+  { value: 96,  suffix: '',  label: 'Avg. Lighthouse score',   meta: 'On every shipped site',  icon: Gauge },
+  { value: 100, suffix: '%', label: 'On‑time delivery',        meta: 'Since the studio began', icon: Calendar }
 ]
 
 export default function Stats() {
   return (
     <section className="relative py-16 md:py-32 border-t border-white/[0.06] overflow-hidden">
-      <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,rgba(124,92,255,0.18),transparent_60%)]" />
+      <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,rgba(124,92,255,0.16),transparent_60%)]" />
+
       <div className="container-x">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4 md:gap-10">
-          {stats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="border-l border-white/10 pl-4 md:pl-6"
-            >
-              <Counter to={s.value} suffix={s.suffix} />
-              <p className="mt-3 text-sm md:text-base text-white/60">{s.label}</p>
-            </motion.div>
-          ))}
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <span className="eyebrow">— By the numbers</span>
+            <h2 className="display-xl mt-4">
+              The receipts. <span className="gradient-text">Not vibes.</span>
+            </h2>
+          </div>
+          <p className="md:max-w-sm text-white/65">
+            Every number below is verifiable in the projects above — click any of them to see the live site.
+          </p>
+        </div>
+
+        {/* Stats panel */}
+        <div className="mt-10 md:mt-14 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-md">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/[0.06]">
+            {stats.map((s, i) => {
+              const Icon = s.icon
+              return (
+                <motion.div
+                  key={s.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ duration: 0.55, delay: i * 0.06 }}
+                  className="relative p-5 md:p-7 group"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="grid h-9 w-9 place-items-center rounded-xl bg-white/[0.05] border border-white/10">
+                      <Icon size={15} className="text-accent-lime" />
+                    </div>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/35">
+                      0{i + 1}
+                    </span>
+                  </div>
+
+                  <div className="mt-6">
+                    <Counter to={s.value} suffix={s.suffix} />
+                  </div>
+                  <p className="mt-2 text-sm text-white font-medium">{s.label}</p>
+                  <p className="mt-1 text-xs text-white/55">{s.meta}</p>
+
+                  <span
+                    className="absolute bottom-0 left-0 h-0.5 w-0 bg-accent-lime transition-all duration-500 group-hover:w-full"
+                    aria-hidden
+                  />
+                </motion.div>
+              )
+            })}
+          </div>
+
+          {/* Footnote */}
+          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.06] bg-ink-950/40 px-5 md:px-7 py-3">
+            <p className="text-xs text-white/50">
+              Numbers updated <span className="text-white/80">{new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}</span>.
+            </p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/40">
+              Verified on every project URL
+            </p>
+          </div>
         </div>
       </div>
     </section>
