@@ -75,7 +75,7 @@ export default function Work() {
                         </span>
                       </div>
                       <SmartImage
-                        sources={[current.shot, current.shot2, current.logo, current.favicon]}
+                        sources={[current.local, current.shot, current.shot2, current.logo, current.favicon]}
                         alt={`${current.title} — live preview`}
                         className="h-[calc(100%-30px)] w-full"
                         imgClassName="h-full w-full object-cover object-top"

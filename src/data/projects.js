@@ -16,6 +16,9 @@ const make = (p) => ({
   ...p,
   favicon: fav(p.host),
   logo: logo(p.host),
+  // Local screenshot captured by `npm run screenshots`. Tried first; if missing,
+  // SmartImage falls through to live services then to logo/favicon.
+  local: `/projects/${p.id}.jpg`,
   shot: shot(p.url),
   shot2: shot2(p.url)
 })
