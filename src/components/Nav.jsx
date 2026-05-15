@@ -87,7 +87,7 @@ export default function Nav() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-2xl px-4 py-3 text-white/85 hover:bg-white/[0.05]"
+                  className="block rounded-2xl px-4 py-3.5 text-base text-white/85 hover:bg-white/[0.05] active:bg-white/[0.08]"
                 >
                   {l.label}
                 </a>
@@ -95,7 +95,7 @@ export default function Nav() {
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="mt-2 flex items-center justify-between rounded-2xl bg-accent-lime px-4 py-3 text-ink-950 font-medium"
+                className="mt-2 flex items-center justify-between rounded-2xl bg-accent-lime px-4 py-3.5 text-ink-950 font-medium"
               >
                 Start a project <ArrowUpRight size={16} />
               </a>

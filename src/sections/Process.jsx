@@ -25,7 +25,7 @@ const steps = [
 
 export default function Process() {
   return (
-    <section id="process" className="relative py-24 md:py-32 border-t border-white/[0.06]">
+    <section id="process" className="relative py-16 md:py-32 border-t border-white/[0.06]">
       <div className="container-x">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>

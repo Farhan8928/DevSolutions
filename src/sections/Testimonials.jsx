@@ -34,7 +34,7 @@ export default function Testimonials() {
   const q = quotes[i]
 
   return (
-    <section className="relative border-t border-white/[0.06] py-28 md:py-36 overflow-hidden">
+    <section className="relative border-t border-white/[0.06] py-20 md:py-36 overflow-hidden">
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-1/2 h-[120%] w-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.18),transparent_60%)] blur-3xl" />
       </div>

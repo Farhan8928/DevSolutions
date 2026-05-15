@@ -33,7 +33,7 @@ export default function Trust() {
   return (
     <section
       id="trust"
-      className="relative border-t border-white/[0.06] py-20 md:py-28 overflow-hidden"
+      className="relative border-t border-white/[0.06] py-16 md:py-28 overflow-hidden"
     >
       <div className="container-x">
         {/* Top label row */}
@@ -52,7 +52,7 @@ export default function Trust() {
         </div>
 
         {/* Logo wall — real favicons pulled from each client domain */}
-        <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]">
+        <div className="mt-10 md:mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]">
           {projects.map((c, i) => (
             <motion.a
               key={c.id}
@@ -64,18 +64,18 @@ export default function Trust() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.45, delay: i * 0.04 }}
-              className="group relative flex h-28 items-center justify-center gap-3 bg-ink-950/80 px-4 transition hover:bg-ink-900"
+              className="group relative flex h-24 sm:h-28 flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-3 bg-ink-950/80 px-3 sm:px-4 transition active:bg-ink-900 hover:bg-ink-900"
             >
               <SmartImage
                 sources={[c.favicon]}
                 alt={`${c.title} icon`}
-                className="h-8 w-8 shrink-0"
-                imgClassName="h-8 w-8 object-contain transition group-hover:scale-110"
+                className="h-7 w-7 sm:h-8 sm:w-8 shrink-0"
+                imgClassName="h-7 w-7 sm:h-8 sm:w-8 object-contain transition group-hover:scale-110"
               />
-              <span className="display-lg text-white/55 transition group-hover:text-white">
+              <span className="text-sm sm:text-base md:text-lg font-semibold tracking-tight text-white/65 transition group-hover:text-white text-center sm:text-left">
                 {c.title.split(' — ')[0]}
               </span>
-              <span className="absolute right-3 top-3 text-[10px] font-mono uppercase tracking-[0.18em] text-white/30 group-hover:text-accent-lime transition">
+              <span className="hidden md:block absolute right-3 top-3 text-[10px] font-mono uppercase tracking-[0.18em] text-white/30 group-hover:text-accent-lime transition">
                 {c.host}
               </span>
             </motion.a>

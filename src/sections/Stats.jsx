@@ -35,10 +35,10 @@ const stats = [
 
 export default function Stats() {
   return (
-    <section className="relative py-24 md:py-32 border-t border-white/[0.06] overflow-hidden">
+    <section className="relative py-16 md:py-32 border-t border-white/[0.06] overflow-hidden">
       <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,rgba(124,92,255,0.18),transparent_60%)]" />
       <div className="container-x">
-        <div className="grid gap-10 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4 md:gap-10">
           {stats.map((s, i) => (
             <motion.div
               key={s.label}
@@ -46,10 +46,10 @@ export default function Stats() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="border-l border-white/10 pl-6"
+              className="border-l border-white/10 pl-4 md:pl-6"
             >
               <Counter to={s.value} suffix={s.suffix} />
-              <p className="mt-3 text-white/60">{s.label}</p>
+              <p className="mt-3 text-sm md:text-base text-white/60">{s.label}</p>
             </motion.div>
           ))}
         </div>

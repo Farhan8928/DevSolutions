@@ -11,7 +11,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative pt-28 md:pt-36 pb-16 md:pb-20 grain overflow-hidden"
+      className="relative pt-24 sm:pt-28 md:pt-36 pb-12 md:pb-20 grain overflow-hidden"
     >
       <div aria-hidden className="absolute inset-0 -z-10">
         <InteractiveDots />
@@ -36,8 +36,8 @@ export default function Hero() {
           <span className="chip">
             <Star size={12} className="text-accent-lime" /> 8 products shipped
           </span>
-          <span className="chip">Remote · India · UAE</span>
-          <span className="chip">
+          <span className="chip hidden sm:inline-flex">Remote · India · UAE</span>
+          <span className="chip hidden md:inline-flex">
             <ShieldCheck size={12} className="text-accent-lime" /> NDA‑first
           </span>
         </motion.div>
@@ -70,15 +70,15 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.2 }}
-            className="md:col-span-5 flex flex-wrap items-center gap-3 md:justify-end"
+            className="md:col-span-5 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 md:justify-end"
           >
             <Magnetic strength={28}>
-              <a href="#contact" className="btn-primary text-sm md:text-base">
+              <a href="#contact" className="btn-primary text-sm md:text-base h-12 sm:h-auto px-6 sm:px-6 justify-center w-full sm:w-auto">
                 <Sparkles size={16} /> Start a project <ArrowUpRight size={16} />
               </a>
             </Magnetic>
             <Magnetic strength={16}>
-              <a href="#work" className="btn-ghost text-sm md:text-base">
+              <a href="#work" className="btn-ghost text-sm md:text-base h-12 sm:h-auto px-6 justify-center w-full sm:w-auto">
                 See selected work
               </a>
             </Magnetic>
@@ -90,7 +90,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.3 }}
-          className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3 text-sm text-white/70"
+          className="mt-7 md:mt-8 grid grid-cols-2 sm:flex flex-wrap items-center gap-x-7 gap-y-3 text-sm text-white/70"
         >
           <span className="inline-flex items-center gap-2">
             <span className="flex">
@@ -98,25 +98,25 @@ export default function Hero() {
                 <Star key={i} size={14} className="fill-accent-lime text-accent-lime" />
               ))}
             </span>
-            <span><b className="text-white">5.0</b> from 24+ founders</span>
+            <span><b className="text-white">5.0</b> rating</span>
           </span>
-          <span className="hidden md:inline-block h-4 w-px bg-white/15" />
+          <span className="hidden sm:inline-block h-4 w-px bg-white/15" />
           <span className="inline-flex items-center gap-2">
             <Clock size={14} className="text-accent-lime" />
-            <span>Reply in <b className="text-white">&lt;1 business day</b></span>
+            <span>Reply <b className="text-white">&lt;1 day</b></span>
           </span>
-          <span className="hidden md:inline-block h-4 w-px bg-white/15" />
+          <span className="hidden sm:inline-block h-4 w-px bg-white/15" />
           <span className="inline-flex items-center gap-2">
             <ShieldCheck size={14} className="text-accent-lime" />
-            <span>100% on‑time delivery</span>
+            <span>100% on‑time</span>
           </span>
-          <span className="hidden md:inline-block h-4 w-px bg-white/15" />
+          <span className="hidden sm:inline-block h-4 w-px bg-white/15" />
           <a
             href="https://wa.me/" target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-white/85 hover:text-white"
           >
             <MessageCircle size={14} className="text-accent-lime" />
-            WhatsApp the founder
+            WhatsApp
           </a>
         </motion.div>
 
@@ -127,7 +127,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 1.4 }}
           className="mt-14 grid gap-4 md:grid-cols-12 relative"
         >
-          <div className="hidden md:block absolute -top-12 right-2 h-28 w-28 z-10">
+          <div className="hidden lg:block absolute -top-12 right-2 h-28 w-28 z-10">
             <RotatingStamp className="h-full w-full" />
           </div>
 

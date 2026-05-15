@@ -15,7 +15,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-24 md:py-32 border-t border-white/[0.06]">
+    <section id="contact" className="relative py-16 md:py-32 border-t border-white/[0.06]">
       <div className="container-x">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
@@ -104,9 +104,9 @@ export default function Contact() {
                   />
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3">
                   <p className="text-xs text-white/45">We reply within 1 business day.</p>
-                  <button type="submit" className="btn-primary">
+                  <button type="submit" className="btn-primary h-12 sm:h-auto justify-center w-full sm:w-auto">
                     Send brief <ArrowUpRight size={16} />
                   </button>
                 </div>
