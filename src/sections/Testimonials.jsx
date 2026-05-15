@@ -2,32 +2,32 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Quote, Star } from 'lucide-react'
 import SmartImage from '../components/SmartImage.jsx'
+import { projects } from '../data/projects.js'
 
-// Tied to real projects — favicons load live from each client domain.
+// Map quotes back to real projects so favicons stay in sync with /favicons/clients
+const findProject = (id) => projects.find((p) => p.id === id)
+
 const quotes = [
   {
     body:
       'They rebuilt our lead engine from the ground up. Meta, web and manual leads now flow through one CRM with crisp role‑based routing.',
     name: 'Operations Lead',
     org: 'Baker & Co — Visa CRM',
-    host: 'bakerandco.ae',
-    favicon: 'https://www.google.com/s2/favicons?domain=bakerandco.ae&sz=128'
+    project: findProject('bakerandco')
   },
   {
     body:
       'The MT5 integration alone would have taken us months. DevSolutions shipped it inside a polished trader dashboard in weeks.',
     name: 'Founder',
     org: 'EliteFX',
-    host: 'elitefx.in',
-    favicon: 'https://www.google.com/s2/favicons?domain=elitefx.in&sz=128'
+    project: findProject('elitefx')
   },
   {
     body:
       'Brand, motion, performance — everything came together. The site looks like the studio we always wanted to be.',
     name: 'Marketing Director',
     org: 'Howl',
-    host: 'howl.in',
-    favicon: 'https://www.google.com/s2/favicons?domain=howl.in&sz=128'
+    project: findProject('howl')
   }
 ]
 
@@ -115,14 +115,14 @@ export default function Testimonials() {
               >
                 {/* Real client favicon, not a letter avatar */}
                 <a
-                  href={`https://${q.host}`}
+                  href={q.project.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   data-cursor="hover"
                   className="grid h-12 w-12 place-items-center rounded-2xl bg-white/[0.05] border border-white/10 overflow-hidden hover:border-accent-lime/40 transition"
                 >
                   <SmartImage
-                    sources={[q.favicon]}
+                    sources={[q.project.favicon, q.project.faviconRemote]}
                     alt={q.org}
                     className="h-7 w-7"
                     imgClassName="h-7 w-7 object-contain"
@@ -132,12 +132,12 @@ export default function Testimonials() {
                   <p className="text-base font-medium text-white">{q.name}</p>
                   <p className="text-sm text-white/55">{q.org}</p>
                   <a
-                    href={`https://${q.host}`}
+                    href={q.project.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-1 inline-block font-mono text-[10px] uppercase tracking-[0.22em] text-accent-lime hover:underline"
                   >
-                    {q.host} →
+                    {q.project.host} →
                   </a>
                 </div>
               </motion.figcaption>
@@ -166,7 +166,7 @@ export default function Testimonials() {
                     <div className="flex items-center gap-3">
                       <div className="grid h-9 w-9 place-items-center rounded-xl bg-white/[0.05] border border-white/10 overflow-hidden">
                         <SmartImage
-                          sources={[quote.favicon]}
+                          sources={[quote.project.favicon, quote.project.faviconRemote]}
                           alt=""
                           className="h-5 w-5"
                           imgClassName="h-5 w-5 object-contain"

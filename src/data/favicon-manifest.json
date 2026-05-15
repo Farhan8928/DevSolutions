@@ -1,0 +1,38 @@
+{
+  "clients": {
+    "remesleep": "/favicons/clients/remesleep.png",
+    "humanewarriors": "/favicons/clients/humanewarriors.png",
+    "howl": "/favicons/clients/howl.png",
+    "benzer": "/favicons/clients/benzer.png",
+    "chainthat": "/favicons/clients/chainthat.png",
+    "bakerandco": "/favicons/clients/bakerandco.png",
+    "elitefx": "/favicons/clients/elitefx.png",
+    "autopart": "/favicons/clients/autopart.svg"
+  },
+  "stack": {
+    "react": "/favicons/stack/react.svg",
+    "nextjs": "/favicons/stack/nextjs.svg",
+    "vite": "/favicons/stack/vite.svg",
+    "typescript": "/favicons/stack/typescript.svg",
+    "tailwindcss": "/favicons/stack/tailwindcss.svg",
+    "framer-motion": "/favicons/stack/framer-motion.png",
+    "nodejs": "/favicons/stack/nodejs.svg",
+    "nestjs": "/favicons/stack/nestjs.svg",
+    "express": "/favicons/stack/express.svg",
+    "graphql": "/favicons/stack/graphql.svg",
+    "postgresql": "/favicons/stack/postgresql.svg",
+    "mongodb": "/favicons/stack/mongodb.svg",
+    "vercel": "/favicons/stack/vercel.png",
+    "aws": "/favicons/stack/aws.png",
+    "docker": "/favicons/stack/docker.svg",
+    "github": "/favicons/stack/github.svg",
+    "cloudflare": "/favicons/stack/cloudflare.svg",
+    "sentry": "/favicons/stack/sentry.svg",
+    "mt5": "/favicons/stack/mt5.png",
+    "stripe": "/favicons/stack/stripe.svg",
+    "meta": "/favicons/stack/meta.svg",
+    "twilio": "/favicons/stack/twilio.png",
+    "shopify": "/favicons/stack/shopify.svg",
+    "sanity": "/favicons/stack/sanity.svg"
+  }
+}

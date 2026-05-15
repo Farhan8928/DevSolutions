@@ -82,7 +82,7 @@ export default function Trust() {
                   className="group inline-flex shrink-0 items-center gap-3 px-2 transition-opacity"
                 >
                   <SmartImage
-                    sources={[c.favicon]}
+                    sources={[c.favicon, c.faviconRemote]}
                     alt=""
                     className="h-6 w-6 md:h-7 md:w-7"
                     imgClassName="h-6 w-6 md:h-7 md:w-7 object-contain opacity-70 group-hover:opacity-100 transition-opacity"

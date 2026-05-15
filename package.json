@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "screenshots": "node scripts/capture-screenshots.mjs"
+    "screenshots": "node scripts/capture-screenshots.mjs",
+    "favicons": "node scripts/download-favicons.mjs"
   },
   "dependencies": {
     "framer-motion": "11.11.17",

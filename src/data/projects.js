@@ -1,11 +1,20 @@
 // Real DevSolutions project portfolio.
 // Assets are pulled live from each client domain via free public services:
-//   - favicon: Google S2 (always works)
+//   - favicon: local copy first (downloaded by `npm run favicons`),
+//              Google S2 as runtime fallback for any missing local file.
 //   - logo:    Clearbit Logo API (works for most established brands)
 //   - shot:    WordPress mShots (free, no key, no auth)
 //   - shot2:   Microlink screenshot (free fallback)
 
-const fav = (d) => `https://www.google.com/s2/favicons?domain=${d}&sz=128`
+import faviconManifest from './favicon-manifest.json'
+
+const fav = (id, host) =>
+  faviconManifest.clients[id] ??
+  `https://www.google.com/s2/favicons?domain=${host}&sz=128`
+
+const favRemote = (host) =>
+  `https://www.google.com/s2/favicons?domain=${host}&sz=128`
+
 const logo = (d) => `https://logo.clearbit.com/${d}`
 const shot = (url) =>
   `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=1600&h=1000`
@@ -14,7 +23,9 @@ const shot2 = (url) =>
 
 const make = (p) => ({
   ...p,
-  favicon: fav(p.host),
+  // SmartImage walks this list — local first, S2 second, then logo, then nothing
+  favicon: fav(p.id, p.host),
+  faviconRemote: favRemote(p.host),
   logo: logo(p.host),
   // Local screenshot captured by `npm run screenshots`. Tried first; if missing,
   // SmartImage falls through to live services then to logo/favicon.

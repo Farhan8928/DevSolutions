@@ -185,7 +185,7 @@ export default function Work() {
                 <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 bg-ink-950/85 px-5 py-4">
                   <div className="flex items-center gap-3 min-w-0">
                     <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/[0.05] border border-white/10 overflow-hidden">
-                      <SmartImage sources={[current.favicon]} alt="" className="h-5 w-5" imgClassName="h-5 w-5 object-contain" />
+                      <SmartImage sources={[current.favicon, current.faviconRemote]} alt="" className="h-5 w-5" imgClassName="h-5 w-5 object-contain" />
                     </div>
                     <div className="min-w-0">
                       <p className="truncate text-[10px] font-mono uppercase tracking-[0.22em] text-white/55">
@@ -229,7 +229,7 @@ export default function Work() {
                     <div className="min-w-0">
                       <div className="flex items-center gap-3 text-xs font-mono text-white/50">
                         <span className="grid h-5 w-5 place-items-center rounded-md bg-white/[0.06] overflow-hidden">
-                          <SmartImage sources={[p.favicon]} alt="" className="h-4 w-4" imgClassName="h-4 w-4 object-contain" />
+                          <SmartImage sources={[p.favicon, p.faviconRemote]} alt="" className="h-4 w-4" imgClassName="h-4 w-4 object-contain" />
                         </span>
                         <span>{String(i + 1).padStart(2, '0')}</span>
                         <span>·</span>
