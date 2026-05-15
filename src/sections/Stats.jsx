@@ -92,7 +92,7 @@ export default function Stats() {
           </div>
 
           {/* Footnote */}
-          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.06] bg-ink-950/40 px-5 md:px-7 py-3">
+          <div className="flex flex-col-reverse sm:flex-row sm:flex-wrap items-start sm:items-center justify-between gap-2 sm:gap-3 border-t border-white/[0.06] bg-ink-950/40 px-5 md:px-7 py-3">
             <p className="text-xs text-white/50">
               Numbers updated <span className="text-white/80">{new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}</span>.
             </p>

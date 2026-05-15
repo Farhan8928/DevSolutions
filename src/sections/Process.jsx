@@ -163,23 +163,23 @@ export default function Process() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-80px' }}
                   transition={{ duration: 0.5, delay: i * 0.05 }}
-                  className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] p-6 md:p-8 hover:border-white/20 transition"
+                  className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] p-5 sm:p-6 md:p-8 hover:border-white/20 transition"
                 >
                   <div className="absolute -bottom-px left-0 h-px w-1/3 bg-gradient-to-r from-accent-lime to-transparent transition-all duration-500 group-hover:w-1/2" />
 
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-center gap-4">
-                      <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white/[0.05] border border-white/10">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
+                    <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                      <div className="grid h-11 w-11 sm:h-12 sm:w-12 shrink-0 place-items-center rounded-2xl bg-white/[0.05] border border-white/10">
                         <Icon size={18} className="text-accent-lime" />
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/45">
                           Phase {p.n}
                         </p>
                         <h3 className="display-lg mt-0.5">{p.title}</h3>
                       </div>
                     </div>
-                    <span className="chip shrink-0">{p.duration}</span>
+                    <span className="chip self-start sm:shrink-0">{p.duration}</span>
                   </div>
 
                   <p className="mt-5 text-white/70 leading-relaxed max-w-prose">

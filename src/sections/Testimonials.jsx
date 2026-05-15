@@ -55,7 +55,7 @@ export default function Testimonials() {
 
       <div className="container-x">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <span className="eyebrow">05 — Words from clients</span>
             <h2 className="display-xl mt-4">
@@ -63,7 +63,7 @@ export default function Testimonials() {
             </h2>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             {/* 5-star rating */}
             <div className="flex items-center gap-1.5">
               {Array.from({ length: 5 }).map((_, n) => (
@@ -71,8 +71,8 @@ export default function Testimonials() {
               ))}
               <span className="ml-2 text-xs text-white/55">5.0 average</span>
             </div>
-            {/* Pagination dots */}
-            <div className="hidden md:flex items-center gap-1.5">
+            {/* Pagination dots — hidden on mobile, mini-list below handles selection */}
+            <div className="hidden lg:flex items-center gap-1.5">
               {quotes.map((_, idx) => (
                 <button
                   key={idx}

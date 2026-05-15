@@ -48,9 +48,12 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Massive wordmark */}
-        <div className="mt-16 md:mt-24 select-none">
-          <p className="display leading-[0.85] tracking-tighter text-[18vw] md:text-[15vw] bg-gradient-to-b from-white/[0.08] via-white/[0.04] to-transparent bg-clip-text text-transparent">
+        {/* Massive wordmark — fluid clamp, never overflows */}
+        <div className="mt-16 md:mt-24 select-none overflow-hidden">
+          <p
+            className="display leading-[0.85] tracking-tighter bg-gradient-to-b from-white/[0.08] via-white/[0.04] to-transparent bg-clip-text text-transparent"
+            style={{ fontSize: 'clamp(3.5rem, 16vw, 18rem)' }}
+          >
             DevSolutions
           </p>
         </div>
@@ -60,7 +63,7 @@ export default function Footer() {
           {/* Status */}
           <div className="md:col-span-4">
             <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/40">Status</p>
-            <div className="mt-3 inline-flex items-center gap-2.5 rounded-full border border-accent-lime/30 bg-accent-lime/[0.06] px-3 py-1.5">
+            <div className="mt-3 inline-flex flex-wrap items-center gap-x-2.5 gap-y-1.5 rounded-2xl border border-accent-lime/30 bg-accent-lime/[0.06] px-3 py-2">
               <span className="relative flex h-2 w-2">
                 <span className={`absolute inline-flex h-full w-full rounded-full bg-accent-lime ${isAwake ? 'animate-ping opacity-60' : 'opacity-30'}`} />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-lime" />
@@ -68,7 +71,7 @@ export default function Footer() {
               <span className="text-xs text-white/85 font-medium">
                 {isAwake ? 'Available now' : 'Quiet hours'}
               </span>
-              <span className="font-mono text-[10px] text-white/45">
+              <span className="font-mono text-[10px] text-white/45 whitespace-nowrap">
                 Mumbai · {istString} IST
               </span>
             </div>

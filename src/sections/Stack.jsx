@@ -81,42 +81,49 @@ export default function Stack() {
                       custom={i}
                       onMouseEnter={() => setHovered(tool.name)}
                       onMouseLeave={() => setHovered(null)}
-                      className="group relative aspect-square"
+                      className="group relative"
                     >
-                      <div
-                        className={`relative h-full w-full overflow-hidden rounded-xl border bg-white/[0.02] transition ${
-                          isActive
-                            ? 'border-accent-lime/50 bg-white/[0.06]'
-                            : 'border-white/[0.06] hover:border-white/15'
-                        }`}
-                      >
-                        {/* Logo — fades + scales out when active */}
+                      {/* Mobile: name shown below logo. Desktop: aspect-square with hover reveal. */}
+                      <div className="flex flex-col items-center gap-2 md:gap-0 md:block md:aspect-square">
                         <div
-                          className={`absolute inset-0 grid place-items-center transition-all duration-300 ${
-                            isActive ? 'opacity-0 scale-90' : 'opacity-100 scale-100'
+                          className={`relative aspect-square w-full overflow-hidden rounded-xl border bg-white/[0.02] transition ${
+                            isActive
+                              ? 'border-accent-lime/50 bg-white/[0.06]'
+                              : 'border-white/[0.06] hover:border-white/15'
                           }`}
                         >
-                          <SmartImage
-                            sources={[tool.logo]}
-                            alt={tool.name}
-                            className="h-7 w-7 md:h-8 md:w-8"
-                            imgClassName="h-7 w-7 md:h-8 md:w-8 object-contain"
-                          />
-                        </div>
+                          {/* Logo */}
+                          <div
+                            className={`absolute inset-0 grid place-items-center transition-all duration-300 md:${
+                              isActive ? 'opacity-0 scale-90' : 'opacity-100 scale-100'
+                            } opacity-100 scale-100`}
+                          >
+                            <SmartImage
+                              sources={[tool.logo]}
+                              alt={tool.name}
+                              className="h-7 w-7 md:h-8 md:w-8"
+                              imgClassName="h-7 w-7 md:h-8 md:w-8 object-contain"
+                            />
+                          </div>
 
-                        {/* "Why" content — fades in inside the tile */}
-                        <div
-                          className={`absolute inset-0 flex flex-col justify-between p-2 md:p-2.5 transition-all duration-300 ${
-                            isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1 pointer-events-none'
-                          }`}
-                        >
-                          <p className="text-[10px] font-semibold leading-tight text-accent-lime">
-                            {tool.name}
-                          </p>
-                          <p className="text-[9px] leading-tight text-white/75 line-clamp-3">
-                            {tool.why}
-                          </p>
+                          {/* Hover-reveal overlay (desktop only) */}
+                          <div
+                            className={`hidden md:flex absolute inset-0 flex-col justify-between p-2.5 transition-all duration-300 ${
+                              isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1 pointer-events-none'
+                            }`}
+                          >
+                            <p className="text-[11px] font-semibold leading-tight text-accent-lime">
+                              {tool.name}
+                            </p>
+                            <p className="text-[10.5px] leading-snug text-white/75 line-clamp-3">
+                              {tool.why}
+                            </p>
+                          </div>
                         </div>
+                        {/* Mobile-only label below logo */}
+                        <p className="md:hidden text-center text-[10px] font-medium text-white/65 leading-tight line-clamp-1">
+                          {tool.name}
+                        </p>
                       </div>
                     </motion.li>
                   )
@@ -126,8 +133,8 @@ export default function Stack() {
           ))}
         </div>
 
-        {/* Active tool deep-line — supplementary, full-width */}
-        <div className="mt-6 min-h-[44px] flex items-center justify-center">
+        {/* Active tool deep-line — desktop only (mobile names already visible below logos) */}
+        <div className="hidden md:flex mt-6 min-h-[44px] items-center justify-center">
           {hovered ? (
             <motion.div
               key={hovered}
