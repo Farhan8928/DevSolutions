@@ -1,16 +1,27 @@
 // Real DevSolutions project portfolio.
-// Assets are pulled live from each client domain via public services:
+// Assets are pulled live from each client domain via free public services:
 //   - favicon: Google S2 (always works)
-//   - logo:    Clearbit Logo API (works for established brands; falls back to favicon)
-//   - shot:    thum.io live page screenshot (free, no key)
+//   - logo:    Clearbit Logo API (works for most established brands)
+//   - shot:    WordPress mShots (free, no key, no auth)
+//   - shot2:   Microlink screenshot (free fallback)
 
 const fav = (d) => `https://www.google.com/s2/favicons?domain=${d}&sz=128`
 const logo = (d) => `https://logo.clearbit.com/${d}`
 const shot = (url) =>
-  `https://image.thum.io/get/width/1600/crop/1200/noanimate/maxAge/24/${url}`
+  `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=1600&h=1000`
+const shot2 = (url) =>
+  `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url&viewport.width=1440&viewport.height=900`
+
+const make = (p) => ({
+  ...p,
+  favicon: fav(p.host),
+  logo: logo(p.host),
+  shot: shot(p.url),
+  shot2: shot2(p.url)
+})
 
 export const projects = [
-  {
+  make({
     id: 'remesleep',
     title: 'Remesleep',
     domain: 'Healthcare',
@@ -20,12 +31,9 @@ export const projects = [
       'Sleep & recovery healthcare platform with patient onboarding, clinician dashboards and telehealth flows.',
     stack: ['React', 'Node', 'PostgreSQL', 'Stripe'],
     url: 'https://www.remesleep.com/',
-    accent: 'from-emerald-300/30 via-cyan-400/10 to-transparent',
-    favicon: fav('remesleep.com'),
-    logo: logo('remesleep.com'),
-    shot: shot('https://www.remesleep.com/')
-  },
-  {
+    accent: 'from-emerald-300/30 via-cyan-400/10 to-transparent'
+  }),
+  make({
     id: 'humanewarriors',
     title: 'Humane Warriors',
     domain: 'NGO',
@@ -35,12 +43,9 @@ export const projects = [
       'Global NGO website that mobilises donors and volunteers across regions with rich storytelling.',
     stack: ['React', 'CMS', 'GSAP'],
     url: 'https://humanewarriors.ch/',
-    accent: 'from-amber-300/25 via-rose-300/10 to-transparent',
-    favicon: fav('humanewarriors.ch'),
-    logo: logo('humanewarriors.ch'),
-    shot: shot('https://humanewarriors.ch/')
-  },
-  {
+    accent: 'from-amber-300/25 via-rose-300/10 to-transparent'
+  }),
+  make({
     id: 'howl',
     title: 'Howl',
     domain: 'Marketing',
@@ -50,12 +55,9 @@ export const projects = [
       'Brand-led website for a digital marketing agency with bold motion and lead capture.',
     stack: ['Next.js', 'Framer Motion', 'Sanity'],
     url: 'https://www.howl.in/',
-    accent: 'from-fuchsia-400/25 via-violet-400/10 to-transparent',
-    favicon: fav('howl.in'),
-    logo: logo('howl.in'),
-    shot: shot('https://www.howl.in/')
-  },
-  {
+    accent: 'from-fuchsia-400/25 via-violet-400/10 to-transparent'
+  }),
+  make({
     id: 'benzer',
     title: 'Benzer World',
     domain: 'E‑commerce',
@@ -65,12 +67,9 @@ export const projects = [
       'Headless commerce on Shopify + custom CMS — catalogue, merchandising and checkout tuned for conversion.',
     stack: ['Shopify', 'Custom CMS', 'Liquid', 'Node'],
     url: 'https://benzerworld.com/',
-    accent: 'from-amber-200/25 via-yellow-300/10 to-transparent',
-    favicon: fav('benzerworld.com'),
-    logo: logo('benzerworld.com'),
-    shot: shot('https://benzerworld.com/')
-  },
-  {
+    accent: 'from-amber-200/25 via-yellow-300/10 to-transparent'
+  }),
+  make({
     id: 'chainthat',
     title: 'ChainThat',
     domain: 'InsurTech',
@@ -80,12 +79,9 @@ export const projects = [
       'Brand and product site for an enterprise insurance technology company.',
     stack: ['React', 'TypeScript', 'GraphQL'],
     url: 'https://chainthat.com/',
-    accent: 'from-sky-400/25 via-indigo-400/10 to-transparent',
-    favicon: fav('chainthat.com'),
-    logo: logo('chainthat.com'),
-    shot: shot('https://chainthat.com/')
-  },
-  {
+    accent: 'from-sky-400/25 via-indigo-400/10 to-transparent'
+  }),
+  make({
     id: 'bakerandco',
     title: 'Baker & Co — Visa CRM',
     domain: 'Custom CRM',
@@ -95,12 +91,9 @@ export const projects = [
       'End‑to‑end visa lead CRM. Captures leads from Meta, websites and manual entry. Role‑based routing across telecallers, advisors, processing and admin.',
     stack: ['React', 'Node', 'MongoDB', 'Meta API', 'Twilio'],
     url: 'https://bakerandco.ae/',
-    accent: 'from-lime-300/30 via-emerald-300/10 to-transparent',
-    favicon: fav('bakerandco.ae'),
-    logo: logo('bakerandco.ae'),
-    shot: shot('https://bakerandco.ae/')
-  },
-  {
+    accent: 'from-lime-300/30 via-emerald-300/10 to-transparent'
+  }),
+  make({
     id: 'elitefx',
     title: 'EliteFX',
     domain: 'Forex / Fintech',
@@ -110,12 +103,9 @@ export const projects = [
       'Full forex website plus client and admin CRM with native MT5 and broker‑platform integrations baked in.',
     stack: ['React', 'Node', 'MT5', 'WebSockets', 'PostgreSQL'],
     url: 'https://www.elitefx.in/',
-    accent: 'from-rose-300/25 via-orange-300/10 to-transparent',
-    favicon: fav('elitefx.in'),
-    logo: logo('elitefx.in'),
-    shot: shot('https://www.elitefx.in/')
-  },
-  {
+    accent: 'from-rose-300/25 via-orange-300/10 to-transparent'
+  }),
+  make({
     id: 'autopart',
     title: 'AutoPart',
     domain: 'Automotive',
@@ -125,9 +115,6 @@ export const projects = [
       'Booking platform for premium car repair — quote builder, service catalogue and slot management.',
     stack: ['React', 'Vite', 'Tailwind', 'Vercel'],
     url: 'https://autopart-web.vercel.app/',
-    accent: 'from-cyan-300/25 via-blue-400/10 to-transparent',
-    favicon: fav('autopart-web.vercel.app'),
-    logo: logo('autopart-web.vercel.app'),
-    shot: shot('https://autopart-web.vercel.app/')
-  }
+    accent: 'from-cyan-300/25 via-blue-400/10 to-transparent'
+  })
 ]
