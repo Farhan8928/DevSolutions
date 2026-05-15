@@ -37,7 +37,7 @@ export default function Work() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <span className="eyebrow">02 — Selected work</span>
-            <h2 className="display mt-4 text-5xl md:text-7xl tracking-tight">
+            <h2 className="display-xl mt-4">
               Real products, <span className="gradient-text">live in the wild.</span>
             </h2>
           </div>
@@ -69,7 +69,7 @@ export default function Work() {
                       </div>
                       <div>
                         <p className="text-xs font-mono uppercase tracking-[0.22em] text-white/65">{current.domain}</p>
-                        <h3 className="display mt-3 text-5xl md:text-6xl text-white">{current.title}</h3>
+                        <h3 className="display-xl mt-3 text-white">{current.title}</h3>
                       </div>
                     </div>
                   </motion.div>
@@ -113,7 +113,7 @@ export default function Work() {
                         <span>·</span>
                         <span>{p.year}</span>
                       </div>
-                      <h3 className="display mt-3 text-3xl md:text-4xl">
+                      <h3 className="display-lg mt-3">
                         <a href={p.url} target="_blank" rel="noopener noreferrer" className="hover:text-accent-lime transition">
                           {p.title}
                         </a>

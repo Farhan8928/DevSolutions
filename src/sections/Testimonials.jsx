@@ -42,7 +42,7 @@ export default function Testimonials() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <span className="eyebrow">05 — Words from clients</span>
-            <h2 className="display mt-4 text-5xl md:text-7xl tracking-tight">
+            <h2 className="display-xl mt-4">
               Trusted by founders <span className="gradient-text">who ship.</span>
             </h2>
           </div>
@@ -69,7 +69,7 @@ export default function Testimonials() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-6 display text-3xl md:text-5xl leading-[1.1] text-white"
+              className="mt-6 display-xl leading-[1.05] text-white"
             >
               “{q.body}”
             </motion.blockquote>

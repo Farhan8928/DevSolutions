@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Sparkles, Star } from 'lucide-react'
+import {
+  ArrowUpRight, Sparkles, Star, ShieldCheck, Clock, MessageCircle
+} from 'lucide-react'
 import KineticHeading from '../components/KineticHeading.jsx'
 import InteractiveDots from '../components/InteractiveDots.jsx'
 import Magnetic from '../components/Magnetic.jsx'
@@ -7,8 +9,10 @@ import RotatingStamp from '../components/RotatingStamp.jsx'
 
 export default function Hero() {
   return (
-    <section id="top" className="relative pt-32 md:pt-40 pb-16 md:pb-24 grain overflow-hidden">
-      {/* Background layers */}
+    <section
+      id="top"
+      className="relative pt-28 md:pt-36 pb-16 md:pb-20 grain overflow-hidden"
+    >
       <div aria-hidden className="absolute inset-0 -z-10">
         <InteractiveDots />
         <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[700px] w-[1100px] rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.22),transparent_60%)] blur-3xl animate-aurora" />
@@ -18,81 +22,124 @@ export default function Hero() {
       </div>
 
       <div className="container-x">
+        {/* Top meta strip */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex flex-wrap items-center gap-3"
+          className="flex flex-wrap items-center gap-2.5"
         >
           <span className="chip">
             <span className="h-1.5 w-1.5 rounded-full bg-accent-lime animate-pulse" />
             Booking Q3 2026
           </span>
           <span className="chip">
-            <Star size={12} className="text-accent-lime" /> 8 products shipped this year
+            <Star size={12} className="text-accent-lime" /> 8 products shipped
           </span>
           <span className="chip">Remote · India · UAE</span>
+          <span className="chip">
+            <ShieldCheck size={12} className="text-accent-lime" /> NDA‑first
+          </span>
         </motion.div>
 
-        <div className="mt-8">
+        {/* Headline (2 lines, fluid clamp, never overflows) */}
+        <div className="mt-7">
           <KineticHeading
-            text="We build digital"
-            highlight="products that scale."
-            delay={0.6}
-            className="text-[12vw] md:text-[7.5rem] lg:text-[9rem]"
+            delay={0.5}
+            lines={[
+              { text: 'Engineering studio' },
+              { text: 'for premium products.', highlight: true }
+            ]}
           />
         </div>
 
-        <div className="mt-10 grid gap-8 md:grid-cols-12 items-end">
+        {/* Sub copy + CTAs */}
+        <div className="mt-8 grid gap-8 md:grid-cols-12 items-end">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-            className="md:col-span-6 max-w-xl text-lg md:text-xl text-white/70 leading-relaxed"
+            transition={{ duration: 0.6, delay: 1.1 }}
+            className="md:col-span-7 max-w-2xl text-base md:text-lg text-white/70 leading-relaxed"
           >
-            DevSolutions is a small, senior engineering studio. We design and ship
-            premium web, mobile and CRM products across healthcare, fintech, e‑commerce
-            and beyond.
+            We design and ship web, mobile and CRM products for ambitious teams in
+            <span className="text-white/90"> healthcare, fintech, e‑commerce, NGO, and automotive</span>.
+            Senior engineers only — no handoffs, no agency theatre.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.3 }}
-            className="md:col-span-6 flex flex-wrap items-center gap-3 md:justify-end"
+            transition={{ duration: 0.6, delay: 1.2 }}
+            className="md:col-span-5 flex flex-wrap items-center gap-3 md:justify-end"
           >
-            <Magnetic strength={36}>
-              <a href="#contact" className="btn-primary text-base">
+            <Magnetic strength={28}>
+              <a href="#contact" className="btn-primary text-sm md:text-base">
                 <Sparkles size={16} /> Start a project <ArrowUpRight size={16} />
               </a>
             </Magnetic>
-            <Magnetic strength={20}>
-              <a href="#work" className="btn-ghost">See selected work</a>
+            <Magnetic strength={16}>
+              <a href="#work" className="btn-ghost text-sm md:text-base">
+                See selected work
+              </a>
             </Magnetic>
           </motion.div>
         </div>
+
+        {/* Inline trust strip — high impact, sits right under the CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.3 }}
+          className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3 text-sm text-white/70"
+        >
+          <span className="inline-flex items-center gap-2">
+            <span className="flex">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} size={14} className="fill-accent-lime text-accent-lime" />
+              ))}
+            </span>
+            <span><b className="text-white">5.0</b> from 24+ founders</span>
+          </span>
+          <span className="hidden md:inline-block h-4 w-px bg-white/15" />
+          <span className="inline-flex items-center gap-2">
+            <Clock size={14} className="text-accent-lime" />
+            <span>Reply in <b className="text-white">&lt;1 business day</b></span>
+          </span>
+          <span className="hidden md:inline-block h-4 w-px bg-white/15" />
+          <span className="inline-flex items-center gap-2">
+            <ShieldCheck size={14} className="text-accent-lime" />
+            <span>100% on‑time delivery</span>
+          </span>
+          <span className="hidden md:inline-block h-4 w-px bg-white/15" />
+          <a
+            href="https://wa.me/" target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-white/85 hover:text-white"
+          >
+            <MessageCircle size={14} className="text-accent-lime" />
+            WhatsApp the founder
+          </a>
+        </motion.div>
 
         {/* Hero panel */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.4 }}
-          className="mt-16 grid gap-4 md:grid-cols-12 relative"
+          className="mt-14 grid gap-4 md:grid-cols-12 relative"
         >
-          {/* Stamp anchor */}
-          <div className="hidden md:block absolute -top-14 right-2 h-32 w-32 z-10">
+          <div className="hidden md:block absolute -top-12 right-2 h-28 w-28 z-10">
             <RotatingStamp className="h-full w-full" />
           </div>
 
-          <div className="card ring-glow md:col-span-8 p-6 md:p-8 relative overflow-hidden">
+          <div className="card ring-glow md:col-span-8 p-5 md:p-7 relative overflow-hidden">
             <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(200,255,0,0.08),transparent_60%)]" />
             <div className="flex items-center gap-2 text-xs text-white/50 font-mono">
               <span className="h-2 w-2 rounded-full bg-rose-400" />
               <span className="h-2 w-2 rounded-full bg-amber-400" />
               <span className="h-2 w-2 rounded-full bg-emerald-400" />
-              <span className="ml-3">~/devsolutions/manifest.ts</span>
+              <span className="ml-3 truncate">~/devsolutions/manifest.ts</span>
             </div>
-            <pre className="mt-5 overflow-x-auto text-sm md:text-[15px] leading-relaxed font-mono text-white/85">
+            <pre className="mt-4 overflow-x-auto text-[12px] sm:text-sm md:text-[15px] leading-relaxed font-mono text-white/85">
 {`export const studio = {
   name:    "DevSolutions",
   shipped: ["healthcare", "fintech", "ecommerce", "ngo", "automotive"],
@@ -102,16 +149,16 @@ export default function Hero() {
             </pre>
           </div>
 
-          <div className="md:col-span-4 grid gap-4">
-            <div className="card p-6">
-              <p className="text-xs uppercase tracking-[0.18em] text-white/50 font-mono">Live products</p>
-              <p className="display mt-3 text-5xl">8+</p>
-              <p className="mt-2 text-sm text-white/60">In production across 5 industries.</p>
+          <div className="md:col-span-4 grid grid-cols-2 md:grid-cols-1 gap-4">
+            <div className="card p-5 md:p-6">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-white/50 font-mono">Live products</p>
+              <p className="display mt-2 md:mt-3 text-4xl md:text-5xl">8+</p>
+              <p className="mt-2 text-xs md:text-sm text-white/60">Across 5 industries.</p>
             </div>
-            <div className="card p-6">
-              <p className="text-xs uppercase tracking-[0.18em] text-white/50 font-mono">Avg. lighthouse</p>
-              <p className="display mt-3 text-5xl">96</p>
-              <p className="mt-2 text-sm text-white/60">Performance score on shipped sites.</p>
+            <div className="card p-5 md:p-6">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-white/50 font-mono">Avg. lighthouse</p>
+              <p className="display mt-2 md:mt-3 text-4xl md:text-5xl">96</p>
+              <p className="mt-2 text-xs md:text-sm text-white/60">On shipped sites.</p>
             </div>
           </div>
         </motion.div>
@@ -121,8 +168,8 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 0.6 }}
-        className="container-x mt-16 flex items-center justify-between text-xs font-mono uppercase tracking-[0.22em] text-white/45"
+        transition={{ delay: 1.7, duration: 0.6 }}
+        className="container-x mt-12 flex flex-wrap items-center justify-between gap-3 text-[10px] md:text-xs font-mono uppercase tracking-[0.22em] text-white/45"
       >
         <span>↓ Scroll to explore</span>
         <span className="hidden md:inline">N 19.07° · E 72.87° · MUMBAI</span>

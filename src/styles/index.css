@@ -52,6 +52,31 @@ body {
     line-height: 0.95;
   }
 
+  /* Fluid hero — never overflows. Scales from 320px to 1920px viewports. */
+  .display-hero {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 0.92;
+    font-size: clamp(2.6rem, 9.2vw, 8.5rem);
+  }
+
+  .display-xl {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+    font-size: clamp(2rem, 5.4vw, 4.75rem);
+  }
+
+  .display-lg {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-size: clamp(1.6rem, 3.6vw, 2.75rem);
+  }
+
   .btn-primary {
     @apply inline-flex items-center gap-2 rounded-full bg-accent-lime px-6 py-3 text-sm font-medium text-ink-950 transition-transform hover:-translate-y-0.5;
   }

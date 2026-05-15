@@ -30,7 +30,7 @@ export default function Process() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <span className="eyebrow">03 — How we work</span>
-            <h2 className="display mt-4 text-5xl md:text-7xl tracking-tight">
+            <h2 className="display-xl mt-4">
               A process built for <span className="gradient-text">clarity & velocity.</span>
             </h2>
           </div>
@@ -50,7 +50,7 @@ export default function Process() {
                 <span className="font-mono text-xs text-accent-lime">{s.n}</span>
                 <span className="font-mono text-xs text-white/40">phase</span>
               </div>
-              <h3 className="display mt-6 text-3xl md:text-4xl">{s.title}</h3>
+              <h3 className="display-lg mt-6">{s.title}</h3>
               <p className="mt-3 text-white/65 leading-relaxed max-w-prose">{s.body}</p>
               <div className="absolute -bottom-px left-0 h-px w-1/3 bg-gradient-to-r from-accent-lime to-transparent" />
             </motion.li>

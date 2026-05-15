@@ -20,7 +20,7 @@ function Counter({ to, suffix = '', duration = 1.6 }) {
   }, [inView, to, duration, suffix, value])
 
   return (
-    <span ref={ref} className="display text-6xl md:text-7xl">
+    <span ref={ref} className="display-xl">
       <span ref={node}>0{suffix}</span>
     </span>
   )

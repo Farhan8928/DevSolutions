@@ -40,7 +40,7 @@ export default function Loader() {
                 initial={{ y: '110%' }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="display text-[14vw] md:text-[10vw] leading-[0.9] tracking-tight"
+                className="display-hero leading-[0.9]"
               >
                 Engineering <span className="gradient-text">premium</span> products.
               </motion.h2>

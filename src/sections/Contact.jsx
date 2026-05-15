@@ -20,7 +20,7 @@ export default function Contact() {
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
             <span className="eyebrow">06 — Let’s talk</span>
-            <h2 className="display mt-4 text-5xl md:text-7xl tracking-tight">
+            <h2 className="display-xl mt-4">
               Have an idea? <br />
               <span className="gradient-text">Let’s build it.</span>
             </h2>

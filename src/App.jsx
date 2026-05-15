@@ -5,6 +5,7 @@ import ProgressRail from './components/ProgressRail.jsx'
 import Nav from './components/Nav.jsx'
 import Hero from './sections/Hero.jsx'
 import Marquee from './sections/Marquee.jsx'
+import Trust from './sections/Trust.jsx'
 import Services from './sections/Services.jsx'
 import Work from './sections/Work.jsx'
 import Process from './sections/Process.jsx'
@@ -28,6 +29,7 @@ export default function App() {
       <main>
         <Hero />
         <Marquee />
+        <Trust />
         <Services />
         <Work />
         <Process />

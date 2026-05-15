@@ -18,7 +18,7 @@ export default function Services() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <span className="eyebrow">01 — What we do</span>
-            <h2 className="display mt-4 text-5xl md:text-7xl tracking-tight">
+            <h2 className="display-xl mt-4">
               Services with the <span className="gradient-text">depth of a team,</span>
               <br className="hidden md:block" />
               the speed of a studio.
@@ -46,7 +46,7 @@ export default function Services() {
                 <span className="font-mono text-xs uppercase tracking-[0.22em] text-white/45">Flagship</span>
               </div>
               <div>
-                <h3 className="display text-4xl md:text-5xl">Web platforms <span className="gradient-text">built to convert.</span></h3>
+                <h3 className="display-xl">Web platforms <span className="gradient-text">built to convert.</span></h3>
                 <p className="mt-4 max-w-xl text-white/70 leading-relaxed">
                   Marketing sites, dashboards and SaaS products on React, Next.js and modern stacks. Pixel‑precise, accessible, and fast on real networks.
                 </p>
@@ -110,7 +110,7 @@ export default function Services() {
                   <Sparkles size={14} className="text-accent-lime" />
                   Engagement model
                 </div>
-                <h3 className="display mt-4 text-3xl md:text-4xl">
+                <h3 className="display-lg mt-4">
                   Fixed‑scope sprints, monthly retainers, or fully embedded teams — pick the model that fits your roadmap.
                 </h3>
               </div>
