@@ -1,10 +1,10 @@
 /**
- * Capture a real screenshot of every project domain via WordPress mShots,
- * then save it locally to /public/projects/<id>.jpg.
+ * Capture pixel-perfect portrait screenshots of every project domain using
+ * a real headless Chromium (Playwright). Each shot is saved to
+ *   /public/projects/<id>.jpg
  *
- * mShots returns a small placeholder (a few KB) while it's still rendering
- * the page in the background. We poll the URL until the response is large
- * enough to be the real screenshot.
+ * The capture viewport matches the aspect ratio of the showcase modal
+ * (4:5 portrait) so screenshots fill the panel with no blank bands.
  *
  * Usage:  npm run screenshots
  */
@@ -12,9 +12,17 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { chromium, devices } from 'playwright'
 
 const __filename = fileURLToPath(import.meta.url)
 const __root = path.resolve(path.dirname(__filename), '..')
+const outDir = path.join(__root, 'public', 'projects')
+
+// Modal aspect ratio is 4:5 portrait. Capturing at 2x density so the result
+// stays crisp on retina screens.
+const VIEWPORT = { width: 1280, height: 1600 } // 4:5
+const SCALE = 2 // device pixel ratio
+const NAV_TIMEOUT = 45_000
 
 const projects = [
   { id: 'remesleep',      url: 'https://www.remesleep.com/' },
@@ -27,94 +35,93 @@ const projects = [
   { id: 'autopart',       url: 'https://autopart-web.vercel.app/' }
 ]
 
-const W = 1600
-const H = 1000
-const MIN_REAL_BYTES = 25_000   // anything smaller is mShots placeholder
-const MAX_TRIES = 18            // ~ 90s per site
-const DELAY_MS = 5000
+// Try to dismiss common cookie / consent banners so they don't pollute the shot.
+const dismissBanners = `
+(() => {
+  const tries = [
+    /accept/i, /agree/i, /got it/i, /allow all/i, /i understand/i,
+    /allow cookies/i, /close/i, /dismiss/i, /ok/i
+  ];
+  const click = (el) => { try { el.click() } catch (e) {} };
+  // Click any obvious "accept" button.
+  const buttons = Array.from(document.querySelectorAll('button, a, [role="button"]'));
+  for (const b of buttons) {
+    const t = (b.innerText || '').trim();
+    if (!t) continue;
+    if (tries.some((re) => re.test(t))) { click(b); break; }
+  }
+  // Hide common banner containers as a fallback.
+  const hide = ['#onetrust-banner-sdk','#CybotCookiebotDialog','.cc-window','.cookie-banner','#cookie-banner','.cky-consent-bar','.osano-cm-window'];
+  hide.forEach((sel) => {
+    document.querySelectorAll(sel).forEach((el) => el.style.setProperty('display','none','important'));
+  });
+})();
+`
 
-const outDir = path.join(__root, 'public', 'projects')
+async function ensureDir(d) { await fs.mkdir(d, { recursive: true }) }
 
-async function ensureDir(d) {
-  await fs.mkdir(d, { recursive: true })
-}
-
-function mshots(url, bust = 0) {
-  const u = new URL('https://s.wordpress.com/mshots/v1/' + encodeURIComponent(url))
-  u.searchParams.set('w', String(W))
-  u.searchParams.set('h', String(H))
-  if (bust) u.searchParams.set('_b', String(bust))
-  return u.toString()
-}
-
-async function fetchBuffer(url) {
-  const res = await fetch(url, {
-    headers: {
-      'User-Agent':
-        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36',
-      'Accept': 'image/avif,image/webp,image/jpeg,image/png,*/*;q=0.8'
-    },
-    redirect: 'follow'
-  })
-  if (!res.ok) throw new Error(`HTTP ${res.status}`)
-  const buf = Buffer.from(await res.arrayBuffer())
-  return buf
-}
-
-async function captureOne({ id, url }) {
+async function captureOne(browser, { id, url }) {
   const dest = path.join(outDir, `${id}.jpg`)
   process.stdout.write(`▸ ${id.padEnd(16)} ${url}\n`)
 
-  let lastBuf = null
-  for (let i = 0; i < MAX_TRIES; i++) {
-    try {
-      const buf = await fetchBuffer(mshots(url, i))
-      lastBuf = buf
-      const ok = buf.length >= MIN_REAL_BYTES
-      process.stdout.write(
-        `   try ${String(i + 1).padStart(2, '0')}/${MAX_TRIES}  ${(buf.length / 1024).toFixed(0).padStart(5)} KB  ${ok ? '✓' : '… still rendering'}\n`
-      )
-      if (ok) {
-        await fs.writeFile(dest, buf)
-        return { id, ok: true, bytes: buf.length, path: `/projects/${id}.jpg` }
-      }
-    } catch (err) {
-      process.stdout.write(`   try ${i + 1} error: ${err.message}\n`)
-    }
-    await new Promise((r) => setTimeout(r, DELAY_MS))
-  }
+  const ctx = await browser.newContext({
+    ...devices['Desktop Chrome'],
+    viewport: VIEWPORT,
+    deviceScaleFactor: SCALE,
+    ignoreHTTPSErrors: true
+  })
+  const page = await ctx.newPage()
 
-  // Timed out — write whatever we last received so the page still has something.
-  if (lastBuf) {
-    await fs.writeFile(dest, lastBuf)
-    return { id, ok: false, bytes: lastBuf.length, path: `/projects/${id}.jpg`, note: 'placeholder' }
+  try {
+    await page.goto(url, { waitUntil: 'networkidle', timeout: NAV_TIMEOUT }).catch(async () => {
+      // Fall back to domcontentloaded if a site never settles network-idle.
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT })
+    })
+    // Let lazy assets, fonts and animations settle.
+    await page.evaluate(dismissBanners).catch(() => {})
+    await page.waitForTimeout(1500)
+    await page.evaluate(() => window.scrollTo(0, 0))
+    await page.waitForTimeout(400)
+
+    const buf = await page.screenshot({
+      type: 'jpeg',
+      quality: 88,
+      fullPage: false,
+      clip: { x: 0, y: 0, width: VIEWPORT.width, height: VIEWPORT.height }
+    })
+    await fs.writeFile(dest, buf)
+    process.stdout.write(`   ✓ ${(buf.length / 1024).toFixed(0)} KB\n`)
+    return { id, ok: true, bytes: buf.length }
+  } catch (err) {
+    process.stdout.write(`   ⚠ ${err.message}\n`)
+    return { id, ok: false, bytes: 0, error: err.message }
+  } finally {
+    await ctx.close()
   }
-  return { id, ok: false, bytes: 0, path: null, note: 'failed' }
 }
 
 async function main() {
   await ensureDir(outDir)
-  console.log(`\nCapturing ${projects.length} screenshots → ${path.relative(__root, outDir)}\n`)
+  console.log(`\nCapturing ${projects.length} portrait screenshots → ${path.relative(__root, outDir)}`)
+  console.log(`Viewport ${VIEWPORT.width}x${VIEWPORT.height} @ ${SCALE}x  (4:5)\n`)
 
+  const browser = await chromium.launch()
   const results = []
-  for (const p of projects) {
-    results.push(await captureOne(p))
+  try {
+    for (const p of projects) {
+      results.push(await captureOne(browser, p))
+    }
+  } finally {
+    await browser.close()
   }
 
   console.log('\nSummary:')
   for (const r of results) {
     const tag = r.ok ? '✓' : '⚠'
-    console.log(`  ${tag} ${r.id.padEnd(16)} ${(r.bytes / 1024).toFixed(0).padStart(5)} KB  ${r.note ?? ''}`)
+    console.log(`  ${tag} ${r.id.padEnd(16)} ${(r.bytes / 1024).toFixed(0).padStart(5)} KB  ${r.error ?? ''}`)
   }
-
   const ok = results.filter((r) => r.ok).length
-  console.log(`\n${ok}/${results.length} captured successfully.\n`)
-  if (ok < results.length) {
-    console.log('Tip: re-run "npm run screenshots" — mShots often needs a second pass for fresh URLs.\n')
-  }
+  console.log(`\n${ok}/${results.length} captured.\n`)
 }
 
-main().catch((e) => {
-  console.error(e)
-  process.exit(1)
-})
+main().catch((e) => { console.error(e); process.exit(1) })
