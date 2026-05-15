@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --paper:  #FAF7F2;       /* warm cream — editorial canvas */
+  --paper-2:#F1ECE2;       /* slightly darker cream */
+  --ink:    #0F172A;
+  --rule:   #15233D;
+}
+
+* { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { overflow-x: clip; }
+
+::selection { background: #00B4E5; color: #FFFFFF; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1480px] px-6 md:px-10 lg:px-20;
+  }
+
+  /* Editorial type system — serifish display + clean body */
+  .display-serif {
+    font-family: 'Fraunces', 'Plus Jakarta Sans', serif;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+  }
+
+  .editorial-hero {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    font-size: clamp(2.5rem, 7.5vw, 7.5rem);
+  }
+
+  .editorial-xl {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    line-height: 1;
+    font-size: clamp(2rem, 5vw, 4.5rem);
+  }
+
+  .editorial-lg {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    letter-spacing: -0.012em;
+    line-height: 1.05;
+    font-size: clamp(1.5rem, 3.4vw, 2.75rem);
+  }
+
+  .numeral {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-feature-settings: 'lnum';
+    letter-spacing: -0.04em;
+  }
+
+  .tag-line {
+    @apply inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.28em] font-mono text-ink-700;
+  }
+
+  /* Press a small caps / number style on the section markers */
+  .section-marker {
+    @apply font-mono text-[10px] uppercase tracking-[0.34em] text-ink-700;
+  }
+
+  .btn-cyan {
+    @apply inline-flex items-center gap-2 bg-brand-500 px-7 py-3.5 text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:bg-brand-600;
+  }
+
+  .btn-line {
+    @apply inline-flex items-center gap-2 border border-ink-900 px-7 py-3.5 text-sm font-medium text-ink-900 transition hover:bg-ink-900 hover:text-white;
+  }
+
+  /* No rounded buttons here — corporate-editorial uses square edges */
+
+  .rule {
+    @apply border-t border-ink-900/15;
+  }
+
+  .double-rule {
+    @apply border-y-2 border-ink-900/85 py-1;
+  }
+
+  /* Diagonal section-break clip — used as a section's bottom edge */
+  .diagonal-bottom {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 60px), 0 100%);
+  }
+  .diagonal-top {
+    clip-path: polygon(0 60px, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* Underline that draws on hover */
+  .draw-line {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 400ms cubic-bezier(.22,1,.36,1);
+  }
+  .draw-line:hover { background-size: 100% 1px; }
+}
+
+/* Fraunces is loaded via index.html <link> for proper preconnect */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

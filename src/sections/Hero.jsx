@@ -13,7 +13,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative pt-24 sm:pt-28 md:pt-36 pb-12 md:pb-20 grain overflow-hidden"
+      className="relative pt-24 sm:pt-26 md:pt-28 lg:pt-32 pb-10 md:pb-14 grain overflow-hidden"
     >
       <div aria-hidden className="absolute inset-0 -z-10">
         <InteractiveDots />
@@ -127,7 +127,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.4 }}
-          className="mt-14 grid gap-4 md:grid-cols-12 relative"
+          className="mt-10 md:mt-12 grid gap-4 md:grid-cols-12 relative"
         >
           <div className="hidden lg:block absolute -top-12 right-2 h-28 w-28 z-10">
             <RotatingStamp className="h-full w-full" />
