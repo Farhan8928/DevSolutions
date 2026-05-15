@@ -53,7 +53,7 @@ export default function StudioStatusCard() {
           <span className="ml-2 text-base font-mono text-white/40">IST</span>
         </p>
         <p className="mt-1.5 text-sm text-white/65">
-          {isAwake ? 'Available now · founder online' : 'Quiet hours · reply by 09:00 IST'}
+          {isAwake ? 'Available now · founders online' : 'Quiet hours · reply by 09:00 IST'}
         </p>
       </div>
 

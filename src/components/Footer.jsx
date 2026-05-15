@@ -78,7 +78,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-3 text-xs text-white/55 max-w-xs">
-              Founder replies inside one business day, every day, on every channel.
+              Founders reply inside one business day, every day, on every channel.
             </p>
           </div>
 

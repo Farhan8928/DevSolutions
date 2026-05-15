@@ -3,15 +3,29 @@
 
 export const studio = {
   name: 'DevSolutions',
-  founder: 'Farhan Sayyed',
   city: 'Mumbai',
   country: 'India',
   email: 'farhan.sayyed.tech@gmail.com',
   phone: '+918928040454',          // E.164 form for tel: links
   whatsapp: '918928040454',        // wa.me uses no plus sign
   whatsappText:
-    'Hi Farhan, I came across DevSolutions and would love to discuss a project.'
+    'Hi DevSolutions, I came across your studio and would love to discuss a project.'
 }
+
+// Two co-founders.
+// Initials are auto-derived from the name in the UI for the avatar tile.
+export const founders = [
+  {
+    name: 'Farhan Sayyed',
+    role: 'Co‑founder · Engineering',
+    initials: 'FS'
+  },
+  {
+    name: 'Sameer Shaikh',
+    role: 'Co‑founder · Product',
+    initials: 'SS'
+  }
+]
 
 // Pre-formatted helpers used across the page.
 export const contact = {

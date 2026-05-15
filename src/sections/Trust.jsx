@@ -4,7 +4,7 @@ import {
   Clock, Lock, Award
 } from 'lucide-react'
 import { projects } from '../data/projects.js'
-import { contact, studio } from '../data/studio.js'
+import { contact, studio, founders } from '../data/studio.js'
 import SmartImage from '../components/SmartImage.jsx'
 
 const guarantees = [
@@ -109,19 +109,56 @@ export default function Trust() {
             <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent-lime/15 blur-3xl" />
 
             <div className="flex items-center gap-4">
-              <div className="grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-accent-lime/30 to-accent-violet/30 text-2xl font-semibold border border-white/10">
-                F
+              {/* Stacked / overlapping avatar tiles — premium two-founder pattern */}
+              <div className="flex -space-x-3">
+                {founders.map((f, i) => (
+                  <span
+                    key={f.name}
+                    className={`grid h-14 w-14 place-items-center rounded-2xl border border-ink-900 text-base font-semibold ring-1 ring-white/10 ${
+                      i === 0
+                        ? 'bg-gradient-to-br from-accent-lime/40 to-accent-lime/10 text-ink-950'
+                        : 'bg-gradient-to-br from-accent-violet/40 to-accent-violet/10 text-white'
+                    }`}
+                    title={f.name}
+                  >
+                    {f.initials}
+                  </span>
+                ))}
               </div>
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.22em] text-white/50 font-mono">Founder</p>
-                <p className="text-lg font-semibold">{studio.founder} · {studio.name}</p>
+              <div className="min-w-0">
+                <p className="text-[11px] uppercase tracking-[0.22em] text-white/50 font-mono">
+                  Co‑founders · {studio.city}
+                </p>
+                <p className="text-base md:text-lg font-semibold leading-tight">
+                  {founders.map((f) => f.name).join(' · ')}
+                </p>
               </div>
             </div>
 
+            {/* Per-founder one-liner roles */}
+            <ul className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {founders.map((f) => (
+                <li
+                  key={f.name}
+                  className="flex items-center gap-2.5 rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2.5"
+                >
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-white/[0.05] border border-white/10 text-[11px] font-semibold text-white/85">
+                    {f.initials}
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-white truncate">{f.name}</p>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/45 truncate">
+                      {f.role}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
             <p className="mt-6 text-white/75 leading-relaxed">
-              “You will talk to me directly through every sprint. No account
-              managers, no offshore relays. If we miss a deadline, the next sprint
-              is on us.”
+              “You will talk to one of us directly through every sprint. No
+              account managers, no offshore relays. If we miss a deadline, the
+              next sprint is on us.”
             </p>
 
             <div className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
