@@ -21,7 +21,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="relative min-h-screen bg-ink-950 text-white overflow-hidden">
+    <div className="relative min-h-screen bg-ink-950 text-white overflow-x-clip">
       <Loader />
       <Cursor />
       <ProgressRail />

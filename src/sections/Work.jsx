@@ -20,7 +20,7 @@ export default function Work() {
           }
         })
       },
-      { rootMargin: '-45% 0px -45% 0px' }
+      { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
     )
     items.forEach((it) => obs.observe(it))
     return () => obs.disconnect()
