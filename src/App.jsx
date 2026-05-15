@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import Cursor from './components/Cursor.jsx'
 import Loader from './components/Loader.jsx'
 import ProgressRail from './components/ProgressRail.jsx'
+import ScrollProgress from './components/ScrollProgress.jsx'
+import AvailabilityDock from './components/AvailabilityDock.jsx'
 import Nav from './components/Nav.jsx'
 import Hero from './sections/Hero.jsx'
 import Marquee from './sections/Marquee.jsx'
@@ -24,6 +26,7 @@ export default function App() {
     <div className="relative min-h-screen bg-ink-950 text-white overflow-x-clip">
       <Loader />
       <Cursor />
+      <ScrollProgress />
       <ProgressRail />
       <Nav />
       <main>
@@ -39,6 +42,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <AvailabilityDock />
     </div>
   )
 }

@@ -1,64 +1,146 @@
-import { ArrowUpRight, Github, Linkedin, Mail } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { ArrowUpRight, Mail, MessageCircle, Linkedin, Github } from 'lucide-react'
 
 export default function Footer() {
+  const [now, setNow] = useState(new Date())
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 60_000)
+    return () => clearInterval(id)
+  }, [])
+
+  // Mumbai is the studio base — show local time in IST
+  const istString = now.toLocaleTimeString('en-IN', {
+    timeZone: 'Asia/Kolkata',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  })
+
+  // Available 09:00–22:00 IST
+  const istHour = Number(
+    now.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', hour12: false })
+  )
+  const isAwake = istHour >= 9 && istHour < 22
+
   return (
-    <footer className="relative border-t border-white/[0.06] bg-ink-950">
-      <div className="container-x py-16">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <div className="flex items-center gap-2.5">
-              <span className="grid h-9 w-9 place-items-center rounded-xl bg-accent-lime text-ink-950 font-bold">
-                D
-              </span>
-              <span className="text-base font-semibold">DevSolutions</span>
-            </div>
-            <p className="mt-5 max-w-md text-white/60">
-              An engineering studio building premium web, mobile and CRM products.
-              We pair sharp design with systems that scale.
-            </p>
-            <div className="mt-6 flex items-center gap-3">
-              <a href="mailto:hello@devsolutions.dev" className="grid h-10 w-10 place-items-center rounded-full border border-white/10 hover:bg-white/[0.06]" aria-label="Email">
-                <Mail size={16} />
-              </a>
-              <a href="#" className="grid h-10 w-10 place-items-center rounded-full border border-white/10 hover:bg-white/[0.06]" aria-label="LinkedIn">
-                <Linkedin size={16} />
-              </a>
-              <a href="#" className="grid h-10 w-10 place-items-center rounded-full border border-white/10 hover:bg-white/[0.06]" aria-label="GitHub">
-                <Github size={16} />
-              </a>
-            </div>
-          </div>
+    <footer className="relative border-t border-white/[0.06] bg-ink-950 overflow-hidden">
+      {/* Aurora glow at top of footer */}
+      <div aria-hidden className="absolute inset-x-0 top-0 -z-10 h-[420px]">
+        <div className="absolute left-1/2 top-0 h-[400px] w-[1100px] -translate-x-1/2 -translate-y-1/3 rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.16),transparent_60%)] blur-3xl" />
+      </div>
 
-          <div className="md:col-span-3">
-            <p className="text-xs uppercase tracking-[0.2em] text-white/40 font-mono">Studio</p>
-            <ul className="mt-4 space-y-2 text-white/80">
-              <li><a href="#services" className="hover:text-white">Services</a></li>
-              <li><a href="#work" className="hover:text-white">Work</a></li>
-              <li><a href="#process" className="hover:text-white">Process</a></li>
-              <li><a href="#stack" className="hover:text-white">Stack</a></li>
-            </ul>
+      <div className="container-x pt-20 md:pt-28 pb-10">
+        {/* Final CTA */}
+        <div className="grid gap-8 md:grid-cols-12 md:items-end">
+          <div className="md:col-span-8">
+            <span className="eyebrow">— Ready to build?</span>
+            <h2 className="display-hero mt-4">
+              Let’s make <span className="gradient-text">something real.</span>
+            </h2>
           </div>
-
-          <div className="md:col-span-4">
-            <p className="text-xs uppercase tracking-[0.2em] text-white/40 font-mono">Get in touch</p>
+          <div className="md:col-span-4 md:text-right">
             <a
               href="#contact"
-              className="mt-4 group flex items-center justify-between rounded-3xl border border-white/10 bg-white/[0.03] p-5 hover:border-accent-lime/50 transition"
+              className="inline-flex items-center gap-2 rounded-full bg-accent-lime px-6 py-3.5 text-sm font-medium text-ink-950 hover:-translate-y-0.5 transition-transform"
             >
-              <div>
-                <div className="text-lg font-medium">Have a project in mind?</div>
-                <div className="text-white/60 text-sm">Tell us what you are building.</div>
-              </div>
-              <span className="grid h-10 w-10 place-items-center rounded-full bg-accent-lime text-ink-950 transition group-hover:rotate-45">
-                <ArrowUpRight size={18} />
-              </span>
+              Start a project <ArrowUpRight size={16} />
             </a>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-t border-white/[0.06] pt-6 text-sm text-white/50">
-          <div>© {new Date().getFullYear()} DevSolutions. All rights reserved.</div>
-          <div className="font-mono text-xs">Crafted with React · Vite · Tailwind</div>
+        {/* Massive wordmark */}
+        <div className="mt-16 md:mt-24 select-none">
+          <p className="display leading-[0.85] tracking-tighter text-[18vw] md:text-[15vw] bg-gradient-to-b from-white/[0.08] via-white/[0.04] to-transparent bg-clip-text text-transparent">
+            DevSolutions
+          </p>
+        </div>
+
+        {/* Status row */}
+        <div className="mt-10 grid gap-6 md:grid-cols-12 border-t border-white/[0.06] pt-8">
+          {/* Status */}
+          <div className="md:col-span-4">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/40">Status</p>
+            <div className="mt-3 inline-flex items-center gap-2.5 rounded-full border border-accent-lime/30 bg-accent-lime/[0.06] px-3 py-1.5">
+              <span className="relative flex h-2 w-2">
+                <span className={`absolute inline-flex h-full w-full rounded-full bg-accent-lime ${isAwake ? 'animate-ping opacity-60' : 'opacity-30'}`} />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-lime" />
+              </span>
+              <span className="text-xs text-white/85 font-medium">
+                {isAwake ? 'Available now' : 'Quiet hours'}
+              </span>
+              <span className="font-mono text-[10px] text-white/45">
+                Mumbai · {istString} IST
+              </span>
+            </div>
+            <p className="mt-3 text-xs text-white/55 max-w-xs">
+              Founder replies inside one business day, every day, on every channel.
+            </p>
+          </div>
+
+          {/* Sitemap */}
+          <div className="md:col-span-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+            <p className="col-span-2 font-mono text-[10px] uppercase tracking-[0.22em] text-white/40">Studio</p>
+            <a href="#services" className="text-white/75 hover:text-white">Services</a>
+            <a href="#work" className="text-white/75 hover:text-white">Work</a>
+            <a href="#process" className="text-white/75 hover:text-white">Process</a>
+            <a href="#stack" className="text-white/75 hover:text-white">Stack</a>
+            <a href="#trust" className="text-white/75 hover:text-white">Trust</a>
+            <a href="#contact" className="text-white/75 hover:text-white">Contact</a>
+          </div>
+
+          {/* Channels */}
+          <div className="md:col-span-4">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/40">Channels</p>
+            <ul className="mt-3 space-y-2">
+              <li>
+                <a href="mailto:hello@devsolutions.dev" className="group flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5 hover:border-accent-lime/40 transition">
+                  <span className="inline-flex items-center gap-2.5 text-sm text-white/85">
+                    <Mail size={14} className="text-accent-lime" />
+                    hello@devsolutions.dev
+                  </span>
+                  <ArrowUpRight size={13} className="text-white/40 group-hover:text-accent-lime transition" />
+                </a>
+              </li>
+              <li>
+                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5 hover:border-accent-lime/40 transition">
+                  <span className="inline-flex items-center gap-2.5 text-sm text-white/85">
+                    <MessageCircle size={14} className="text-accent-lime" />
+                    WhatsApp
+                  </span>
+                  <ArrowUpRight size={13} className="text-white/40 group-hover:text-accent-lime transition" />
+                </a>
+              </li>
+              <li className="grid grid-cols-2 gap-2">
+                <a href="#" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5 hover:border-accent-lime/40 transition">
+                  <span className="inline-flex items-center gap-2 text-sm text-white/85">
+                    <Linkedin size={14} className="text-accent-lime" />
+                    LinkedIn
+                  </span>
+                  <ArrowUpRight size={12} className="text-white/40 group-hover:text-accent-lime transition" />
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5 hover:border-accent-lime/40 transition">
+                  <span className="inline-flex items-center gap-2 text-sm text-white/85">
+                    <Github size={14} className="text-accent-lime" />
+                    GitHub
+                  </span>
+                  <ArrowUpRight size={12} className="text-white/40 group-hover:text-accent-lime transition" />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom legal strip */}
+        <div className="mt-10 flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-3 border-t border-white/[0.06] pt-6 text-xs text-white/45">
+          <div className="flex items-center gap-2">
+            <span className="grid h-7 w-7 place-items-center rounded-lg bg-accent-lime text-ink-950 text-xs font-bold">
+              D
+            </span>
+            <span>© {new Date().getFullYear()} DevSolutions. All rights reserved.</span>
+          </div>
+          <div className="font-mono uppercase tracking-[0.18em] text-[10px]">
+            Built with React · Vite · Tailwind · Framer Motion
+          </div>
         </div>
       </div>
     </footer>
