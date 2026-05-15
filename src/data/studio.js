@@ -6,7 +6,7 @@ export const studio = {
   founder: 'Farhan Sayyed',
   city: 'Mumbai',
   country: 'India',
-  email: '\farhan.sayyed.tech@gmail.com',
+  email: 'farhan.sayyed.tech@gmail.com',
   phone: '+918928040454',          // E.164 form for tel: links
   whatsapp: '918928040454',        // wa.me uses no plus sign
   whatsappText:
