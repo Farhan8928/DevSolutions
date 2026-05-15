@@ -3,11 +3,8 @@ import {
   ShieldCheck, MessageCircle, Mail, MapPin, BadgeCheck,
   Clock, Lock, Award
 } from 'lucide-react'
-
-const clients = [
-  'Remesleep', 'Humane Warriors', 'Howl', 'Benzer World',
-  'ChainThat', 'Baker & Co', 'EliteFX', 'AutoPart'
-]
+import { projects } from '../data/projects.js'
+import SmartImage from '../components/SmartImage.jsx'
 
 const guarantees = [
   {
@@ -54,21 +51,34 @@ export default function Trust() {
           </p>
         </div>
 
-        {/* Logo wall */}
+        {/* Logo wall — real favicons pulled from each client domain */}
         <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]">
-          {clients.map((c, i) => (
-            <motion.div
-              key={c}
+          {projects.map((c, i) => (
+            <motion.a
+              key={c.id}
+              href={c.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="hover"
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.45, delay: i * 0.04 }}
-              className="group flex h-24 items-center justify-center bg-ink-950/80 px-4 transition hover:bg-ink-900"
+              className="group relative flex h-28 items-center justify-center gap-3 bg-ink-950/80 px-4 transition hover:bg-ink-900"
             >
+              <SmartImage
+                sources={[c.favicon]}
+                alt={`${c.title} icon`}
+                className="h-8 w-8 shrink-0"
+                imgClassName="h-8 w-8 object-contain transition group-hover:scale-110"
+              />
               <span className="display-lg text-white/55 transition group-hover:text-white">
-                {c}
+                {c.title.split(' — ')[0]}
               </span>
-            </motion.div>
+              <span className="absolute right-3 top-3 text-[10px] font-mono uppercase tracking-[0.18em] text-white/30 group-hover:text-accent-lime transition">
+                {c.host}
+              </span>
+            </motion.a>
           ))}
         </div>
 

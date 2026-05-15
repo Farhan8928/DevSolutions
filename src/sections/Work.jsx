@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { projects } from '../data/projects.js'
+import SmartImage from '../components/SmartImage.jsx'
 
 export default function Work() {
   const containerRef = useRef(null)
@@ -51,26 +52,59 @@ export default function Work() {
           <div className="lg:col-span-6">
             <div className="lg:sticky lg:top-28">
               <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] border border-white/10 bg-ink-800">
+                {/* Tinted accent base, behind the screenshot */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${current.accent}`} />
+
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={current.id}
-                    initial={{ opacity: 0, scale: 1.04 }}
+                    initial={{ opacity: 0, scale: 1.05 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.98 }}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                     className="absolute inset-0"
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${current.accent}`} />
-                    <div className="absolute inset-0 opacity-50 [background-image:linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:40px_40px]" />
-                    <div className="absolute inset-0 flex flex-col justify-between p-8">
-                      <div className="flex items-start justify-between text-xs font-mono text-white/70">
-                        <span>{String(active + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span>
-                        <span>{current.year}</span>
+                    {/* Browser-frame screenshot */}
+                    <div className="absolute inset-4 md:inset-6 rounded-2xl overflow-hidden border border-white/10 bg-ink-900 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]">
+                      <div className="flex items-center gap-1.5 bg-ink-950/90 px-3 py-2 border-b border-white/10">
+                        <span className="h-2 w-2 rounded-full bg-rose-400/80" />
+                        <span className="h-2 w-2 rounded-full bg-amber-400/80" />
+                        <span className="h-2 w-2 rounded-full bg-emerald-400/80" />
+                        <span className="ml-3 truncate font-mono text-[11px] text-white/45">
+                          {current.host}
+                        </span>
                       </div>
-                      <div>
-                        <p className="text-xs font-mono uppercase tracking-[0.22em] text-white/65">{current.domain}</p>
-                        <h3 className="display-xl mt-3 text-white">{current.title}</h3>
+                      <SmartImage
+                        sources={[current.shot, current.logo, current.favicon]}
+                        alt={`${current.title} — live preview`}
+                        className="h-[calc(100%-30px)] w-full"
+                        imgClassName="h-full w-full object-cover object-top"
+                      />
+                    </div>
+
+                    {/* Bottom meta overlay */}
+                    <div className="absolute inset-x-0 bottom-0 p-5 md:p-6 flex items-end justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 backdrop-blur border border-white/10 overflow-hidden">
+                          <SmartImage
+                            sources={[current.favicon]}
+                            alt=""
+                            className="h-6 w-6"
+                            imgClassName="h-6 w-6 object-contain"
+                          />
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-white/65">
+                            {current.domain} · {current.year}
+                          </p>
+                          <h3 className="display-lg leading-none mt-1 text-white">
+                            {current.title}
+                          </h3>
+                        </div>
                       </div>
+                      <span className="font-mono text-[11px] text-white/65">
+                        {String(active + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
+                      </span>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -83,7 +117,7 @@ export default function Work() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-accent-lime hover:underline"
                 >
-                  Visit live <ArrowUpRight size={12} />
+                  Visit {current.host} <ArrowUpRight size={12} />
                 </a>
               </div>
             </div>
@@ -105,11 +139,19 @@ export default function Work() {
                   }`}
                 >
                   <div className="flex items-start justify-between gap-6">
-                    <div>
+                    <div className="min-w-0">
                       <div className="flex items-center gap-3 text-xs font-mono text-white/50">
+                        <span className="grid h-5 w-5 place-items-center rounded-md bg-white/[0.06] overflow-hidden">
+                          <SmartImage
+                            sources={[p.favicon]}
+                            alt=""
+                            className="h-4 w-4"
+                            imgClassName="h-4 w-4 object-contain"
+                          />
+                        </span>
                         <span>{String(i + 1).padStart(2, '0')}</span>
                         <span>·</span>
-                        <span>{p.domain}</span>
+                        <span className="truncate">{p.host}</span>
                         <span>·</span>
                         <span>{p.year}</span>
                       </div>
