@@ -6,6 +6,7 @@ import KineticHeading from '../components/KineticHeading.jsx'
 import InteractiveDots from '../components/InteractiveDots.jsx'
 import Magnetic from '../components/Magnetic.jsx'
 import RotatingStamp from '../components/RotatingStamp.jsx'
+import StudioStatusCard from '../components/StudioStatusCard.jsx'
 
 export default function Hero() {
   return (
@@ -149,17 +150,8 @@ export default function Hero() {
             </pre>
           </div>
 
-          <div className="md:col-span-4 grid grid-cols-2 md:grid-cols-1 gap-4">
-            <div className="card p-5 md:p-6">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-white/50 font-mono">Live products</p>
-              <p className="display mt-2 md:mt-3 text-4xl md:text-5xl">8+</p>
-              <p className="mt-2 text-xs md:text-sm text-white/60">Across 5 industries.</p>
-            </div>
-            <div className="card p-5 md:p-6">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-white/50 font-mono">Avg. lighthouse</p>
-              <p className="display mt-2 md:mt-3 text-4xl md:text-5xl">96</p>
-              <p className="mt-2 text-xs md:text-sm text-white/60">On shipped sites.</p>
-            </div>
+          <div className="md:col-span-4">
+            <StudioStatusCard />
           </div>
         </motion.div>
       </div>

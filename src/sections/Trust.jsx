@@ -179,19 +179,6 @@ export default function Trust() {
             })}
           </div>
         </div>
-
-        {/* Industries strip */}
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-white/10 bg-white/[0.03] p-5 md:p-6">
-          <div className="flex items-center gap-3 text-sm text-white/65">
-            <ShieldCheck size={16} className="text-accent-lime" />
-            Industries we’ve shipped in
-          </div>
-          <div className="flex flex-wrap items-center gap-2">
-            {['Healthcare', 'Forex / Fintech', 'E‑commerce', 'NGO', 'InsurTech', 'Visa CRM', 'Automotive'].map((it) => (
-              <span key={it} className="chip">{it}</span>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   )

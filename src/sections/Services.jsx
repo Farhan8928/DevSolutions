@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion'
-import {
-  Code2, Workflow, ShoppingBag, ShieldCheck, Smartphone, Layers, Sparkles, ArrowUpRight
-} from 'lucide-react'
+import { Sparkles, ArrowUpRight } from 'lucide-react'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -40,10 +38,16 @@ export default function Services() {
             <div className="absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-accent-lime/15 blur-3xl" />
             <div className="relative z-10 flex h-full flex-col justify-between gap-8">
               <div className="flex items-start justify-between">
-                <div className="grid h-14 w-14 place-items-center rounded-2xl bg-white/[0.06] border border-white/10">
-                  <Code2 size={22} className="text-accent-lime" />
+                {/* Custom svg glyph: braces — represents engineering */}
+                <div className="grid h-14 w-14 place-items-center rounded-2xl border border-white/10 bg-white/[0.06]">
+                  <svg viewBox="0 0 32 32" className="h-6 w-6 text-accent-lime" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M11 6c-3 0-4 1-4 4v2c0 2-1 3-3 3v2c2 0 3 1 3 3v2c0 3 1 4 4 4" />
+                    <path d="M21 6c3 0 4 1 4 4v2c0 2 1 3 3 3v2c-2 0-3 1-3 3v2c0 3-1 4-4 4" />
+                  </svg>
                 </div>
-                <span className="font-mono text-xs uppercase tracking-[0.22em] text-white/45">Flagship</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/45">
+                  Flagship · 01
+                </span>
               </div>
               <div>
                 <h3 className="display-xl">Web platforms <span className="gradient-text">built to convert.</span></h3>
@@ -59,44 +63,74 @@ export default function Services() {
             </div>
           </motion.article>
 
-          {/* CRM */}
           <Tile
-            i={1} className="md:col-span-2"
-            icon={Workflow} label="Custom CRM"
+            n="02" className="md:col-span-2"
+            label="Custom CRM"
             body="Lead capture from Meta, websites and manual sources. Role‑based routing across telecaller, advisor, processing, admin."
             chips={['Meta API', 'RBAC', 'Reporting']}
+            glyph={
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                <circle cx="16" cy="9" r="3" />
+                <path d="M9 23c0-3 3-6 7-6s7 3 7 6" />
+                <path d="M4 26c1-2 3-3 6-3" />
+                <path d="M28 26c-1-2-3-3-6-3" />
+              </svg>
+            }
           />
 
-          {/* Fintech */}
           <Tile
-            i={2} className="md:col-span-2"
-            icon={ShieldCheck} label="Fintech & Forex"
+            n="03" className="md:col-span-2"
+            label="Fintech & Forex"
             body="Trader‑grade dashboards, KYC, payments and direct integrations with MT5 and broker platforms."
             chips={['MT5', 'KYC', 'Realtime']}
+            glyph={
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                <path d="M5 22l5-7 5 4 6-9 6 8" />
+                <circle cx="10" cy="15" r="1.5" fill="currentColor" />
+                <circle cx="21" cy="10" r="1.5" fill="currentColor" />
+              </svg>
+            }
           />
 
-          {/* E-commerce */}
           <Tile
-            i={3} className="md:col-span-2"
-            icon={ShoppingBag} label="E‑commerce"
+            n="04" className="md:col-span-2"
+            label="E‑commerce"
             body="Headless Shopify and custom CMS storefronts with bespoke merchandising and checkout flows."
             chips={['Shopify', 'Custom CMS', 'CRO']}
+            glyph={
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                <path d="M5 9h22l-2 14H7L5 9z" />
+                <path d="M11 9V6a5 5 0 0110 0v3" />
+              </svg>
+            }
           />
 
-          {/* Mobile */}
           <Tile
-            i={4} className="md:col-span-2"
-            icon={Smartphone} label="Mobile apps"
+            n="05" className="md:col-span-2"
+            label="Mobile apps"
             body="Cross‑platform iOS and Android with React Native — fast launches without compromising native feel."
             chips={['React Native', 'Native modules']}
+            glyph={
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                <rect x="9" y="4" width="14" height="24" rx="3" />
+                <path d="M14 24h4" />
+              </svg>
+            }
           />
 
-          {/* Design systems */}
           <Tile
-            i={5} className="md:col-span-2"
-            icon={Layers} label="Design systems"
+            n="06" className="md:col-span-2"
+            label="Design systems"
             body="Reusable component libraries, tokens and Figma → code pipelines that keep teams shipping consistently."
             chips={['Tokens', 'Storybook']}
+            glyph={
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                <rect x="5" y="5" width="9" height="9" rx="1.5" />
+                <rect x="18" y="5" width="9" height="9" rx="1.5" />
+                <rect x="5" y="18" width="9" height="9" rx="1.5" />
+                <rect x="18" y="18" width="9" height="9" rx="1.5" />
+              </svg>
+            }
           />
 
           {/* Engagement model — wide tile */}
@@ -117,7 +151,6 @@ export default function Services() {
                 </h3>
               </div>
 
-              {/* Pricing trio */}
               <div className="md:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {[
                   { k: 'Sprint',   v: '2–6 wks', d: 'Fixed scope', from: 'from $8k' },
@@ -152,27 +185,31 @@ export default function Services() {
   )
 }
 
-function Tile({ icon: Icon, label, body, chips, className = '', i = 0 }) {
+function Tile({ n, label, body, chips, glyph, className = '' }) {
   return (
     <motion.article
-      variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} custom={i}
+      variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} custom={Number(n)}
       className={`card group relative overflow-hidden p-6 md:p-7 hover:border-white/20 transition ${className}`}
     >
+      {/* Hover glow */}
       <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-accent-violet/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+      {/* Top row: oversized numeral + custom glyph */}
       <div className="flex items-center justify-between">
-        <div className="grid h-11 w-11 place-items-center rounded-2xl bg-white/[0.05] border border-white/10">
-          <Icon size={18} className="text-accent-lime" />
-        </div>
-        <span className="font-mono text-xs text-white/40">0{i}</span>
+        <span className="display-xl text-white/85 leading-none">{n}</span>
+        <span className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-accent-lime">
+          {glyph}
+        </span>
       </div>
-      <h3 className="mt-6 text-lg font-semibold tracking-tight">{label}</h3>
+
+      <h3 className="mt-7 text-lg font-semibold tracking-tight">{label}</h3>
       <p className="mt-2 text-white/65 leading-relaxed text-sm">{body}</p>
       <ul className="mt-5 flex flex-wrap gap-2">
         {chips.map((c) => (<li key={c} className="chip">{c}</li>))}
       </ul>
-      <div className="mt-5 flex items-center gap-2 text-sm text-white/45 group-hover:text-accent-lime transition">
-        Learn more <ArrowUpRight size={14} />
-      </div>
+
+      {/* Lime hairline at the bottom on hover */}
+      <span className="absolute bottom-0 left-0 h-px w-0 bg-accent-lime transition-all duration-500 group-hover:w-full" aria-hidden />
     </motion.article>
   )
 }

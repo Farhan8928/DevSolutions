@@ -7,25 +7,25 @@ import {
 const phases = [
   {
     n: '01',
-    title: 'Discover',
+    title: 'Sit with it',
     icon: Search,
     duration: '~1 week',
     summary:
-      'We sit with the problem. Stakeholder interviews, audits, competitive teardowns, and a clear scope before a single pixel moves.',
+      'We don’t pitch first. We listen. Stakeholder interviews, audits, competitive teardowns and a clear scope before a single pixel moves.',
     deliverables: [
       'Discovery brief',
-      'Competitive audit',
+      'Competitive teardown',
       'Tech feasibility memo',
       'Scoped sprint plan'
     ]
   },
   {
     n: '02',
-    title: 'Design',
+    title: 'Make it real',
     icon: PenTool,
     duration: '2–3 weeks',
     summary:
-      'High‑fidelity flows, prototypes and a design system tuned to your brand. We test ideas in days, not months.',
+      'High‑fidelity flows, prototypes and a design system tuned to your brand. Tested in days, not months — with you in the room.',
     deliverables: [
       'Brand & component system',
       'Hi‑fi Figma prototypes',
@@ -35,25 +35,25 @@ const phases = [
   },
   {
     n: '03',
-    title: 'Build',
+    title: 'Ship in the open',
     icon: Code2,
     duration: '4–8 weeks',
     summary:
-      'Production engineering with React, Vite and Node. Type‑safe, observable, deployable from day one.',
+      'Production engineering. Type‑safe, observable, deployable from day one. You get a working demo every Friday — no exceptions.',
     deliverables: [
       'Production codebase',
       'Weekly working demo',
       'CI/CD on day one',
-      'Test + analytics in place'
+      'Tests + analytics in place'
     ]
   },
   {
     n: '04',
-    title: 'Launch & evolve',
+    title: 'Stay on the call',
     icon: Rocket,
     duration: 'Ongoing',
     summary:
-      'Phased launches, analytics, weekly iteration. We stay in the trenches after go‑live.',
+      'Phased launches, analytics, weekly iteration. We don’t hand over and disappear — we stay in the trenches after go‑live.',
     deliverables: [
       'Soft → public rollout',
       '2‑week post‑launch warranty',
