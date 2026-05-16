@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/prerender.mjs",
-    "build:fast": "vite build",
+    "build": "vite build",
+    "build:full": "vite build && node scripts/prerender.mjs",
     "preview": "vite preview",
+    "prerender": "node scripts/prerender.mjs",
     "screenshots": "node scripts/capture-screenshots.mjs",
     "favicons": "node scripts/download-favicons.mjs",
     "icons": "node scripts/generate-icons.mjs",
