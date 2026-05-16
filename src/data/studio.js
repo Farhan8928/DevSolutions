@@ -20,6 +20,7 @@ export const studio = {
   geo: { lat: 19.0760, lng: 72.8777 },
   email: 'farhan.sayyed.tech@gmail.com',
   phone: '+918928040454',          // E.164 form for tel: links
+  phoneDisplay: '+91 89280 40454', // human-readable
   whatsapp: '918928040454',        // wa.me uses no plus sign
   whatsappText:
     'Hi DevSolutions, I came across your studio and would love to discuss a project.',
@@ -32,6 +33,21 @@ export const studio = {
     dribbble: ''
   }
 }
+
+// Mumbai neighbourhoods we explicitly target. These power both the visible
+// "Service area" block on landing pages and the `areaServed` enumeration in
+// every JSON-LD payload, so Google sees the same coverage statement in
+// rendered DOM and structured data — the consistency that local pack ranks on.
+export const serviceAreas = [
+  { name: 'Andheri',     slug: 'andheri',     lat: 19.1136, lng: 72.8697 },
+  { name: 'Bandra',      slug: 'bandra',      lat: 19.0596, lng: 72.8295 },
+  { name: 'BKC',         slug: 'bkc',         lat: 19.0664, lng: 72.8682 },
+  { name: 'Powai',       slug: 'powai',       lat: 19.1196, lng: 72.9089 },
+  { name: 'Lower Parel', slug: 'lower-parel', lat: 19.0030, lng: 72.8302 },
+  { name: 'Borivali',    slug: 'borivali',    lat: 19.2299, lng: 72.8567 },
+  { name: 'Thane',       slug: 'thane',       lat: 19.2183, lng: 72.9781 },
+  { name: 'Navi Mumbai', slug: 'navi-mumbai', lat: 19.0330, lng: 73.0297 }
+]
 
 // Two co-founders.
 // Initials are auto-derived from the name in the UI for the avatar tile.
@@ -54,5 +70,5 @@ export const contact = {
   tel:    `tel:${studio.phone}`,
   whatsapp: `https://wa.me/${studio.whatsapp}?text=${encodeURIComponent(studio.whatsappText)}`,
   emailLabel:    studio.email,
-  whatsappLabel: '+91 89280 40454'
+  whatsappLabel: studio.phoneDisplay
 }
