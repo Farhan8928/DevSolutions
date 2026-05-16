@@ -4,9 +4,17 @@ import { ChevronDown, HelpCircle, MapPin } from 'lucide-react'
 import { studio } from '../data/studio.js'
 
 /**
- * Visible FAQ. Mirrors the FAQPage JSON-LD in index.html one-to-one so the
- * structured data validates and unlocks the FAQ rich result. Localised copy
- * (Mumbai, India, IST, INR-friendly) helps with local intent queries.
+ * Visible FAQ section.
+ *
+ * Note: structured data lives EXCLUSIVELY in the FAQPage JSON-LD block
+ * inside index.html. This component intentionally has no microdata
+ * (no itemScope / itemProp / itemType). Reasons:
+ *   1. Two FAQPage entities on the same URL trips Google's
+ *      "Duplicate field FAQPage" rich-result error.
+ *   2. Closed accordion items don't render their answer in the DOM,
+ *      so the microdata `acceptedAnswer` would be incomplete anyway.
+ * The Q&A copy below stays in lockstep with the JSON-LD list — keep
+ * them in sync when editing.
  */
 const faqs = [
   {
@@ -50,8 +58,6 @@ export default function Faq() {
     <section
       id="faq"
       className="relative border-t border-white/[0.06] py-20 md:py-32"
-      itemScope
-      itemType="https://schema.org/FAQPage"
     >
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-1/2 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.10),transparent_60%)] blur-3xl" />
@@ -95,9 +101,6 @@ export default function Faq() {
               return (
                 <li
                   key={f.q}
-                  itemScope
-                  itemProp="mainEntity"
-                  itemType="https://schema.org/Question"
                   className={`overflow-hidden rounded-2xl border transition ${
                     isOpen
                       ? 'border-accent-lime/40 bg-white/[0.04]'
@@ -111,10 +114,7 @@ export default function Faq() {
                     aria-controls={`faq-${i}`}
                     className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
                   >
-                    <h3
-                      itemProp="name"
-                      className="text-base md:text-lg font-medium text-white"
-                    >
+                    <h3 className="text-base md:text-lg font-medium text-white">
                       {f.q}
                     </h3>
                     <span
@@ -137,14 +137,8 @@ export default function Faq() {
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-                        itemScope
-                        itemProp="acceptedAnswer"
-                        itemType="https://schema.org/Answer"
                       >
-                        <p
-                          itemProp="text"
-                          className="px-5 pb-5 -mt-1 text-sm md:text-[15px] leading-relaxed text-white/75"
-                        >
+                        <p className="px-5 pb-5 -mt-1 text-sm md:text-[15px] leading-relaxed text-white/75">
                           {f.a}
                         </p>
                       </motion.div>
