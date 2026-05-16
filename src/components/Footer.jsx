@@ -139,9 +139,9 @@ export default function Footer() {
         <div className="mt-10 flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-3 border-t border-white/[0.06] pt-6 text-xs text-white/45">
           <div className="flex items-center gap-2">
             <span
-              className="grid h-7 w-7 place-items-center rounded-lg bg-accent-lime text-ink-950"
+              className="grid h-7 w-7 place-items-center rounded-lg bg-white/[0.04] border border-white/10"
             >
-              <LogoMark size={18} strokeWidth={2.6} />
+              <LogoMark size={18} bare />
             </span>
             <span>© {new Date().getFullYear()} {studio.name}. All rights reserved.</span>
           </div>

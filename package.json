@@ -5,10 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/prerender.mjs",
+    "build:fast": "vite build",
     "preview": "vite preview",
     "screenshots": "node scripts/capture-screenshots.mjs",
-    "favicons": "node scripts/download-favicons.mjs"
+    "favicons": "node scripts/download-favicons.mjs",
+    "icons": "node scripts/generate-icons.mjs",
+    "og": "node scripts/generate-og.mjs"
   },
   "dependencies": {
     "framer-motion": "11.11.17",

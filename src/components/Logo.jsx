@@ -1,68 +1,58 @@
 /**
  * DevSolutions brandmark.
  *
- * The mark is a single closed monoline path that reads two ways:
- *  - As a stylised "D" silhouette at small sizes (favicon, nav)
- *  - As an opening + closing angle bracket {<  >} at larger sizes
- *    — a custom code glyph specific to this studio.
+ * Geometric "D" monogram in the studio brand colours. Construction is
+ * mathematically pure on a 64-unit grid:
  *
- * Pure SVG. Recolorable via `currentColor`. Works from 12px to 400px.
+ *   • Outer letterform : 18-tall vertical stem on the left, half-circle
+ *                        bowl of radius 20 on the right.
+ *   • Inner counter    : same construction inset by 8 units uniformly.
+ *   • Fill rule        : evenodd, so the negative space punches through
+ *                        cleanly at every scale.
+ *
+ * Identical path geometry to /public/favicon.svg, the OG image generator,
+ * and scripts/generate-icons.mjs — every surface uses the same mark.
+ *
+ * Render modes:
+ *   • default  — lime chassis + ink letterform (the brandmark)
+ *   • bare     — lime letterform on transparent (for tinted/glass tiles
+ *                like the footer copyright stamp where the chassis would
+ *                read as a double background)
  */
 
-export function LogoMark({ size = 36, className = '', strokeWidth = 2.4 }) {
+const D_PATH =
+  // Outer D
+  'M 14 12 H 32 A 20 20 0 0 1 32 52 H 14 Z ' +
+  // Inner counter (inset 8 on every edge)
+  'M 22 20 H 32 A 12 12 0 0 1 32 44 H 22 Z'
+
+export function LogoMark({ size = 36, className = '', bare = false }) {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 40 40"
-      fill="none"
+      viewBox="0 0 64 64"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      aria-hidden
+      role="img"
+      aria-label="DevSolutions"
     >
-      {/* Square chassis */}
-      <rect
-        x="2.5" y="2.5"
-        width="35" height="35"
-        rx="9"
-        stroke="currentColor"
-        strokeWidth={strokeWidth}
-      />
-
-      {/* Inner monogram: { D } —
-          left bracket descending, vertical spine,
-          right bracket ascending. Drawn as a single path. */}
+      {!bare && (
+        <rect width="64" height="64" rx="14" fill="#C8FF00" />
+      )}
       <path
-        d="
-          M14 12
-          L11 14
-          L11 26
-          L14 28
-
-          M14 12
-          L18 12
-          C24 12, 28 14, 28 20
-          C28 26, 24 28, 18 28
-          L14 28
-
-          M26 12
-          L29 14
-          L29 26
-          L26 28
-        "
-        stroke="currentColor"
-        strokeWidth={strokeWidth}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
+        d={D_PATH}
+        fill={bare ? '#C8FF00' : '#06070A'}
+        fillRule="evenodd"
       />
     </svg>
   )
 }
 
 /**
- * Wordmark + mark together. Used in the navbar and footer.
- * Compact, intentional spacing.
+ * Wordmark + mark together. Used in the navbar.
+ * Mark always renders with its lime chassis here so the brand reads
+ * uniformly across nav, OG share image, and platform icons.
  */
 export function LogoLockup({
   size = 32,
@@ -72,12 +62,7 @@ export function LogoLockup({
 }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <span
-        className="grid place-items-center rounded-xl bg-accent-lime text-ink-950"
-        style={{ height: size, width: size }}
-      >
-        <LogoMark size={size * 0.62} strokeWidth={2.6} />
-      </span>
+      <LogoMark size={size} />
       {showWord && (
         <span className="font-semibold tracking-tight text-white text-[0.95rem] sm:text-base">
           {word}

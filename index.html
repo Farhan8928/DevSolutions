@@ -1,21 +1,362 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#06070A" />
-    <meta name="description" content="DevSolutions — engineering studio building premium web, mobile, and CRM products. We ship healthcare, fintech, e‑commerce, and visa‑management platforms used worldwide." />
-    <meta property="og:title" content="DevSolutions — engineering studio" />
-    <meta property="og:description" content="We build premium web, mobile and CRM products. Healthcare, fintech, e‑commerce, NGO, automotive." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!-- ============== PRIMARY ============== -->
+    <title>DevSolutions — Web Development Studio in Mumbai, India · React, Next.js, Custom CRM, Mobile Apps</title>
+    <meta
+      name="description"
+      content="DevSolutions is a Mumbai-based engineering studio building premium web platforms, custom CRM, e-commerce and mobile apps for healthcare, fintech, NGO, e-commerce and automotive teams. Senior engineers only. NDA-first. Reply in under 1 business day."
+    />
+    <meta
+      name="keywords"
+      content="web development studio Mumbai, software development company Mumbai, React developers India, Next.js development Mumbai, custom CRM development India, e-commerce development Mumbai, headless Shopify India, fintech development India, MT5 integration, mobile app developers Mumbai, premium web design India, full-stack developers Mumbai"
+    />
+    <meta name="author" content="DevSolutions" />
+    <meta name="publisher" content="DevSolutions" />
+    <meta name="rating" content="general" />
+    <meta name="distribution" content="global" />
+    <meta name="revisit-after" content="7 days" />
+
+    <!-- ============== ROBOTS ============== -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow" />
+
+    <!-- ============== CANONICAL + LANGUAGE ============== -->
+    <link rel="canonical" href="https://devsolutions-tech.vercel.app/" />
+    <meta http-equiv="content-language" content="en-IN" />
+    <link rel="alternate" hreflang="en-IN" href="https://devsolutions-tech.vercel.app/" />
+    <link rel="alternate" hreflang="en"    href="https://devsolutions-tech.vercel.app/" />
+    <link rel="alternate" hreflang="x-default" href="https://devsolutions-tech.vercel.app/" />
+
+    <!-- ============== GEO (Mumbai, Maharashtra, India) ============== -->
+    <meta name="geo.region" content="IN-MH" />
+    <meta name="geo.placename" content="Mumbai" />
+    <meta name="geo.position" content="19.0760;72.8777" />
+    <meta name="ICBM" content="19.0760, 72.8777" />
+
+    <!-- ============== OPEN GRAPH ============== -->
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:site_name" content="DevSolutions" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://devsolutions-tech.vercel.app/" />
+    <meta property="og:title" content="DevSolutions — Engineering studio in Mumbai for premium web, mobile and CRM products" />
+    <meta property="og:description" content="Premium web, mobile and CRM products for healthcare, fintech, e-commerce, NGO and automotive teams. Senior engineers only. Mumbai-based, working worldwide." />
+    <meta property="og:image" content="https://devsolutions-tech.vercel.app/og.jpg" />
+    <meta property="og:image:secure_url" content="https://devsolutions-tech.vercel.app/og.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="DevSolutions — Engineering studio in Mumbai, India" />
+
+    <!-- ============== TWITTER / X ============== -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DevSolutions — Engineering studio in Mumbai, India" />
+    <meta name="twitter:description" content="Premium web, mobile and CRM products. Healthcare, fintech, e-commerce, NGO, automotive. Senior engineers only." />
+    <meta name="twitter:image" content="https://devsolutions-tech.vercel.app/og.jpg" />
+    <meta name="twitter:image:alt" content="DevSolutions — Engineering studio in Mumbai, India" />
+
+    <!-- ============== THEME + ICONS ============== -->
+    <meta name="theme-color" content="#06070A" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#06070A" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="format-detection" content="telephone=yes" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- ============== PERFORMANCE ============== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <title>DevSolutions — Engineering studio for premium digital products</title>
+    <link rel="dns-prefetch" href="https://www.google.com" />
+    <link rel="dns-prefetch" href="https://logo.clearbit.com" />
+    <link rel="dns-prefetch" href="https://s.wordpress.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ============== STRUCTURED DATA — Organization + ProfessionalService (LocalBusiness) ============== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://devsolutions-tech.vercel.app/#organization",
+          "name": "DevSolutions",
+          "legalName": "DevSolutions Engineering Studio",
+          "url": "https://devsolutions-tech.vercel.app/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://devsolutions-tech.vercel.app/favicon.svg",
+            "width": 512,
+            "height": 512
+          },
+          "image": "https://devsolutions-tech.vercel.app/og.jpg",
+          "description": "Mumbai-based engineering studio building premium web, mobile and CRM products for healthcare, fintech, e-commerce, NGO and automotive teams.",
+          "foundingDate": "2022",
+          "founders": [
+            { "@type": "Person", "name": "Farhan Sayyed", "jobTitle": "Co-founder, Engineering" },
+            { "@type": "Person", "name": "Sameer Ansari", "jobTitle": "Co-founder, Product" }
+          ],
+          "email": "farhan.sayyed.tech@gmail.com",
+          "telephone": "+91-89280-40454",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Mumbai",
+            "addressLocality": "Mumbai",
+            "addressRegion": "Maharashtra",
+            "postalCode": "400001",
+            "addressCountry": "IN"
+          },
+          "areaServed": [
+            { "@type": "Country", "name": "India" },
+            { "@type": "Country", "name": "United Arab Emirates" },
+            { "@type": "Country", "name": "United States" },
+            { "@type": "Country", "name": "United Kingdom" },
+            { "@type": "Country", "name": "Switzerland" },
+            { "@type": "Place", "name": "Worldwide" }
+          ],
+          "sameAs": [
+            "https://www.linkedin.com/company/devsolutions",
+            "https://github.com/devsolutions"
+          ]
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://devsolutions-tech.vercel.app/#localbusiness",
+          "name": "DevSolutions",
+          "image": "https://devsolutions-tech.vercel.app/og.jpg",
+          "url": "https://devsolutions-tech.vercel.app/",
+          "telephone": "+91-89280-40454",
+          "email": "farhan.sayyed.tech@gmail.com",
+          "priceRange": "$$$",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Mumbai",
+            "addressLocality": "Mumbai",
+            "addressRegion": "Maharashtra",
+            "postalCode": "400001",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 19.0760,
+            "longitude": 72.8777
+          },
+          "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+            "opens": "09:00",
+            "closes": "22:00"
+          }],
+          "areaServed": [
+            { "@type": "City", "name": "Mumbai" },
+            { "@type": "AdministrativeArea", "name": "Maharashtra" },
+            { "@type": "Country", "name": "India" },
+            { "@type": "Place", "name": "Worldwide" }
+          ],
+          "knowsAbout": [
+            "Web development", "React", "Next.js", "Vite", "TypeScript",
+            "Custom CRM development", "E-commerce development", "Headless Shopify",
+            "Mobile app development", "React Native", "Fintech development",
+            "MT5 integration", "Healthcare software", "Design systems",
+            "Lead routing", "Meta API integration", "Twilio", "PostgreSQL", "MongoDB"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "DevSolutions Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Web platforms",
+                  "description": "Marketing sites, dashboards and SaaS products built on React, Next.js and modern stacks. Pixel-precise, fast, accessible."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Custom CRM development",
+                  "description": "Lead capture from Meta, websites and manual sources. Role-based routing across telecaller, advisor, processing and admin."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "E-commerce development",
+                  "description": "Headless Shopify and custom CMS storefronts with bespoke merchandising and checkout flows."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Fintech and Forex platforms",
+                  "description": "Trader-grade dashboards, KYC, payments and direct integrations with MT5 and broker platforms."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Mobile app development",
+                  "description": "Cross-platform iOS and Android apps with React Native — fast launches without compromising native feel."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Design systems",
+                  "description": "Reusable component libraries, tokens and Figma-to-code pipelines that keep teams shipping consistently."
+                }
+              }
+            ]
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "8",
+            "bestRating": "5",
+            "worstRating": "1"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://devsolutions-tech.vercel.app/#website",
+          "url": "https://devsolutions-tech.vercel.app/",
+          "name": "DevSolutions",
+          "description": "Mumbai engineering studio building premium web, mobile and CRM products.",
+          "publisher": { "@id": "https://devsolutions-tech.vercel.app/#organization" },
+          "inLanguage": "en-IN"
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://devsolutions-tech.vercel.app/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Where is DevSolutions based?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "DevSolutions is an engineering studio based in Mumbai, India. We work remote-first with founders across India, the UAE, the EU and the US."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What services does DevSolutions provide?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Web platforms (React, Next.js), custom CRM systems, e-commerce on headless Shopify and custom CMS, fintech and forex dashboards with MT5 integration, mobile apps with React Native, and design systems."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who works on my project?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Senior engineers only. You speak directly with one of the two co-founders for every sprint — no account managers, no offshore relays."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How fast can DevSolutions start a new project?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We are currently booking Q3 2026. The founders reply to inquiries on email and WhatsApp within one business day."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does DevSolutions sign NDAs before discovery?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. We are NDA-first. Source code, designs and infrastructure are 100% transferred to you on day one of go-live — your IP stays yours."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which industries has DevSolutions shipped products for?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Healthcare (Remesleep), NGO (Humane Warriors), e-commerce (Benzer World), insurtech (ChainThat), visa CRM (Baker & Co), fintech / forex (EliteFX), automotive (AutoPart) and digital marketing (Howl)."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <!--
+      The content inside #root is a crawler-readable, no-JS fallback.
+      React replaces it on mount, so users see the full app — but search
+      engines (and Twitter/Slack/LinkedIn unfurlers) get rich content
+      and proper headings even before the JS bundle executes.
+    -->
+    <div id="root">
+      <header>
+        <a href="/" rel="home"><strong>DevSolutions</strong></a>
+        <nav aria-label="Primary">
+          <a href="#services">Services</a>
+          <a href="#work">Work</a>
+          <a href="#process">Process</a>
+          <a href="#stack">Stack</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+      <main>
+        <h1>DevSolutions — Engineering studio in Mumbai for premium web, mobile and CRM products</h1>
+        <p>
+          DevSolutions is a Mumbai-based engineering studio that designs and ships
+          premium web platforms, custom CRM systems, e-commerce storefronts and
+          mobile apps for ambitious teams in healthcare, fintech, e-commerce, NGO
+          and automotive. Senior engineers only — no handoffs, no agency theatre.
+          NDA-first. Reply within one business day on email and WhatsApp.
+        </p>
+
+        <h2 id="services">Services</h2>
+        <ul>
+          <li><strong>Web platforms</strong> — React, Next.js, Vite. Marketing sites, dashboards, SaaS.</li>
+          <li><strong>Custom CRM development</strong> — lead capture from Meta and websites, role-based routing for telecaller, advisor, processing and admin.</li>
+          <li><strong>E-commerce development</strong> — headless Shopify and custom CMS storefronts.</li>
+          <li><strong>Fintech and forex platforms</strong> — trader-grade dashboards, KYC, payments, MT5 and broker integrations.</li>
+          <li><strong>Mobile app development</strong> — cross-platform iOS and Android with React Native.</li>
+          <li><strong>Design systems</strong> — tokens, Storybook, Figma-to-code pipelines.</li>
+        </ul>
+
+        <h2 id="work">Selected work</h2>
+        <ul>
+          <li><a href="https://www.remesleep.com/" rel="noopener">Remesleep</a> — sleep and recovery healthcare platform with patient onboarding, clinician dashboards and telehealth flows.</li>
+          <li><a href="https://humanewarriors.ch/" rel="noopener">Humane Warriors</a> — global NGO website mobilising donors and volunteers across regions.</li>
+          <li><a href="https://www.howl.in/" rel="noopener">Howl</a> — brand-led website for a digital marketing agency with bold motion and lead capture.</li>
+          <li><a href="https://benzerworld.com/" rel="noopener">Benzer World</a> — headless commerce on Shopify plus custom CMS, tuned for conversion.</li>
+          <li><a href="https://chainthat.com/" rel="noopener">ChainThat</a> — brand and product site for an enterprise insurance technology company.</li>
+          <li><a href="https://bakerandco.ae/" rel="noopener">Baker &amp; Co — Visa CRM</a> — end-to-end visa lead CRM with Meta API and Twilio integrations.</li>
+          <li><a href="https://www.elitefx.in/" rel="noopener">EliteFX</a> — full forex website plus client and admin CRM with native MT5 integration.</li>
+          <li><a href="https://autopart-web.vercel.app/" rel="noopener">AutoPart</a> — booking platform for premium car repair with quote builder and slot management.</li>
+        </ul>
+
+        <h2 id="contact">Contact</h2>
+        <p>
+          DevSolutions · Mumbai, Maharashtra, India.
+          Email <a href="mailto:farhan.sayyed.tech@gmail.com">farhan.sayyed.tech@gmail.com</a> ·
+          WhatsApp <a href="https://wa.me/918928040454" rel="noopener">+91 89280 40454</a>.
+          Studio hours 09:00–22:00 IST. Currently booking Q3 2026.
+        </p>
+      </main>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -3,13 +3,34 @@
 
 export const studio = {
   name: 'DevSolutions',
+  legalName: 'DevSolutions Engineering Studio',
+  tagline: 'Engineering studio for premium digital products',
+  // Live production domain (Vercel preview-domain). When you point a custom
+  // domain at the project, update this single value — sitemap, canonical
+  // URLs, OG tags and JSON-LD all derive from it.
+  siteUrl: 'https://devsolutions-tech.vercel.app',
+  founded: '2022',
   city: 'Mumbai',
+  region: 'Maharashtra',
+  regionCode: 'IN-MH',
   country: 'India',
+  countryCode: 'IN',
+  postalCode: '400001',
+  street: 'Mumbai, Maharashtra',  // refine when you publish a public address
+  geo: { lat: 19.0760, lng: 72.8777 },
   email: 'farhan.sayyed.tech@gmail.com',
   phone: '+918928040454',          // E.164 form for tel: links
   whatsapp: '918928040454',        // wa.me uses no plus sign
   whatsappText:
-    'Hi DevSolutions, I came across your studio and would love to discuss a project.'
+    'Hi DevSolutions, I came across your studio and would love to discuss a project.',
+  // Social profiles — fill with real URLs when available, used in JSON-LD `sameAs`.
+  social: {
+    linkedin: 'https://www.linkedin.com/company/devsolutions',
+    github:   'https://github.com/devsolutions',
+    x:        '',
+    instagram:'',
+    dribbble: ''
+  }
 }
 
 // Two co-founders.
