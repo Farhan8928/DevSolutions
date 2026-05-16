@@ -1,20 +1,21 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, HelpCircle, MapPin } from 'lucide-react'
 import { studio } from '../data/studio.js'
 
 /**
  * Visible FAQ section.
  *
- * Note: structured data lives EXCLUSIVELY in the FAQPage JSON-LD block
- * inside index.html. This component intentionally has no microdata
- * (no itemScope / itemProp / itemType). Reasons:
- *   1. Two FAQPage entities on the same URL trips Google's
- *      "Duplicate field FAQPage" rich-result error.
- *   2. Closed accordion items don't render their answer in the DOM,
- *      so the microdata `acceptedAnswer` would be incomplete anyway.
- * The Q&A copy below stays in lockstep with the JSON-LD list — keep
- * them in sync when editing.
+ * Mobile-perf notes:
+ *   • Accordion uses the CSS `grid-template-rows: 0fr → 1fr` technique
+ *     instead of Framer Motion's `height: auto` animation. The grid
+ *     trick is GPU-friendly — no per-frame layout recalc, smooth on
+ *     low-end Android. Framer Motion's height-auto path forces full
+ *     layout on every frame which is what was causing the jank.
+ *   • Background gradient uses a moderate blur (md:blur-3xl) because
+ *     blur on phones costs a giant offscreen composite layer. Smaller
+ *     blur on mobile = same visual atmosphere, much cheaper to paint.
+ *   • No microdata — FAQPage JSON-LD lives in index.html alone.
+ *     Two FAQPage entities trip Google's "Duplicate field" error.
  */
 const faqs = [
   {
@@ -59,8 +60,10 @@ export default function Faq() {
       id="faq"
       className="relative border-t border-white/[0.06] py-20 md:py-32"
     >
+      {/* Backdrop — heavy blur only on desktop, lighter on mobile to avoid
+          the giant offscreen composite layer that costs FPS on phones. */}
       <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-1/2 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.10),transparent_60%)] blur-3xl" />
+        <div className="absolute left-1/2 top-1/2 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.10),transparent_60%)] blur-2xl md:blur-3xl" />
       </div>
 
       <div className="container-x">
@@ -94,14 +97,14 @@ export default function Faq() {
             </div>
           </div>
 
-          {/* Accordion */}
+          {/* Accordion — pure CSS expansion via grid-template-rows */}
           <ol className="lg:col-span-7 space-y-2.5">
             {faqs.map((f, i) => {
               const isOpen = open === i
               return (
                 <li
                   key={f.q}
-                  className={`overflow-hidden rounded-2xl border transition ${
+                  className={`overflow-hidden rounded-2xl border transition-colors ${
                     isOpen
                       ? 'border-accent-lime/40 bg-white/[0.04]'
                       : 'border-white/10 bg-white/[0.02] hover:border-white/20'
@@ -118,7 +121,7 @@ export default function Faq() {
                       {f.q}
                     </h3>
                     <span
-                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border transition ${
+                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border transition-transform duration-200 ${
                         isOpen
                           ? 'border-accent-lime bg-accent-lime text-ink-950 rotate-180'
                           : 'border-white/15 text-white/65'
@@ -128,22 +131,22 @@ export default function Faq() {
                     </span>
                   </button>
 
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        id={`faq-${i}`}
-                        key="content"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-                      >
-                        <p className="px-5 pb-5 -mt-1 text-sm md:text-[15px] leading-relaxed text-white/75">
-                          {f.a}
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  {/* The grid trick:
+                      • Wrapper grid animates rows 0fr ↔ 1fr (cheap, GPU-able)
+                      • Inner div has min-height:0 so overflow can hide content
+                      • No JS animation library involved — pure CSS, 60fps */}
+                  <div
+                    id={`faq-${i}`}
+                    className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                      isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                    }`}
+                  >
+                    <div className="min-h-0 overflow-hidden">
+                      <p className="px-5 pb-5 -mt-1 text-sm md:text-[15px] leading-relaxed text-white/75">
+                        {f.a}
+                      </p>
+                    </div>
+                  </div>
                 </li>
               )
             })}
