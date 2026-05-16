@@ -81,6 +81,38 @@
       rel="stylesheet"
     />
 
+    <!--
+      Boot styles. The page background is the brand ink colour from the
+      first paint, so the screen never flashes white. #root is a tiny
+      branded skeleton (logo + spinner) that React replaces on mount —
+      it is the loading state every visitor sees, not hidden content.
+
+      The full SEO content is delivered three ways, none of which require
+      hiding anything from anyone:
+        1. <head> meta tags + JSON-LD (read by Googlebot without rendering)
+        2. <noscript> inline content below (for genuine no-JS clients)
+        3. Static prerendered routes under /web-development-*-mumbai/ etc.
+    -->
+    <style>
+      html, body { background: #06070A; color: #fff; margin: 0; min-height: 100%; }
+      body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+      .boot {
+        position: fixed; inset: 0; display: grid; place-items: center;
+        background: #06070A; z-index: 0;
+      }
+      .boot-mark {
+        width: 56px; height: 56px;
+        animation: pulse 1.6s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 0.6; transform: scale(1); }
+        50%      { opacity: 1;   transform: scale(1.04); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .boot-mark { animation: none; }
+      }
+    </style>
+
     <!-- ============== STRUCTURED DATA — Organization + ProfessionalService (LocalBusiness) ============== -->
     <script type="application/ld+json">
     {
@@ -314,63 +346,86 @@
   </head>
   <body>
     <!--
-      The content inside #root is a crawler-readable, no-JS fallback.
-      React replaces it on mount, so users see the full app — but search
-      engines (and Twitter/Slack/LinkedIn unfurlers) get rich content
-      and proper headings even before the JS bundle executes.
+      Branded boot state. Visible from the first paint until React mounts
+      and replaces #root with the full app. This is a real loading state,
+      not hidden content.
     -->
     <div id="root">
-      <header>
-        <a href="/" rel="home"><strong>DevSolutions</strong></a>
-        <nav aria-label="Primary">
-          <a href="#services">Services</a>
-          <a href="#work">Work</a>
-          <a href="#process">Process</a>
-          <a href="#stack">Stack</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </header>
-      <main>
-        <h1>DevSolutions — Engineering studio in Mumbai for premium web, mobile and CRM products</h1>
-        <p>
+      <div class="boot" aria-label="Loading DevSolutions">
+        <svg class="boot-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="14" fill="#C8FF00"/>
+          <path fill="#06070A" fill-rule="evenodd"
+            d="M 14 12 H 32 A 20 20 0 0 1 32 52 H 14 Z M 22 20 H 32 A 12 12 0 0 1 32 44 H 22 Z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!--
+      No-JS / pre-render fallback. Rendered only when JavaScript is
+      disabled. Search engines still index the structured-data graph
+      above, plus the static HTML at every /web-development-*-mumbai/
+      and /custom-crm-development-mumbai/ route, so disabling this
+      content for normal browsers loses nothing.
+    -->
+    <noscript>
+      <style>.boot { display: none; }</style>
+      <main style="max-width:920px;margin:0 auto;padding:48px 24px;color:#fff;">
+        <h1 style="font-size:2rem;line-height:1.1;letter-spacing:-0.02em;">
+          DevSolutions — Engineering studio in Mumbai for premium web, mobile and CRM products
+        </h1>
+        <p style="color:rgba(255,255,255,0.72);max-width:60ch;">
           DevSolutions is a Mumbai-based engineering studio that designs and ships
           premium web platforms, custom CRM systems, e-commerce storefronts and
           mobile apps for ambitious teams in healthcare, fintech, e-commerce, NGO
-          and automotive. Senior engineers only — no handoffs, no agency theatre.
-          NDA-first. Reply within one business day on email and WhatsApp.
+          and automotive. Senior engineers only — no handoffs. NDA-first.
+          Reply within one business day on email and WhatsApp.
         </p>
 
-        <h2 id="services">Services</h2>
+        <h2>Services in Mumbai</h2>
         <ul>
-          <li><strong>Web platforms</strong> — React, Next.js, Vite. Marketing sites, dashboards, SaaS.</li>
-          <li><strong>Custom CRM development</strong> — lead capture from Meta and websites, role-based routing for telecaller, advisor, processing and admin.</li>
-          <li><strong>E-commerce development</strong> — headless Shopify and custom CMS storefronts.</li>
-          <li><strong>Fintech and forex platforms</strong> — trader-grade dashboards, KYC, payments, MT5 and broker integrations.</li>
-          <li><strong>Mobile app development</strong> — cross-platform iOS and Android with React Native.</li>
-          <li><strong>Design systems</strong> — tokens, Storybook, Figma-to-code pipelines.</li>
+          <li><a href="/web-development-company-mumbai/">Web development company in Mumbai</a> — React, Next.js, Vite.</li>
+          <li><a href="/custom-crm-development-mumbai/">Custom CRM development in Mumbai</a> — Meta API, Twilio, role-based routing.</li>
+          <li><a href="/react-native-app-development-mumbai/">React Native app development in Mumbai</a> — iOS + Android.</li>
+          <li><a href="/shopify-development-company-mumbai/">Shopify development company in Mumbai</a> — headless Hydrogen + Plus.</li>
+          <li><a href="/fintech-platform-development-mumbai/">Fintech and forex platform development in Mumbai</a> — MT5, KYC, trading dashboards.</li>
+          <li><a href="/healthcare-software-development-mumbai/">Healthcare software development in Mumbai</a> — telehealth, EMR, patient apps.</li>
         </ul>
 
-        <h2 id="work">Selected work</h2>
+        <h2>Service area</h2>
+        <p>
+          <a href="/web-development-andheri-mumbai/">Andheri</a> ·
+          <a href="/web-development-bandra-mumbai/">Bandra</a> ·
+          <a href="/web-development-bkc-mumbai/">BKC</a> ·
+          <a href="/web-development-powai-mumbai/">Powai</a> ·
+          <a href="/web-development-lower-parel-mumbai/">Lower Parel</a> ·
+          <a href="/web-development-borivali-mumbai/">Borivali</a> ·
+          <a href="/web-development-thane-mumbai/">Thane</a> ·
+          <a href="/web-development-navi-mumbai/">Navi Mumbai</a>
+        </p>
+
+        <h2>Selected work</h2>
         <ul>
-          <li><a href="https://www.remesleep.com/" rel="noopener">Remesleep</a> — sleep and recovery healthcare platform with patient onboarding, clinician dashboards and telehealth flows.</li>
-          <li><a href="https://humanewarriors.ch/" rel="noopener">Humane Warriors</a> — global NGO website mobilising donors and volunteers across regions.</li>
-          <li><a href="https://www.howl.in/" rel="noopener">Howl</a> — brand-led website for a digital marketing agency with bold motion and lead capture.</li>
-          <li><a href="https://benzerworld.com/" rel="noopener">Benzer World</a> — headless commerce on Shopify plus custom CMS, tuned for conversion.</li>
-          <li><a href="https://chainthat.com/" rel="noopener">ChainThat</a> — brand and product site for an enterprise insurance technology company.</li>
-          <li><a href="https://bakerandco.ae/" rel="noopener">Baker &amp; Co — Visa CRM</a> — end-to-end visa lead CRM with Meta API and Twilio integrations.</li>
-          <li><a href="https://www.elitefx.in/" rel="noopener">EliteFX</a> — full forex website plus client and admin CRM with native MT5 integration.</li>
-          <li><a href="https://autopart-web.vercel.app/" rel="noopener">AutoPart</a> — booking platform for premium car repair with quote builder and slot management.</li>
+          <li><a href="https://www.remesleep.com/" rel="noopener">Remesleep</a> — sleep and recovery healthcare platform.</li>
+          <li><a href="https://humanewarriors.ch/" rel="noopener">Humane Warriors</a> — global NGO website.</li>
+          <li><a href="https://www.howl.in/" rel="noopener">Howl</a> — brand-led marketing agency website.</li>
+          <li><a href="https://benzerworld.com/" rel="noopener">Benzer World</a> — headless commerce on Shopify.</li>
+          <li><a href="https://chainthat.com/" rel="noopener">ChainThat</a> — brand and product site for an insurtech.</li>
+          <li><a href="https://bakerandco.ae/" rel="noopener">Baker &amp; Co — Visa CRM</a> — end-to-end visa lead CRM.</li>
+          <li><a href="https://www.elitefx.in/" rel="noopener">EliteFX</a> — full forex website plus CRM with native MT5 integration.</li>
+          <li><a href="https://autopart-web.vercel.app/" rel="noopener">AutoPart</a> — booking platform for premium car repair.</li>
         </ul>
 
-        <h2 id="contact">Contact</h2>
+        <h2>Contact</h2>
         <p>
           DevSolutions · Mumbai, Maharashtra, India.
           Email <a href="mailto:farhan.sayyed.tech@gmail.com">farhan.sayyed.tech@gmail.com</a> ·
+          Phone <a href="tel:+918928040454">+91 89280 40454</a> ·
           WhatsApp <a href="https://wa.me/918928040454" rel="noopener">+91 89280 40454</a>.
           Studio hours 09:00–22:00 IST. Currently booking Q3 2026.
         </p>
       </main>
-    </div>
+    </noscript>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
