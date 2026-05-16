@@ -14,25 +14,25 @@
     <loc>https://devsolutions-tech.vercel.app/#services</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://devsolutions-tech.vercel.app/#work</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://devsolutions-tech.vercel.app/#process</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://devsolutions-tech.vercel.app/#stack</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://devsolutions-tech.vercel.app/#contact</loc>
@@ -44,6 +44,54 @@
     <loc>https://devsolutions-tech.vercel.app/#faq</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://devsolutions-tech.vercel.app/web-development-company-mumbai/</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://devsolutions-tech.vercel.app/web-development-company-mumbai/" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://devsolutions-tech.vercel.app/web-development-company-mumbai/" />
+  </url>
+  <url>
+    <loc>https://devsolutions-tech.vercel.app/custom-crm-development-mumbai/</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://devsolutions-tech.vercel.app/custom-crm-development-mumbai/" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://devsolutions-tech.vercel.app/custom-crm-development-mumbai/" />
+  </url>
+  <url>
+    <loc>https://devsolutions-tech.vercel.app/react-native-app-development-mumbai/</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://devsolutions-tech.vercel.app/react-native-app-development-mumbai/" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://devsolutions-tech.vercel.app/react-native-app-development-mumbai/" />
+  </url>
+  <url>
+    <loc>https://devsolutions-tech.vercel.app/shopify-development-company-mumbai/</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://devsolutions-tech.vercel.app/shopify-development-company-mumbai/" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://devsolutions-tech.vercel.app/shopify-development-company-mumbai/" />
+  </url>
+  <url>
+    <loc>https://devsolutions-tech.vercel.app/fintech-platform-development-mumbai/</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://devsolutions-tech.vercel.app/fintech-platform-development-mumbai/" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://devsolutions-tech.vercel.app/fintech-platform-development-mumbai/" />
+  </url>
+  <url>
+    <loc>https://devsolutions-tech.vercel.app/healthcare-software-development-mumbai/</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://devsolutions-tech.vercel.app/healthcare-software-development-mumbai/" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://devsolutions-tech.vercel.app/healthcare-software-development-mumbai/" />
   </url>
 </urlset>
