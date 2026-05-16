@@ -23,7 +23,7 @@ export const founders = [
   {
     name: 'Sameer Ansari',
     role: 'Co‑founder · Product',
-    initials: 'SS'
+    initials: 'SA'
   }
 ]
 

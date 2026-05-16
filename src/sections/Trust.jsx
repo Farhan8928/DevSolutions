@@ -147,7 +147,7 @@ export default function Trust() {
                   </span>
                   <div className="min-w-0">
                     <p className="text-sm font-medium text-white truncate">{f.name}</p>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/45 truncate">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/45 leading-snug">
                       {f.role}
                     </p>
                   </div>
