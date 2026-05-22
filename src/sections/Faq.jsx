@@ -1,21 +1,30 @@
-import { useState } from 'react'
 import { ChevronDown, HelpCircle, MapPin } from 'lucide-react'
 import { studio } from '../data/studio.js'
 
 /**
- * Visible FAQ section.
+ * FAQ section.
  *
- * Mobile-perf notes:
- *   • Accordion uses the CSS `grid-template-rows: 0fr → 1fr` technique
- *     instead of Framer Motion's `height: auto` animation. The grid
- *     trick is GPU-friendly — no per-frame layout recalc, smooth on
- *     low-end Android. Framer Motion's height-auto path forces full
- *     layout on every frame which is what was causing the jank.
- *   • Background gradient uses a moderate blur (md:blur-3xl) because
- *     blur on phones costs a giant offscreen composite layer. Smaller
- *     blur on mobile = same visual atmosphere, much cheaper to paint.
- *   • No microdata — FAQPage JSON-LD lives in index.html alone.
- *     Two FAQPage entities trip Google's "Duplicate field" error.
+ * Why we use the native <details>/<summary> element here instead of a
+ * JS-controlled accordion:
+ *
+ *   1. No animation cost. height-auto, max-height, and grid-template-rows
+ *      are all layout properties — none can be GPU-composited. Animating
+ *      them on mobile chews CPU and visibly lags low/mid-range Android.
+ *      <details> open/close is instant by browser default — zero jank.
+ *
+ *   2. No React state. No useState, no AnimatePresence, no per-tap render
+ *      cascade. The browser handles open/close in a single paint frame.
+ *
+ *   3. The `name="faq"` attribute (baseline-supported across all evergreen
+ *      browsers since 2024) gives accordion behaviour for free — opening
+ *      one item closes the others.
+ *
+ *   4. Accessible by default. Native keyboard support, screen-reader
+ *      semantics, and crawlable by Google's content extractor without
+ *      any extra ARIA wiring.
+ *
+ * Structured data still lives in index.html FAQPage JSON-LD — keep the
+ * Q&A copy below in lockstep with that block.
  */
 const faqs = [
   {
@@ -53,15 +62,14 @@ const faqs = [
 ]
 
 export default function Faq() {
-  const [open, setOpen] = useState(0)
-
   return (
     <section
       id="faq"
       className="relative border-t border-white/[0.06] py-20 md:py-32"
     >
-      {/* Backdrop — heavy blur only on desktop, lighter on mobile to avoid
-          the giant offscreen composite layer that costs FPS on phones. */}
+      {/* Backdrop — moderate blur on mobile, fuller on desktop. We deliberately
+          keep this layer outside the accordion's compositing tree so the
+          open/close paint never re-rasterises the blur. */}
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-1/2 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(124,92,255,0.10),transparent_60%)] blur-2xl md:blur-3xl" />
       </div>
@@ -97,59 +105,29 @@ export default function Faq() {
             </div>
           </div>
 
-          {/* Accordion — pure CSS expansion via grid-template-rows */}
-          <ol className="lg:col-span-7 space-y-2.5">
-            {faqs.map((f, i) => {
-              const isOpen = open === i
-              return (
-                <li
-                  key={f.q}
-                  className={`overflow-hidden rounded-2xl border transition-colors ${
-                    isOpen
-                      ? 'border-accent-lime/40 bg-white/[0.04]'
-                      : 'border-white/10 bg-white/[0.02] hover:border-white/20'
-                  }`}
+          {/* Accordion — native <details> with `name="faq"` for one-open-at-a-time */}
+          <ol className="lg:col-span-7 space-y-2.5 list-none p-0">
+            {faqs.map((f, i) => (
+              <li key={f.q}>
+                <details
+                  name="faq"
+                  open={i === 0}
+                  className="faq-item group rounded-2xl border border-white/10 bg-white/[0.02] open:border-accent-lime/40 open:bg-white/[0.04] transition-colors"
                 >
-                  <button
-                    type="button"
-                    onClick={() => setOpen(isOpen ? -1 : i)}
-                    aria-expanded={isOpen}
-                    aria-controls={`faq-${i}`}
-                    className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
-                  >
+                  <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 list-none [&::-webkit-details-marker]:hidden">
                     <h3 className="text-base md:text-lg font-medium text-white">
                       {f.q}
                     </h3>
-                    <span
-                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border transition-transform duration-200 ${
-                        isOpen
-                          ? 'border-accent-lime bg-accent-lime text-ink-950 rotate-180'
-                          : 'border-white/15 text-white/65'
-                      }`}
-                    >
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-white/15 text-white/65 transition-transform duration-200 group-open:rotate-180 group-open:border-accent-lime group-open:bg-accent-lime group-open:text-ink-950">
                       <ChevronDown size={14} />
                     </span>
-                  </button>
-
-                  {/* The grid trick:
-                      • Wrapper grid animates rows 0fr ↔ 1fr (cheap, GPU-able)
-                      • Inner div has min-height:0 so overflow can hide content
-                      • No JS animation library involved — pure CSS, 60fps */}
-                  <div
-                    id={`faq-${i}`}
-                    className={`grid transition-[grid-template-rows] duration-300 ease-out ${
-                      isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
-                    }`}
-                  >
-                    <div className="min-h-0 overflow-hidden">
-                      <p className="px-5 pb-5 -mt-1 text-sm md:text-[15px] leading-relaxed text-white/75">
-                        {f.a}
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              )
-            })}
+                  </summary>
+                  <p className="px-5 pb-5 -mt-1 text-sm md:text-[15px] leading-relaxed text-white/75">
+                    {f.a}
+                  </p>
+                </details>
+              </li>
+            ))}
           </ol>
         </div>
       </div>
