@@ -1,16 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <!--
-    DevSolutions favicon — geometric "D" monogram.
-
-    Construction (64-unit grid, mathematically clean):
-      • Lime chassis  : rounded square, full-bleed, rx 14
-      • D outline     : single path, evenodd fill, 8-unit uniform stroke
-      • Outer bowl    : half-circle, radius 20, centered at (32, 32)
-      • Inner counter : same construction inset by 8 on every edge
+    DuoStack favicon. Two stacked rounded bars representing
+    "duo" (two co-founders) and "stack" (engineering stack),
+    constructed on a 64-unit grid. Reads cleanly from 16×16
+    browser tab to 512×512 PWA install icon.
   -->
   <rect width="64" height="64" rx="14" fill="#C8FF00"/>
-  <path
-    fill="#06070A"
-    fill-rule="evenodd"
-    d="M 14 12 H 32 A 20 20 0 0 1 32 52 H 14 Z M 22 20 H 32 A 12 12 0 0 1 32 44 H 22 Z"/>
+  <rect x="18" y="14" width="34" height="12" rx="6" fill="#06070A"/>
+  <rect x="12" y="34" width="40" height="12" rx="6" fill="#06070A"/>
 </svg>

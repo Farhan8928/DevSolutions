@@ -136,7 +136,7 @@ export default function Contact() {
                     onChange={(v) => setData({ ...data, email: v })} placeholder="you@company.com" />
                 </div>
                 <FloatField label="Company" value={data.company}
-                  onChange={(v) => setData({ ...data, company: v })} placeholder="DevSolutions" />
+                  onChange={(v) => setData({ ...data, company: v })} placeholder="DuoStack" />
 
                 {/* Project type chips */}
                 <div>

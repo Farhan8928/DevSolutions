@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 
 // Big rotating brand stamp used at the hero seam — Awwwards-style anchor.
 export default function RotatingStamp({ className = '' }) {
-  const text = 'DEVSOLUTIONS · STUDIO · MMXXVI · '
+  const text = 'DUOSTACK · STUDIO · MMXXVI · '
   return (
     <motion.div
       animate={{ rotate: 360 }}

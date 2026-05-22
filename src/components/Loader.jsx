@@ -31,7 +31,7 @@ export default function Loader() {
         >
           <div className="container-x flex flex-col items-stretch gap-10">
             <div className="flex items-baseline justify-between font-mono text-xs uppercase tracking-[0.22em] text-white/55">
-              <span>DevSolutions</span>
+              <span>DuoStack</span>
               <span>Booting · MMXXVI</span>
             </div>
 

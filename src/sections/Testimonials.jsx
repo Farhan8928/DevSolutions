@@ -17,7 +17,7 @@ const quotes = [
   },
   {
     body:
-      'The MT5 integration alone would have taken us months. DevSolutions shipped it inside a polished trader dashboard in weeks.',
+      'The MT5 integration alone would have taken us months. DuoStack shipped it inside a polished trader dashboard in weeks.',
     name: 'Founder',
     org: 'EliteFX',
     project: findProject('elitefx')

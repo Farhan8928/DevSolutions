@@ -108,13 +108,11 @@ const html = /* html */ `<!doctype html>
         <div class="logo-tile">
           <svg width="56" height="56" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
             <rect width="64" height="64" rx="14" fill="#C8FF00"/>
-            <path
-              fill="#06070A"
-              fill-rule="evenodd"
-              d="M 14 12 H 32 A 20 20 0 0 1 32 52 H 14 Z M 22 20 H 32 A 12 12 0 0 1 32 44 H 22 Z"/>
+            <rect x="18" y="14" width="34" height="12" rx="6" fill="#06070A"/>
+            <rect x="12" y="34" width="40" height="12" rx="6" fill="#06070A"/>
           </svg>
         </div>
-        <div class="brand">DevSolutions</div>
+        <div class="brand">DuoStack</div>
       </div>
       <div>
         <span class="chip"><span class="dot"></span>Mumbai · India</span>
@@ -132,7 +130,7 @@ const html = /* html */ `<!doctype html>
         <span class="ds-mono">React · Next.js · CRM · Mobile · MT5</span>
       </div>
       <div>
-        <strong>devsolutions-tech.vercel.app</strong>
+        <strong>duostack.in</strong>
       </div>
     </div>
   </div>

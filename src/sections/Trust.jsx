@@ -47,7 +47,7 @@ export default function Trust() {
             </h2>
           </div>
           <p className="md:max-w-sm text-white/65">
-            Founders from 5 industries trust DevSolutions to design, build and ship
+            Founders from 5 industries trust DuoStack to design, build and ship
             production software that earns revenue from week one.
           </p>
         </div>

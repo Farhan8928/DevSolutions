@@ -1,4 +1,4 @@
-# DevSolutions — robots policy
+# DuoStack — robots policy
 # Allow well-behaved crawlers full access. Block known scrapers.
 
 User-agent: *
@@ -27,4 +27,4 @@ User-agent: Google-Extended
 Allow: /
 
 # Sitemap
-Sitemap: https://devsolutions-tech.vercel.app/sitemap.xml
+Sitemap: https://duostack.in/sitemap.xml

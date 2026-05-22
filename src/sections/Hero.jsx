@@ -139,11 +139,11 @@ export default function Hero() {
               <span className="h-2 w-2 rounded-full bg-rose-400" />
               <span className="h-2 w-2 rounded-full bg-amber-400" />
               <span className="h-2 w-2 rounded-full bg-emerald-400" />
-              <span className="ml-3 truncate">~/devsolutions/manifest.ts</span>
+              <span className="ml-3 truncate">~/duostack/manifest.ts</span>
             </div>
             <pre className="mt-4 overflow-x-auto text-[12px] sm:text-sm md:text-[15px] leading-relaxed font-mono text-white/85">
 {`export const studio = {
-  name:    "DevSolutions",
+  name:    "DuoStack",
   shipped: ["healthcare", "fintech", "ecommerce", "ngo", "automotive"],
   stack:   ["React", "Vite", "Next.js", "Node", "PostgreSQL", "MT5"],
   promise: "Pixel-precise. Measurable. Built to scale.",

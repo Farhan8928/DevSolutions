@@ -36,7 +36,7 @@ export default function Nav() {
               : 'bg-ink-900/30 backdrop-blur-md'
           }`}
         >
-          <a href="#top" className="flex items-center group" aria-label="DevSolutions home">
+          <a href="#top" className="flex items-center group" aria-label="DuoStack home">
             <LogoLockup size={32} />
           </a>
 

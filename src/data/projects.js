@@ -1,4 +1,4 @@
-// Real DevSolutions project portfolio.
+// Real DuoStack project portfolio.
 // Assets are pulled live from each client domain via free public services:
 //   - favicon: local copy first (downloaded by `npm run favicons`),
 //              Google S2 as runtime fallback for any missing local file.

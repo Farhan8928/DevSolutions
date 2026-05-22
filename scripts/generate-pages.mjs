@@ -37,13 +37,13 @@ const DIST      = join(ROOT, 'dist')
 // ----------------------------------------------------------------------
 // Site constants — mirror src/data/studio.js
 // ----------------------------------------------------------------------
-const SITE_URL  = 'https://devsolutions-tech.vercel.app'
-const SITE_NAME = 'DevSolutions'
+const SITE_URL  = 'https://duostack.in'
+const SITE_NAME = 'DuoStack'
 const PHONE_E164 = '+918928040454'
 const PHONE_DISPLAY = '+91 89280 40454'
 const WHATSAPP_NUMBER = '918928040454'
 const WHATSAPP_MSG = encodeURIComponent(
-  'Hi DevSolutions, I came across your studio and would love to discuss a project.'
+  'Hi DuoStack, I came across your studio and would love to discuss a project.'
 )
 const TODAY = new Date().toISOString().slice(0, 10)
 
@@ -314,8 +314,8 @@ const renderHeader = () => `
       <a class="brand" href="/" aria-label="${SITE_NAME} home">
         <svg class="mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
           <rect width="64" height="64" rx="14" fill="#C8FF00"/>
-          <path fill="#06070A" fill-rule="evenodd"
-            d="M 14 12 H 32 A 20 20 0 0 1 32 52 H 14 Z M 22 20 H 32 A 12 12 0 0 1 32 44 H 22 Z"/>
+          <rect x="18" y="14" width="34" height="12" rx="6" fill="#06070A"/>
+          <rect x="12" y="34" width="40" height="12" rx="6" fill="#06070A"/>
         </svg>
         <span>${SITE_NAME}</span>
       </a>
@@ -526,7 +526,7 @@ const neighbourhoodPage = (area) => {
     : `web-development-${area.slug}-mumbai`
   const url   = `${SITE_URL}/${slug}/`
   const h1    = `Web development company in ${area.name}, Mumbai`
-  const title = `Web Development Company in ${area.name}, Mumbai · React, Next.js — DevSolutions`
+  const title = `Web Development Company in ${area.name}, Mumbai · React, Next.js — DuoStack`
   const desc  = `Premium web development company serving ${area.name}, Mumbai. We build React, Next.js and custom CMS platforms for founders in ${area.name} and across the Mumbai Metropolitan Region. Senior engineers only. Reply within 1 business day.`
   const keyword = `web development company ${area.name} Mumbai`
 
@@ -537,7 +537,7 @@ const neighbourhoodPage = (area) => {
 
   const sections = [
     {
-      h2: `Why founders in ${area.name} choose DevSolutions`,
+      h2: `Why founders in ${area.name} choose DuoStack`,
       body: `Three things, repeatedly. First — you talk to the engineers who actually build. There are no account managers, no juniors hidden behind a brand. Second — we ship pixel-perfect code that survives real production traffic and Lighthouse audits, not handover-and-pray deliverables. Third — we sign before we discover. Your roadmap, your stack choices and your customer data stay protected from the very first call.`
     },
     {
@@ -552,7 +552,7 @@ const neighbourhoodPage = (area) => {
 
   const faqs = [
     {
-      q: `Can DevSolutions work onsite in ${area.name}?`,
+      q: `Can DuoStack work onsite in ${area.name}?`,
       a: `Yes. ${area.name} is well within our regular onsite radius. We typically run remote-first with one to two onsite days per fortnight where it helps the project. Discovery and kick-off sessions are often onsite if you prefer.`
     },
     {

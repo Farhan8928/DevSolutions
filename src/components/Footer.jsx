@@ -56,7 +56,7 @@ export default function Footer() {
             className="display leading-[0.85] tracking-tighter bg-gradient-to-b from-white/[0.08] via-white/[0.04] to-transparent bg-clip-text text-transparent"
             style={{ fontSize: 'clamp(3.5rem, 16vw, 18rem)' }}
           >
-            DevSolutions
+            DuoStack
           </p>
         </div>
 

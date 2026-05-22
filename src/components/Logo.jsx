@@ -1,30 +1,33 @@
 /**
- * DevSolutions brandmark.
+ * DuoStack brandmark.
  *
- * Geometric "D" monogram in the studio brand colours. Construction is
- * mathematically pure on a 64-unit grid:
+ * The mark visualises both halves of the name in one geometric glyph:
+ *   • DUO   — two equal-weight rounded bars (the co-founder pair)
+ *   • STACK — bars are stacked vertically with a clean gap; the top
+ *             bar sits inset from the left, suggesting a stack that
+ *             "builds up" from a wider base to a narrower top piece
  *
- *   • Outer letterform : 18-tall vertical stem on the left, half-circle
- *                        bowl of radius 20 on the right.
- *   • Inner counter    : same construction inset by 8 units uniformly.
- *   • Fill rule        : evenodd, so the negative space punches through
- *                        cleanly at every scale.
+ * Constructed on a 64-unit grid with mathematical purity:
+ *   • Lime chassis: full-bleed rounded square, rx 14
+ *   • Bottom bar  : x 12 → 52, y 34 → 46  (full width 40)
+ *   • Top bar     : x 18 → 52, y 14 → 26  (right-aligned, width 34)
+ *   • Gap         : 8 units between bars (matches stroke-grid spacing)
  *
- * Identical path geometry to /public/favicon.svg, the OG image generator,
- * and scripts/generate-icons.mjs — every surface uses the same mark.
- *
- * Render modes:
- *   • default  — lime chassis + ink letterform (the brandmark)
- *   • bare     — lime letterform on transparent (for tinted/glass tiles
- *                like the footer copyright stamp where the chassis would
- *                read as a double background)
+ * Two render modes:
+ *   • default — lime chassis + ink letterform (the brandmark)
+ *   • bare    — lime letterform on transparent (for tinted/glass tiles
+ *               like the footer copyright stamp where the chassis
+ *               would read as a double background)
  */
 
-const D_PATH =
-  // Outer D
-  'M 14 12 H 32 A 20 20 0 0 1 32 52 H 14 Z ' +
-  // Inner counter (inset 8 on every edge)
-  'M 22 20 H 32 A 12 12 0 0 1 32 44 H 22 Z'
+const STACK_BARS = (
+  <>
+    {/* Top bar — narrower, right-aligned (the "duo" tip of the stack) */}
+    <rect x="18" y="14" width="34" height="12" rx="6" />
+    {/* Bottom bar — full width (the "stack" base) */}
+    <rect x="12" y="34" width="40" height="12" rx="6" />
+  </>
+)
 
 export function LogoMark({ size = 36, className = '', bare = false }) {
   return (
@@ -35,16 +38,14 @@ export function LogoMark({ size = 36, className = '', bare = false }) {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       role="img"
-      aria-label="DevSolutions"
+      aria-label="DuoStack"
     >
       {!bare && (
         <rect width="64" height="64" rx="14" fill="#C8FF00" />
       )}
-      <path
-        d={D_PATH}
-        fill={bare ? '#C8FF00' : '#06070A'}
-        fillRule="evenodd"
-      />
+      <g fill={bare ? '#C8FF00' : '#06070A'}>
+        {STACK_BARS}
+      </g>
     </svg>
   )
 }
@@ -58,7 +59,7 @@ export function LogoLockup({
   size = 32,
   className = '',
   showWord = true,
-  word = 'DevSolutions'
+  word = 'DuoStack'
 }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>

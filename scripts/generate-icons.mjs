@@ -18,8 +18,8 @@ import { fileURLToPath } from 'node:url'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PUBLIC = join(__dirname, '..', 'public')
 
-// Master mark SVG — lime tile + geometric D. The chassis is drawn as
-// a rectangle so it adapts to any output size we pass in.
+// Master mark SVG — lime tile + DuoStack two-bar glyph. The chassis is
+// drawn as a rectangle so it adapts to any output size we pass in.
 const markSvg = ({ size = 512, padding = 0, rx = 0, bg = '#C8FF00' }) => {
   // padding is a fraction (0..0.3 typically). We scale the inner mark to fit
   // the remaining safe area, leaving the chassis full-bleed for maskable.
@@ -28,11 +28,9 @@ const markSvg = ({ size = 512, padding = 0, rx = 0, bg = '#C8FF00' }) => {
   const ty = size * padding
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
     <rect width="${size}" height="${size}" rx="${rx}" fill="${bg}"/>
-    <g transform="translate(${tx} ${ty}) scale(${(size * inner) / 64})">
-      <path
-        fill="#06070A"
-        fill-rule="evenodd"
-        d="M 14 12 H 32 A 20 20 0 0 1 32 52 H 14 Z M 22 20 H 32 A 12 12 0 0 1 32 44 H 22 Z"/>
+    <g transform="translate(${tx} ${ty}) scale(${(size * inner) / 64})" fill="#06070A">
+      <rect x="18" y="14" width="34" height="12" rx="6"/>
+      <rect x="12" y="34" width="40" height="12" rx="6"/>
     </g>
   </svg>`
 }

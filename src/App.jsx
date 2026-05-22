@@ -28,7 +28,7 @@ const isPrerender =
 export default function App() {
   useEffect(() => {
     document.title =
-      'DevSolutions — Web Development Studio in Mumbai, India · React, Next.js, Custom CRM, Mobile Apps'
+      'DuoStack — Web Development Studio in Mumbai, India · React, Next.js, Custom CRM, Mobile Apps'
   }, [])
 
   return (

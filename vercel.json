@@ -4,6 +4,16 @@
   "framework": "vite",
   "cleanUrls": true,
   "trailingSlash": false,
+
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.duostack.in" }],
+      "destination": "https://duostack.in/$1",
+      "permanent": true
+    }
+  ],
+
   "headers": [
     {
       "source": "/sitemap.xml",
@@ -40,6 +50,7 @@
     {
       "source": "/(.*)",
       "headers": [
+        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains; preload" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },

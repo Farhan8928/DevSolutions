@@ -16,9 +16,9 @@
 export const seoPages = [
   {
     slug: 'web-development-company-mumbai',
-    title: 'Web Development Company in Mumbai · DevSolutions',
+    title: 'Web Development Company in Mumbai · DuoStack',
     metaTitle:
-      'Web Development Company in Mumbai · React, Next.js, Vite — DevSolutions',
+      'Web Development Company in Mumbai · React, Next.js, Vite — DuoStack',
     metaDescription:
       'Premium web development company in Mumbai. We build React, Next.js and custom CMS platforms for healthcare, fintech, e-commerce and NGO teams across Mumbai, Andheri, Bandra and BKC. Senior engineers only.',
     keyword: 'web development company in Mumbai',
@@ -26,7 +26,7 @@ export const seoPages = [
     eyebrow: 'Web platforms · Mumbai, India',
     serviceName: 'Web platforms',
     intro: [
-      `DevSolutions is a Mumbai-based web development studio that designs and ships premium web platforms for ambitious teams. We work with founders across Mumbai — from Andheri and Bandra to Lower Parel, Powai, BKC and Navi Mumbai — and ship to clients in the UAE, the EU, the UK and the US. Every line of code is written by senior engineers with five-plus years of production experience. There are no junior developers hiding behind the brand, no offshore relays, no account managers between you and the people building your product.`,
+      `DuoStack is a Mumbai-based web development studio that designs and ships premium web platforms for ambitious teams. We work with founders across Mumbai — from Andheri and Bandra to Lower Parel, Powai, BKC and Navi Mumbai — and ship to clients in the UAE, the EU, the UK and the US. Every line of code is written by senior engineers with five-plus years of production experience. There are no junior developers hiding behind the brand, no offshore relays, no account managers between you and the people building your product.`,
       `We focus on the work that compounds: marketing sites that convert, dashboards that load on real networks, and SaaS products that hold up when traffic spikes. Our defaults are React, Next.js, Vite and TypeScript, on top of edge platforms like Vercel and Cloudflare. We refuse work we cannot ship pixel-perfect — that has become our reputation in Mumbai's product community.`
     ],
     sections: [
@@ -66,9 +66,9 @@ export const seoPages = [
 
   {
     slug: 'custom-crm-development-mumbai',
-    title: 'Custom CRM Development in Mumbai · DevSolutions',
+    title: 'Custom CRM Development in Mumbai · DuoStack',
     metaTitle:
-      'Custom CRM Development in Mumbai · Lead Routing, Meta API, Twilio — DevSolutions',
+      'Custom CRM Development in Mumbai · Lead Routing, Meta API, Twilio — DuoStack',
     metaDescription:
       'Custom CRM development in Mumbai for sales, telecaller and operations teams. Lead capture from Meta and websites, role-based routing, Twilio voice and WhatsApp, real-time reporting. Built by senior engineers.',
     keyword: 'custom CRM development in Mumbai',
@@ -116,9 +116,9 @@ export const seoPages = [
 
   {
     slug: 'react-native-app-development-mumbai',
-    title: 'React Native App Development in Mumbai · DevSolutions',
+    title: 'React Native App Development in Mumbai · DuoStack',
     metaTitle:
-      'React Native App Development in Mumbai · iOS + Android — DevSolutions',
+      'React Native App Development in Mumbai · iOS + Android — DuoStack',
     metaDescription:
       'React Native app development in Mumbai. Cross-platform iOS and Android apps with native performance, App Store and Play Store launches, push, analytics and offline-first architecture. Built by senior engineers.',
     keyword: 'React Native app development in Mumbai',
@@ -166,9 +166,9 @@ export const seoPages = [
 
   {
     slug: 'shopify-development-company-mumbai',
-    title: 'Shopify Development Company in Mumbai · DevSolutions',
+    title: 'Shopify Development Company in Mumbai · DuoStack',
     metaTitle:
-      'Shopify Development Company in Mumbai · Headless Hydrogen, Custom Themes — DevSolutions',
+      'Shopify Development Company in Mumbai · Headless Hydrogen, Custom Themes — DuoStack',
     metaDescription:
       'Shopify development company in Mumbai for D2C brands. Headless Shopify Hydrogen, custom themes, conversion-tuned checkout, Razorpay and Stripe. Senior engineers, no agency theatre.',
     keyword: 'Shopify development company in Mumbai',
@@ -216,9 +216,9 @@ export const seoPages = [
 
   {
     slug: 'fintech-platform-development-mumbai',
-    title: 'Fintech and Forex Platform Development in Mumbai · DevSolutions',
+    title: 'Fintech and Forex Platform Development in Mumbai · DuoStack',
     metaTitle:
-      'Fintech & Forex Platform Development in Mumbai · MT5, KYC, Trading Dashboards — DevSolutions',
+      'Fintech & Forex Platform Development in Mumbai · MT5, KYC, Trading Dashboards — DuoStack',
     metaDescription:
       'Fintech and forex platform development in Mumbai. Trader-grade dashboards, KYC and AML flows, payment integrations, MT5 and broker platform integration. Built by senior engineers.',
     keyword: 'fintech platform development in Mumbai',
@@ -266,9 +266,9 @@ export const seoPages = [
 
   {
     slug: 'healthcare-software-development-mumbai',
-    title: 'Healthcare Software Development in Mumbai · DevSolutions',
+    title: 'Healthcare Software Development in Mumbai · DuoStack',
     metaTitle:
-      'Healthcare Software Development in Mumbai · Telehealth, EMR, Patient Apps — DevSolutions',
+      'Healthcare Software Development in Mumbai · Telehealth, EMR, Patient Apps — DuoStack',
     metaDescription:
       'Healthcare software development in Mumbai for hospitals, clinics and digital-health startups. Telehealth, patient onboarding, clinician dashboards, EMR integration. Senior engineers, NDA-first.',
     keyword: 'healthcare software development in Mumbai',

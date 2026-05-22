@@ -1,6 +1,6 @@
-# DevSolutions — Studio Site
+# DuoStack — Studio Site
 
-Premium single‑page experience for DevSolutions, built with **React + Vite + Tailwind + Framer Motion**.
+Premium single‑page experience for DuoStack, built with **React + Vite + Tailwind + Framer Motion**.
 
 ## Highlights
 - Immersive aurora hero with gradient display type

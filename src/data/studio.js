@@ -2,13 +2,13 @@
 // Update once here — every section pulls from this.
 
 export const studio = {
-  name: 'DevSolutions',
-  legalName: 'DevSolutions Engineering Studio',
-  tagline: 'Engineering studio for premium digital products',
-  // Live production domain (Vercel preview-domain). When you point a custom
-  // domain at the project, update this single value — sitemap, canonical
-  // URLs, OG tags and JSON-LD all derive from it.
-  siteUrl: 'https://devsolutions-tech.vercel.app',
+  name: 'DuoStack',
+  legalName: 'DuoStack Studio',
+  tagline: 'Two senior engineers. One full-stack studio.',
+  // Live production domain. Update this single value to migrate the
+  // studio to a new domain — sitemap, canonical URLs, OG tags and
+  // JSON-LD all derive from it.
+  siteUrl: 'https://duostack.in',
   founded: '2022',
   city: 'Mumbai',
   region: 'Maharashtra',
@@ -23,11 +23,11 @@ export const studio = {
   phoneDisplay: '+91 89280 40454', // human-readable
   whatsapp: '918928040454',        // wa.me uses no plus sign
   whatsappText:
-    'Hi DevSolutions, I came across your studio and would love to discuss a project.',
+    'Hi DuoStack, I came across your studio and would love to discuss a project.',
   // Social profiles — fill with real URLs when available, used in JSON-LD `sameAs`.
   social: {
-    linkedin: 'https://www.linkedin.com/company/devsolutions',
-    github:   'https://github.com/devsolutions',
+    linkedin: 'https://www.linkedin.com/company/duostack',
+    github:   'https://github.com/duostack',
     x:        '',
     instagram:'',
     dribbble: ''
