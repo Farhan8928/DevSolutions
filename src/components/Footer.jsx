@@ -116,20 +116,34 @@ export default function Footer() {
                 </a>
               </li>
               <li className="grid grid-cols-2 gap-2">
-                <a href="#" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5 hover:border-accent-lime/40 transition">
+                <a
+                  href={studio.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="DuoStack on LinkedIn"
+                  className="group flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5 hover:border-accent-lime/40 transition"
+                >
                   <span className="inline-flex items-center gap-2 text-sm text-white/85">
                     <Linkedin size={14} className="text-accent-lime" />
                     LinkedIn
                   </span>
                   <ArrowUpRight size={12} className="text-white/40 group-hover:text-accent-lime transition" />
                 </a>
-                <a href="#" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5 hover:border-accent-lime/40 transition">
-                  <span className="inline-flex items-center gap-2 text-sm text-white/85">
-                    <Github size={14} className="text-accent-lime" />
-                    GitHub
-                  </span>
-                  <ArrowUpRight size={12} className="text-white/40 group-hover:text-accent-lime transition" />
-                </a>
+                {studio.social.github && (
+                  <a
+                    href={studio.social.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="DuoStack on GitHub"
+                    className="group flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5 hover:border-accent-lime/40 transition"
+                  >
+                    <span className="inline-flex items-center gap-2 text-sm text-white/85">
+                      <Github size={14} className="text-accent-lime" />
+                      GitHub
+                    </span>
+                    <ArrowUpRight size={12} className="text-white/40 group-hover:text-accent-lime transition" />
+                  </a>
+                )}
               </li>
             </ul>
           </div>

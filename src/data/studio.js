@@ -26,7 +26,7 @@ export const studio = {
     'Hi DuoStack, I came across your studio and would love to discuss a project.',
   // Social profiles — fill with real URLs when available, used in JSON-LD `sameAs`.
   social: {
-    linkedin: 'https://www.linkedin.com/company/duostack',
+    linkedin: 'https://www.linkedin.com/in/duo-stack-b84289411',
     github:   'https://github.com/duostack',
     x:        '',
     instagram:'',
