@@ -133,33 +133,71 @@ export default function Services() {
             }
           />
 
-          {/* Engagement model — wide tile */}
+          {/* Engagement model — wide tile, 4 tiers from ₹20k landing pages
+              up to enterprise embedded engagements. The Sprint tier is the
+              recommended/converting middle option (HBR good-better-best
+              pattern), so any visitor whose budget is in the wide ₹20k–₹25L
+              range can self-qualify without leaving the page. */}
           <motion.article
             variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} custom={6}
             className="card relative md:col-span-6 overflow-hidden p-6 md:p-9"
           >
             <div className="absolute -top-20 right-10 h-48 w-48 rounded-full bg-accent-lime/10 blur-3xl" aria-hidden />
 
-            <div className="grid gap-6 md:grid-cols-12 items-center">
-              <div className="md:col-span-5">
+            <div className="flex flex-col gap-6">
+              <div>
                 <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-[0.22em] text-white/50">
                   <Sparkles size={14} className="text-accent-lime" />
-                  Engagement model
+                  Engagement model · transparent pricing
                 </div>
                 <h3 className="display-lg mt-4">
-                  Sprint, retainer, or embedded — we shape to your roadmap.
+                  From a quick landing page to a full custom platform — pick your fit.
                 </h3>
+                <p className="mt-3 text-sm text-white/55">
+                  Honest fixed-scope pricing. No hourly billing, no surprise invoices.
+                  Indian and international rates shown side by side.
+                </p>
               </div>
 
-              <div className="md:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 {[
-                  { k: 'Sprint',   v: '2–6 wks', d: 'Fixed scope', from: 'from $8k' },
-                  { k: 'Retainer', v: 'Monthly', d: 'Always-on team', from: 'from $12k/mo', highlight: true },
-                  { k: 'Embedded', v: 'Quarterly', d: 'Inside your team', from: 'from $30k/qtr' }
+                  {
+                    k: 'Starter',
+                    duration: '7–14 days',
+                    desc: 'Single landing page or simple brand site',
+                    inr: '₹20k+',
+                    usd: '~$240',
+                    bullets: ['Up to 5 sections', 'Form + analytics', 'Vercel deploy']
+                  },
+                  {
+                    k: 'Sprint',
+                    duration: '2–6 weeks',
+                    desc: 'Fixed-scope custom build · single product or feature',
+                    inr: '₹2L+',
+                    usd: '~$2.5k',
+                    bullets: ['Custom design', 'CMS or auth', '30-day support'],
+                    highlight: true
+                  },
+                  {
+                    k: 'Pro',
+                    duration: '8–12 weeks',
+                    desc: 'Full custom web platform with backend, payments, integrations',
+                    inr: '₹6.5L+',
+                    usd: '~$8k',
+                    bullets: ['Full stack build', 'Payments + KYC', 'CI/CD + observability']
+                  },
+                  {
+                    k: 'Enterprise',
+                    duration: 'Quarterly',
+                    desc: 'Embedded team or always-on retainer',
+                    inr: '₹25L+/qtr',
+                    usd: '~$30k+',
+                    bullets: ['Senior team inside yours', 'Roadmap ownership', 'SLA + on-call']
+                  }
                 ].map((m) => (
                   <div
                     key={m.k}
-                    className={`relative rounded-2xl border p-4 ${
+                    className={`relative rounded-2xl border p-4 flex flex-col gap-2 ${
                       m.highlight
                         ? 'border-accent-lime/50 bg-accent-lime/[0.04]'
                         : 'border-white/10 bg-white/[0.03]'
@@ -171,12 +209,26 @@ export default function Services() {
                       </span>
                     )}
                     <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/45">{m.k}</p>
-                    <p className="display-lg mt-2">{m.v}</p>
-                    <p className="mt-1 text-xs text-white/55">{m.d}</p>
-                    <p className="mt-3 text-sm text-white/85">{m.from}</p>
+                    <p className="text-xl font-semibold tabular-nums">{m.inr}</p>
+                    <p className="text-[11px] text-white/45 -mt-1">{m.usd} · {m.duration}</p>
+                    <p className="mt-1 text-xs text-white/65 leading-relaxed">{m.desc}</p>
+                    <ul className="mt-2 space-y-1">
+                      {m.bullets.map((b) => (
+                        <li key={b} className="flex items-start gap-1.5 text-[11px] text-white/55">
+                          <span className="mt-1 h-1 w-1 rounded-full bg-accent-lime shrink-0" />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 ))}
               </div>
+
+              <p className="text-xs text-white/40 leading-relaxed">
+                Prices in INR for Indian clients, USD shown for international reference.
+                Final quotes are scoped after a free 30-minute call. Payment in INR (Razorpay)
+                or USD (Stripe / wire) depending on your location.
+              </p>
             </div>
           </motion.article>
         </div>

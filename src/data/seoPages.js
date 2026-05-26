@@ -25,6 +25,14 @@ export const seoPages = [
     h1: 'Web development company in Mumbai',
     eyebrow: 'Web platforms · Mumbai, India',
     serviceName: 'Web platforms',
+    aeoAnswer:
+      'A web development company in Mumbai builds production-grade websites and web applications for local and international businesses, typically using modern stacks like React, Next.js, and Node.js. DuoStack is a senior-engineer-only studio that ships custom platforms in 8–12 weeks, with full source-code transfer on day one of go-live.',
+    tldr: [
+      'Senior engineers only — no juniors hidden behind a brand. Two co-founders run every sprint.',
+      'Stack defaults: React, Next.js, Vite, TypeScript, Tailwind, NestJS, PostgreSQL/MongoDB.',
+      'Mumbai-based, NDA-first, full IP and source-code transfer on day one of go-live.',
+      'Pricing scales: Starter landing pages from ₹20k, Sprint custom builds from ₹2L, full Pro platforms from ₹6.5L.'
+    ],
     intro: [
       `DuoStack is a Mumbai-based web development studio that designs and ships premium web platforms for ambitious teams. We work with founders across Mumbai — from Andheri and Bandra to Lower Parel, Powai, BKC and Navi Mumbai — and ship to clients in the UAE, the EU, the UK and the US. Every line of code is written by senior engineers with five-plus years of production experience. There are no junior developers hiding behind the brand, no offshore relays, no account managers between you and the people building your product.`,
       `We focus on the work that compounds: marketing sites that convert, dashboards that load on real networks, and SaaS products that hold up when traffic spikes. Our defaults are React, Next.js, Vite and TypeScript, on top of edge platforms like Vercel and Cloudflare. We refuse work we cannot ship pixel-perfect — that has become our reputation in Mumbai's product community.`
@@ -40,7 +48,7 @@ export const seoPages = [
       },
       {
         h2: 'How an engagement starts',
-        body: `Email or WhatsApp the founders. You will speak directly with one of us — Farhan or Sameer — within one business day. We sign an NDA before discovery if you ask, then run a one-week scoping sprint to define the build before any production code is written. Engagements run as fixed-scope sprints starting at $8k, monthly retainers from $12k, or quarterly embedded engagements. Source code, designs and infrastructure are 100% transferred to your team on day one of go-live.`
+        body: `Email or WhatsApp the founders. You will speak directly with one of us — Farhan or Sameer — within one business day. We sign an NDA before discovery if you ask, then run a one-week scoping sprint to define the build before any production code is written. Engagements are tiered transparently: Starter landing pages from ₹20k, Sprint custom builds from ₹2L, full Pro platforms from ₹6.5L, and Enterprise embedded engagements quoted quarterly. No hourly billing. Source code, designs and infrastructure are 100% transferred to your team on day one of go-live.`
       }
     ],
     faqs: [
@@ -50,7 +58,7 @@ export const seoPages = [
       },
       {
         q: 'What does a typical web development project cost in Mumbai?',
-        a: 'Sprint engagements start at around $8k for a fixed two- to six-week scope. Monthly retainers start at $12k. Embedded engagements are quoted quarterly. We do not run hourly billing.'
+        a: 'Pricing scales with scope. A Starter landing page or simple brand site starts at ₹20k. A Sprint custom build (single product or feature) starts at ₹2L. A full Pro web platform with backend, payments and integrations starts at ₹6.5L. Enterprise engagements with embedded teams are quoted quarterly from ₹25L. Every engagement is fixed-scope with the price agreed upfront — we do not run hourly billing.'
       },
       {
         q: 'Can you work alongside our existing engineering team?',
@@ -75,6 +83,14 @@ export const seoPages = [
     h1: 'Custom CRM development in Mumbai',
     eyebrow: 'Custom CRM · Mumbai, India',
     serviceName: 'Custom CRM development',
+    aeoAnswer:
+      'Custom CRM development is the practice of building a sales and operations system tuned to a single business — lead sources, routing rules, channels, compliance — instead of forcing the team into a generic tool. DuoStack ships custom CRMs for Mumbai sales floors, fintech brokers, and visa consultancies in 6–16 weeks with full source-code ownership.',
+    tldr: [
+      'Lead capture from Meta Business API, websites, WhatsApp inbound, manual intake, all in one inbox.',
+      'Role-based routing for telecaller, advisor, processing and admin teams; full audit trail per lead.',
+      'Mumbai-region data residency on AWS / DigitalOcean for clients with onshore compliance.',
+      'A working v1 ships in 6–8 weeks; full multi-team rollouts in 12–16 weeks.'
+    ],
     intro: [
       `If your sales floor in Andheri, BKC or Lower Parel runs on shared spreadsheets, missed leads and WhatsApp groups, you are leaving real revenue on the table. We build production-grade custom CRMs that capture every lead from Meta, websites and manual intake, route it instantly to the right human, and report on what actually closed. Our visa-CRM client at Baker & Co alone routes thousands of leads a month across telecallers, advisors, processing and admin — every conversation captured, every handover audited.`,
       `A custom CRM in 2026 is not Salesforce or Zoho with another skin. It is a system tuned to the specific way your Mumbai operations actually work — your lead sources, your handover rules, your compliance, your reporting. We have shipped these for visa consultancies, fintech brokers, healthcare clinics and forex platforms. Each one is its own product, with its own UX.`
@@ -125,6 +141,14 @@ export const seoPages = [
     h1: 'React Native app development in Mumbai',
     eyebrow: 'Mobile apps · Mumbai, India',
     serviceName: 'Mobile app development',
+    aeoAnswer:
+      'React Native app development is a cross-platform mobile build approach that ships one codebase to both iOS and Android with near-native performance. DuoStack builds production React Native apps for Mumbai founders, including App Store and Play Store submission, in 7–12 weeks per launch.',
+    tldr: [
+      'One codebase, two stores. Ships in 7–12 weeks including App Store + Play Store review.',
+      'Stack: React Native 0.76+, TypeScript, Reanimated 3, Expo where appropriate.',
+      'Native modules in Swift / Kotlin where the JS bridge would underperform.',
+      'You own the developer accounts and the source code — no lock-in.'
+    ],
     intro: [
       `Cross-platform mobile development has matured. In 2026, a well-built React Native app is indistinguishable from native iOS or Android in the user's hand — but ships in half the time, with one team. We build React Native apps for Mumbai founders who need both stores live without a sixteen-week timeline.`,
       `Our typical mobile engagement covers product, design, build, store submission and the first six weeks of post-launch iteration. We have shipped consumer-facing apps across healthcare, fintech, automotive and on-demand services, on both iOS App Store and Google Play, in seven to twelve weeks per launch.`
@@ -175,6 +199,14 @@ export const seoPages = [
     h1: 'Shopify development company in Mumbai',
     eyebrow: 'E-commerce · Mumbai, India',
     serviceName: 'E-commerce development',
+    aeoAnswer:
+      'A Shopify development company in Mumbai builds and tunes e-commerce stores on Shopify or headless Hydrogen for D2C brands. DuoStack ships brand-led storefronts with conversion-optimised checkout, Razorpay + Stripe, GST-compliant invoicing, and Lighthouse 90+ mobile scores.',
+    tldr: [
+      'Headless Hydrogen and custom Liquid themes for Shopify and Shopify Plus merchants.',
+      'Indian payments via Razorpay; international via Stripe; GST-compliant invoicing built in.',
+      'Lighthouse 90+ mobile, Plausible/PostHog instrumented from week one.',
+      'Migration from WooCommerce or Magento as a defined sprint at engagement start.'
+    ],
     intro: [
       `Mumbai's D2C scene has matured. Brands that two years ago were happy with a stock Shopify theme now want headless performance, custom checkout, native ERP integration and brand-led storytelling that a templated theme cannot deliver. That is where we come in.`,
       `We have shipped headless Shopify storefronts running Hydrogen and Remix, custom Liquid themes with bespoke product configurators, and end-to-end commerce experiences for brands like Benzer World. Every project is conversion-instrumented from day one — page-level analytics, funnel tracking, A/B test infrastructure, and Lighthouse scores above 90 on real mobile devices.`
@@ -225,6 +257,14 @@ export const seoPages = [
     h1: 'Fintech and forex platform development in Mumbai',
     eyebrow: 'Fintech · Mumbai, India',
     serviceName: 'Fintech and Forex platforms',
+    aeoAnswer:
+      'Fintech platform development in Mumbai means building trader-grade dashboards, KYC/AML pipelines, payment rails, and broker-platform integrations. DuoStack has shipped MT5 manager-API integrations in three weeks where typical timelines run six months, with zero security incidents across four years of fintech work.',
+    tldr: [
+      'MT5 manager-API integration: realtime trade ingestion, balance updates, CRM-side trade tagging.',
+      'KYC defaults: Hyperverge / HyperKYC for India, Sumsub / Onfido for international.',
+      'Security-first by default: TLS, JWT/OAuth, MFA, audit logs, SAST/SCA via Snyk or GitHub Advanced Security.',
+      'India-onshore (RBI rules, data localisation, Razorpay/PayU) and offshore (Stripe, PayPal, crypto on-ramps).'
+    ],
     intro: [
       `Mumbai is India's financial capital. The teams we work with run the gamut — broker startups in BKC, neo-banking founders in Lower Parel, forex platforms in Andheri, and India-out international forex desks routing through Dubai. Every one of them has the same problem: production-grade trading and fintech software is rare, expensive, and hard to ship without security and compliance issues that grow as you scale.`,
       `Our most public fintech project is EliteFX — a full forex website with client and admin CRMs and native MT5 broker-platform integration. We shipped it in twelve weeks. The MT5 integration alone, which most agencies quote at six months, was eighteen working days.`
@@ -275,6 +315,14 @@ export const seoPages = [
     h1: 'Healthcare software development in Mumbai',
     eyebrow: 'Healthcare · Mumbai, India',
     serviceName: 'Healthcare software development',
+    aeoAnswer:
+      'Healthcare software development in Mumbai covers patient apps, clinician dashboards, telehealth, and EMR integration. DuoStack builds DPDP Act-aligned and HIPAA-grade healthcare software for Indian hospital chains and international digital-health startups, with field-level encryption and signed audit trails on every privileged action.',
+    tldr: [
+      'Patient onboarding, clinician dashboards, telehealth (Daily / LiveKit / Agora / Twilio Video).',
+      'EMR integration via FHIR or HL7 where the EMR supports it; SQL views or APIs where it does not.',
+      'India: DPDP Act 2023 compliance with consent capture, audit logs, data export and deletion.',
+      'International: HIPAA-grade controls — BAAs, end-to-end encryption, role-based access, signed audit trails.'
+    ],
     intro: [
       `Healthcare software lives or dies on three things: data integrity, clinician workflow, and patient trust. We build for all three. Our most public healthcare project is Remesleep — a sleep and recovery platform with patient onboarding, clinician dashboards and telehealth flows shipped to international clients.`,
       `In Mumbai, we work with both private hospital chains running internal admin and patient-facing tooling, and with digital-health startups building consumer apps. Every project is NDA-first and built around clinician workflow rather than around what is easy to code.`

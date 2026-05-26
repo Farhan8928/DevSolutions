@@ -11,7 +11,16 @@ const projectTypes = [
   'Fintech / Forex', 'Brand site', 'Other'
 ]
 
-const budgets = ['<$10k', '$10k–25k', '$25k–50k', '$50k+']
+// Indian-first budget bands. Mirrors the four engagement tiers
+// (Starter / Sprint / Pro / Enterprise) with INR-clear numbers, plus
+// a "not sure yet" option so genuinely undecided founders aren't blocked.
+const budgets = [
+  '< ₹50k',
+  '₹50k – ₹2L',
+  '₹2L – ₹10L',
+  '₹10L+',
+  'Not sure yet'
+]
 
 export default function Contact() {
   const [sent, setSent] = useState(false)
@@ -20,7 +29,7 @@ export default function Contact() {
     email: '',
     company: '',
     type: 'Web platform',
-    budget: '$10k–25k',
+    budget: '₹2L – ₹10L',
     message: ''
   })
 
@@ -166,7 +175,7 @@ export default function Contact() {
                   <label className="block font-mono text-[10px] uppercase tracking-[0.22em] text-white/45">
                     Budget
                   </label>
-                  <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
                     {budgets.map((b) => (
                       <button
                         type="button"

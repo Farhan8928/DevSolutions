@@ -57,7 +57,7 @@ const faqs = [
   },
   {
     q: `What does a typical engagement cost?`,
-    a: `Sprint engagements start around $8k for a fixed scope of two to six weeks. Monthly retainers start around $12k/month for an always-on senior team. Embedded engagements are quoted quarterly.`
+    a: `Pricing scales with scope. Starter landing pages from ₹20k (~$240). Sprint custom builds from ₹2L (~$2.5k). Full Pro web platforms from ₹6.5L (~$8k). Enterprise embedded engagements quoted quarterly from ₹25L. Every engagement is fixed-scope with the price agreed upfront — no hourly billing.`
   }
 ]
 

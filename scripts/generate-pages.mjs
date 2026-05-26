@@ -80,7 +80,7 @@ const areaServedGraph = serviceAreas.map((a) => ({
 }))
 
 const buildJsonLd = ({
-  pageUrl, pageTitle, pageDesc, h1, serviceName, faqs
+  pageUrl, pageTitle, pageDesc, h1, serviceName, faqs, tldr = []
 }) => {
   const breadcrumb = {
     '@type': 'BreadcrumbList',
@@ -117,6 +117,23 @@ const buildJsonLd = ({
     }))
   } : null
 
+  // Author Person schema — EEAT Expertise signal. Cited as the page author
+  // in WebPage so Google's Quality Rater system has a credentialed source.
+  const author = {
+    '@type': 'Person',
+    '@id': `${SITE_URL}/#farhan`,
+    name: 'Farhan Sayyed',
+    jobTitle: 'Co-founder, Engineering · DuoStack',
+    worksFor: { '@id': `${SITE_URL}/#organization` },
+    knowsAbout: [
+      'React', 'Next.js', 'TypeScript', 'Node.js', 'NestJS',
+      'PostgreSQL', 'MongoDB', 'React Native', 'MT5 integration',
+      'Custom CRM development', 'Headless Shopify',
+      'Healthcare software', 'Fintech platform development'
+    ],
+    sameAs: ['https://www.linkedin.com/in/duo-stack-b84289411']
+  }
+
   const webPage = {
     '@type': 'WebPage',
     '@id': pageUrl,
@@ -125,13 +142,19 @@ const buildJsonLd = ({
     description: pageDesc,
     isPartOf: { '@id': `${SITE_URL}/#website` },
     inLanguage: 'en-IN',
-    primaryImageOfPage: `${SITE_URL}/og.jpg`
+    primaryImageOfPage: `${SITE_URL}/og.jpg`,
+    datePublished: '2026-05-16',
+    dateModified: TODAY,
+    author: { '@id': `${SITE_URL}/#farhan` },
+    reviewedBy: { '@id': `${SITE_URL}/#farhan` },
+    lastReviewed: TODAY,
+    ...(tldr.length ? { abstract: tldr.join(' ') } : {})
   }
 
   return JSON.stringify(
     {
       '@context': 'https://schema.org',
-      '@graph': [breadcrumb, service, webPage, faqPage].filter(Boolean)
+      '@graph': [breadcrumb, service, webPage, faqPage, author].filter(Boolean)
     },
     null, 2
   )
@@ -212,7 +235,46 @@ const PAGE_CSS = `
   .btn-primary { background: var(--lime); color: #06070A; border-color: var(--lime); }
   .btn-ghost   { color: var(--ink); }
 
-  /* Service-area chips */
+  /* EEAT byline + Trust freshness */
+  .byline {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+    font-size: 13px; color: var(--muted); margin-top: 14px;
+  }
+  .byline .dot { opacity: 0.4; }
+  .byline strong { color: var(--ink); font-weight: 500; }
+
+  /* AEO direct-answer paragraph — slight visual lift so AI extractors
+     find it easily and humans treat it as the lead */
+  .aeo-answer {
+    margin: 22px 0 0; padding: 18px 22px;
+    border-left: 3px solid var(--lime);
+    background: rgba(200, 255, 0, 0.04);
+    border-radius: 0 14px 14px 0;
+    font-size: 1rem; color: rgba(255, 255, 255, 0.88);
+  }
+
+  /* GEO TL;DR — bullet summary box */
+  .tldr {
+    margin: 26px 0 30px; padding: 22px 24px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+  .tldr-h {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--lime); margin: 0 0 12px;
+  }
+  .tldr ul {
+    margin: 0; padding: 0; list-style: none; display: grid; gap: 10px;
+  }
+  .tldr li {
+    padding-left: 22px; position: relative; color: rgba(255, 255, 255, 0.8);
+    font-size: 14px; line-height: 1.55;
+  }
+  .tldr li::before {
+    content: '→'; color: var(--lime); position: absolute; left: 0; top: 0;
+  }
   .areas {
     padding: 26px 24px; border-radius: 22px;
     border: 1px solid var(--border); background: var(--card);
@@ -306,8 +368,48 @@ const PAGE_CSS = `
 `
 
 // ----------------------------------------------------------------------
-// Page chunks
+// Page chunks — EEAT byline, AEO definitional answer, GEO TL;DR box
 // ----------------------------------------------------------------------
+
+// Visible byline + last-reviewed line. EEAT Expertise + Trust freshness.
+const renderByline = () => {
+  const today = new Date()
+  const reviewed = today.toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  })
+  return `
+    <div class="byline" aria-label="Article metadata">
+      <span>By <strong>Farhan Sayyed</strong> · Co-founder, Engineering · DuoStack</span>
+      <span class="dot" aria-hidden>·</span>
+      <span>Last reviewed <time datetime="${TODAY}">${reviewed}</time></span>
+    </div>
+  `
+}
+
+// AEO definitional answer block — sits right after the H1, 40-60 words,
+// formatted to maximise chance of extraction by Google AI Overviews +
+// PAA + featured snippets. Falls back gracefully if no answer provided.
+const renderAeoAnswer = (answer) => {
+  if (!answer) return ''
+  return `
+    <p class="aeo-answer">${esc(answer)}</p>
+  `
+}
+
+// GEO TL;DR / Key Takeaways box — bullet summary at the top. AI engines
+// prefer clearly-bounded scannable content for citation extraction.
+const renderTldr = (items = []) => {
+  if (!items.length) return ''
+  return `
+    <aside class="tldr" aria-labelledby="tldr-h">
+      <p id="tldr-h" class="tldr-h">Key takeaways</p>
+      <ul>
+        ${items.map((t) => `<li>${esc(t)}</li>`).join('')}
+      </ul>
+    </aside>
+  `
+}
+
 const renderHeader = () => `
   <header class="site">
     <div class="wrap row">
@@ -429,7 +531,8 @@ const renderServicePage = (page) => {
     pageDesc: page.metaDescription,
     h1: page.h1,
     serviceName: page.serviceName,
-    faqs: page.faqs
+    faqs: page.faqs,
+    tldr: page.tldr || []
   })
 
   return `<!doctype html>
@@ -495,6 +598,9 @@ ${ldJson}
     <section class="hero">
       <span class="eyebrow">${esc(page.eyebrow)}</span>
       <h1>${esc(page.h1)}</h1>
+      ${renderByline()}
+      ${renderAeoAnswer(page.aeoAnswer)}
+      ${renderTldr(page.tldr)}
       ${introHtml}
       <div class="ctas">
         <a class="btn btn-primary" href="${tel}">📞 Call ${PHONE_DISPLAY}</a>
@@ -561,7 +667,7 @@ const neighbourhoodPage = (area) => {
     },
     {
       q: `What does a typical project cost?`,
-      a: `Sprint engagements start around $8k for a fixed two- to six-week scope. Monthly retainers from $12k. Embedded engagements quoted quarterly. We do not run hourly billing.`
+      a: `Pricing scales with scope. Starter landing pages start at ₹20k. Sprint custom builds start at ₹2L. Full Pro web platforms start at ₹6.5L. Enterprise engagements quoted quarterly from ₹25L. Every engagement is fixed-scope with the price agreed upfront — no hourly billing.`
     },
     {
       q: `Will my source code stay with me?`,
@@ -649,6 +755,14 @@ ${ldJson}
     <section class="hero">
       <span class="eyebrow">Web platforms · ${esc(area.name)}, Mumbai</span>
       <h1>${esc(h1)}</h1>
+      ${renderByline()}
+      ${renderAeoAnswer(`DuoStack is a Mumbai-based engineering studio building React, Next.js, and custom CMS web platforms for founders in ${area.name}. Senior engineers only, NDA-first, full source-code transfer on day one of go-live. Founders reply within one business day on email and WhatsApp.`)}
+      ${renderTldr([
+        `Senior engineers only — no juniors, no offshore relays. You speak directly with the two co-founders.`,
+        `Onsite work available in ${area.name} and across Mumbai Metropolitan Region; remote-first as default.`,
+        `Pricing scales: Starter landing pages from ₹20k, Sprint builds from ₹2L, full Pro platforms from ₹6.5L.`,
+        `100% on-time delivery across 8 shipped products in healthcare, fintech, e-commerce, NGO and automotive.`
+      ])}
       ${introHtml}
       <div class="ctas">
         <a class="btn btn-primary" href="${tel}">📞 Call ${PHONE_DISPLAY}</a>

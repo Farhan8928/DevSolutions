@@ -1,0 +1,77 @@
+# DuoStack
+
+> Engineering studio in Mumbai, India. We build premium web platforms, custom CRM systems, e-commerce storefronts, and mobile apps for ambitious teams in healthcare, fintech, e-commerce, NGO, and automotive. Senior engineers only — two co-founders running every sprint. NDA-first. Founders reply within one business day on email and WhatsApp.
+
+## About
+
+- Studio: DuoStack (legal name: DuoStack Studio)
+- Location: Mumbai, Maharashtra, India
+- Founded: 2022
+- Founders: Farhan Sayyed (Co-founder, Engineering), Sameer Ansari (Co-founder, Product)
+- Contact: farhan.sayyed.tech@gmail.com · +91 89280 40454 · WhatsApp +91 89280 40454
+- Hours: 09:00–22:00 IST, Monday–Saturday
+- Website: https://duostack.in
+
+## Services
+
+- [Web development company in Mumbai](https://duostack.in/web-development-company-mumbai/): React, Next.js, Vite. Marketing sites, dashboards, SaaS products. Starter from ₹20k, Sprint from ₹2L, full Pro platforms from ₹6.5L.
+- [Custom CRM development in Mumbai](https://duostack.in/custom-crm-development-mumbai/): Meta API lead capture, Twilio voice and WhatsApp, role-based routing, Mumbai-region data residency.
+- [React Native app development in Mumbai](https://duostack.in/react-native-app-development-mumbai/): Cross-platform iOS and Android apps; App Store and Play Store submission included.
+- [Shopify development company in Mumbai](https://duostack.in/shopify-development-company-mumbai/): Headless Hydrogen and custom Liquid themes; Razorpay and Stripe; GST-compliant.
+- [Fintech and forex platform development in Mumbai](https://duostack.in/fintech-platform-development-mumbai/): MT5 manager-API integration, KYC/AML, trader-grade dashboards.
+- [Healthcare software development in Mumbai](https://duostack.in/healthcare-software-development-mumbai/): Patient apps, clinician dashboards, telehealth, EMR / FHIR integration. DPDP Act and HIPAA-aligned.
+
+## Service area
+
+We work with founders across the Mumbai Metropolitan Region:
+
+- [Andheri](https://duostack.in/web-development-andheri-mumbai/)
+- [Bandra](https://duostack.in/web-development-bandra-mumbai/)
+- [BKC](https://duostack.in/web-development-bkc-mumbai/)
+- [Powai](https://duostack.in/web-development-powai-mumbai/)
+- [Lower Parel](https://duostack.in/web-development-lower-parel-mumbai/)
+- [Borivali](https://duostack.in/web-development-borivali-mumbai/)
+- [Thane](https://duostack.in/web-development-thane-mumbai/)
+- [Navi Mumbai](https://duostack.in/web-development-navi-mumbai/)
+
+About half our revenue is from outside India — UAE, EU, US, and the UK.
+
+## Selected work
+
+- Remesleep — sleep and recovery healthcare platform with patient onboarding, clinician dashboards, telehealth.
+- Humane Warriors — global NGO website mobilising donors and volunteers.
+- Howl — brand-led digital marketing agency website.
+- Benzer World — headless commerce on Shopify with custom CMS.
+- ChainThat — enterprise insurance technology brand and product site.
+- Baker & Co Visa CRM — end-to-end visa lead CRM with Meta API and Twilio.
+- EliteFX — full forex website plus client and admin CRMs with native MT5 integration.
+- AutoPart — booking platform for premium car repair.
+
+## Engagement model
+
+Pricing is tiered transparently. Indian rates first, USD shown for international reference.
+
+- **Starter — ₹20k+ (~$240) · 7–14 days**: single landing page or simple brand site, up to 5 sections, form + analytics, Vercel deploy.
+- **Sprint — ₹2L+ (~$2.5k) · 2–6 weeks**: fixed-scope custom build for a single product or feature, custom design, CMS or auth, 30-day support.
+- **Pro — ₹6.5L+ (~$8k) · 8–12 weeks**: full custom web platform with backend, payments, integrations, CI/CD and observability.
+- **Enterprise — ₹25L+/quarter (~$30k+)**: embedded senior team, roadmap ownership, SLA + on-call.
+
+We do not run hourly billing. Every engagement is fixed-scope with the price agreed upfront. Indian payments via Razorpay; international via Stripe or wire.
+
+## How we work
+
+- NDA-first. We sign before discovery if asked.
+- Senior engineers only — five-plus years of production experience minimum.
+- Source code, designs, infrastructure-as-code, and deployment access transferred to clients on day one of go-live.
+- 100% on-time delivery across all 8 shipped products.
+- Weekly working demo on Friday, fixed scope on every sprint.
+
+## Stack
+
+React 18, Next.js 15, Vite 5, TypeScript, Tailwind, shadcn/ui, Framer Motion, Node, NestJS, PostgreSQL, MongoDB, Redis, BullMQ, Twilio, Meta Business API, Razorpay, Stripe, MT5, Hyperverge, Sumsub, FHIR, HL7, Sentry, Plausible, PostHog, Vercel, Cloudflare, AWS, DigitalOcean.
+
+## Optional
+
+- [FAQ](https://duostack.in/#faq)
+- [Sitemap](https://duostack.in/sitemap.xml)
+- [LinkedIn](https://www.linkedin.com/in/duo-stack-b84289411)
