@@ -813,13 +813,10 @@ const renderSitemap = (extraSlugs = []) => {
     <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_URL}/" />
   </url>`
 
-  const anchors = ['services', 'work', 'process', 'stack', 'contact', 'faq']
-    .map((a) => `  <url>
-    <loc>${SITE_URL}/#${a}</loc>
-    <lastmod>${TODAY}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>`).join('\n')
+  // NOTE: Do NOT add #fragment URLs (/#services, /#contact, …) to the sitemap.
+  // Google treats a fragment as the same page as "/", so they get reported as
+  // "Discovered – currently not indexed" and never index. They live as on-page
+  // nav anchors only.
 
   const services = seoPages.map((p) => `  <url>
     <loc>${SITE_URL}/${p.slug}/</loc>
@@ -843,7 +840,6 @@ const renderSitemap = (extraSlugs = []) => {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${home}
-${anchors}
 ${services}
 ${neighbourhoods}
 </urlset>
