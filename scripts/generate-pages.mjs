@@ -632,8 +632,8 @@ const neighbourhoodPage = (area) => {
     : `web-development-${area.slug}-mumbai`
   const url   = `${SITE_URL}/${slug}/`
   const h1    = `Web development company in ${area.name}, Mumbai`
-  const title = `Web Development Company in ${area.name}, Mumbai · React, Next.js — DuoStack`
-  const desc  = `Premium web development company serving ${area.name}, Mumbai. We build React, Next.js and custom CMS platforms for founders in ${area.name} and across the Mumbai Metropolitan Region. Senior engineers only. Reply within 1 business day.`
+  const title = `Web Development Company in ${area.name}, Mumbai — DuoStack`
+  const desc  = `Web development company serving ${area.name}, Mumbai — React, Next.js and custom CMS platforms for founders across the Mumbai region. Senior engineers only.`
   const keyword = `web development company ${area.name} Mumbai`
 
   const intro = [

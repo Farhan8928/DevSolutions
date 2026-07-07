@@ -18,9 +18,9 @@ export const seoPages = [
     slug: 'web-development-company-mumbai',
     title: 'Web Development Company in Mumbai · DuoStack',
     metaTitle:
-      'Web Development Company in Mumbai · React, Next.js, Vite — DuoStack',
+      'Web Development Company in Mumbai · React, Next.js — DuoStack',
     metaDescription:
-      'Premium web development company in Mumbai. We build React, Next.js and custom CMS platforms for healthcare, fintech, e-commerce and NGO teams across Mumbai, Andheri, Bandra and BKC. Senior engineers only.',
+      'Premium web development company in Mumbai — React, Next.js and custom CMS platforms for healthcare, fintech, e-commerce and NGO teams. Senior engineers only.',
     keyword: 'web development company in Mumbai',
     h1: 'Web development company in Mumbai',
     eyebrow: 'Web platforms · Mumbai, India',
@@ -76,9 +76,9 @@ export const seoPages = [
     slug: 'custom-crm-development-mumbai',
     title: 'Custom CRM Development in Mumbai · DuoStack',
     metaTitle:
-      'Custom CRM Development in Mumbai · Lead Routing, Meta API, Twilio — DuoStack',
+      'Custom CRM Development in Mumbai · Lead Routing — DuoStack',
     metaDescription:
-      'Custom CRM development in Mumbai for sales, telecaller and operations teams. Lead capture from Meta and websites, role-based routing, Twilio voice and WhatsApp, real-time reporting. Built by senior engineers.',
+      'Custom CRM development in Mumbai — lead capture from Meta and websites, role-based routing, Twilio voice and WhatsApp, real-time reporting. Senior engineers.',
     keyword: 'custom CRM development in Mumbai',
     h1: 'Custom CRM development in Mumbai',
     eyebrow: 'Custom CRM · Mumbai, India',
@@ -134,9 +134,9 @@ export const seoPages = [
     slug: 'react-native-app-development-mumbai',
     title: 'React Native App Development in Mumbai · DuoStack',
     metaTitle:
-      'React Native App Development in Mumbai · iOS + Android — DuoStack',
+      'React Native App Development in Mumbai — DuoStack',
     metaDescription:
-      'React Native app development in Mumbai. Cross-platform iOS and Android apps with native performance, App Store and Play Store launches, push, analytics and offline-first architecture. Built by senior engineers.',
+      'React Native app development in Mumbai — cross-platform iOS and Android apps with native performance, App Store and Play Store launches, push and analytics.',
     keyword: 'React Native app development in Mumbai',
     h1: 'React Native app development in Mumbai',
     eyebrow: 'Mobile apps · Mumbai, India',
@@ -192,9 +192,9 @@ export const seoPages = [
     slug: 'shopify-development-company-mumbai',
     title: 'Shopify Development Company in Mumbai · DuoStack',
     metaTitle:
-      'Shopify Development Company in Mumbai · Headless Hydrogen, Custom Themes — DuoStack',
+      'Shopify Development Company in Mumbai · Headless — DuoStack',
     metaDescription:
-      'Shopify development company in Mumbai for D2C brands. Headless Shopify Hydrogen, custom themes, conversion-tuned checkout, Razorpay and Stripe. Senior engineers, no agency theatre.',
+      'Shopify development company in Mumbai for D2C brands — headless Hydrogen, custom themes, conversion-tuned checkout, Razorpay and Stripe. Senior engineers.',
     keyword: 'Shopify development company in Mumbai',
     h1: 'Shopify development company in Mumbai',
     eyebrow: 'E-commerce · Mumbai, India',
@@ -250,9 +250,9 @@ export const seoPages = [
     slug: 'fintech-platform-development-mumbai',
     title: 'Fintech and Forex Platform Development in Mumbai · DuoStack',
     metaTitle:
-      'Fintech & Forex Platform Development in Mumbai · MT5, KYC, Trading Dashboards — DuoStack',
+      'Fintech & Forex Platform Development in Mumbai — DuoStack',
     metaDescription:
-      'Fintech and forex platform development in Mumbai. Trader-grade dashboards, KYC and AML flows, payment integrations, MT5 and broker platform integration. Built by senior engineers.',
+      'Fintech and forex platform development in Mumbai — trader-grade dashboards, KYC/AML flows, payment integrations and MT5/broker platform integration.',
     keyword: 'fintech platform development in Mumbai',
     h1: 'Fintech and forex platform development in Mumbai',
     eyebrow: 'Fintech · Mumbai, India',
@@ -308,9 +308,9 @@ export const seoPages = [
     slug: 'healthcare-software-development-mumbai',
     title: 'Healthcare Software Development in Mumbai · DuoStack',
     metaTitle:
-      'Healthcare Software Development in Mumbai · Telehealth, EMR, Patient Apps — DuoStack',
+      'Healthcare Software Development in Mumbai — DuoStack',
     metaDescription:
-      'Healthcare software development in Mumbai for hospitals, clinics and digital-health startups. Telehealth, patient onboarding, clinician dashboards, EMR integration. Senior engineers, NDA-first.',
+      'Healthcare software development in Mumbai — telehealth, patient onboarding, clinician dashboards and EMR integration. Senior engineers, NDA-first.',
     keyword: 'healthcare software development in Mumbai',
     h1: 'Healthcare software development in Mumbai',
     eyebrow: 'Healthcare · Mumbai, India',

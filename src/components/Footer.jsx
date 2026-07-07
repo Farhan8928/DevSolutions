@@ -3,6 +3,31 @@ import { ArrowUpRight, Mail, MessageCircle, Linkedin, Github } from 'lucide-reac
 import { contact, studio } from '../data/studio.js'
 import { LogoMark } from './Logo.jsx'
 
+// Internal links to the static SEO landing pages (src/data/seoPages.js,
+// generated at build time). Surfaced in the footer so the homepage passes link
+// equity to them and crawlers discover them. Keep slugs in sync with seoPages.js.
+const servicePages = [
+  { href: '/web-development-company-mumbai/', label: 'Web Development' },
+  { href: '/custom-crm-development-mumbai/', label: 'Custom CRM' },
+  { href: '/react-native-app-development-mumbai/', label: 'React Native Apps' },
+  { href: '/shopify-development-company-mumbai/', label: 'Shopify Development' },
+  { href: '/fintech-platform-development-mumbai/', label: 'Fintech & Forex' },
+  { href: '/healthcare-software-development-mumbai/', label: 'Healthcare Software' },
+]
+
+// Neighbourhood landing pages — keep slugs in sync with the areas in
+// scripts/generate-pages.mjs.
+const areaPages = [
+  { href: '/web-development-andheri-mumbai/', label: 'Andheri' },
+  { href: '/web-development-bandra-mumbai/', label: 'Bandra' },
+  { href: '/web-development-bkc-mumbai/', label: 'BKC' },
+  { href: '/web-development-powai-mumbai/', label: 'Powai' },
+  { href: '/web-development-lower-parel-mumbai/', label: 'Lower Parel' },
+  { href: '/web-development-borivali-mumbai/', label: 'Borivali' },
+  { href: '/web-development-thane-mumbai/', label: 'Thane' },
+  { href: '/web-development-navi-mumbai/', label: 'Navi Mumbai' },
+]
+
 export default function Footer() {
   const [now, setNow] = useState(new Date())
   useEffect(() => {
@@ -59,6 +84,38 @@ export default function Footer() {
             DuoStack
           </p>
         </div>
+
+        {/* Services in Mumbai — internal links to the SEO landing pages */}
+        <nav aria-label="Services in Mumbai" className="mt-12 border-t border-white/[0.06] pt-8">
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/40">
+            Services in Mumbai
+          </p>
+          <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            {servicePages.map((p) => (
+              <a
+                key={p.href}
+                href={p.href}
+                className="text-white/70 hover:text-accent-lime transition"
+              >
+                {p.label} in Mumbai
+              </a>
+            ))}
+          </div>
+          <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-white/40">
+            Web development by area
+          </p>
+          <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            {areaPages.map((p) => (
+              <a
+                key={p.href}
+                href={p.href}
+                className="text-white/60 hover:text-accent-lime transition"
+              >
+                {p.label}
+              </a>
+            ))}
+          </div>
+        </nav>
 
         {/* Status row */}
         <div className="mt-10 grid gap-6 md:grid-cols-12 border-t border-white/[0.06] pt-8">
