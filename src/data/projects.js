@@ -128,7 +128,7 @@ export const projects = [
     summary:
       'Booking platform for premium car repair — quote builder, service catalogue and slot management.',
     stack: ['React', 'Vite', 'Tailwind', 'Vercel'],
-    url: 'https://autopart-web.vercel.app/',
+    url: 'https://www.autodoorspecialist.com/',
     accent: 'from-cyan-300/25 via-blue-400/10 to-transparent'
   })
 ]
