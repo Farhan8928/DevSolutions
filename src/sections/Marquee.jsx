@@ -2,7 +2,7 @@
 // Each row uses a different status verb so the page has rhythm.
 const items = [
   { verb: 'Shipping',     subject: 'Visa CRM v2 for Baker & Co' },
-  { verb: 'Designing',    subject: 'Trader dashboard v3 for EliteFX' },
+  { verb: 'Designing',    subject: 'Attribution dashboard v3 for OutVue' },
   { verb: 'Refactoring',  subject: 'Storefront for Benzer World' },
   { verb: 'Migrating',    subject: 'Healthcare data layer for Remesleep' },
   { verb: 'Wireframing',  subject: 'Donor flow for Humane Warriors' },

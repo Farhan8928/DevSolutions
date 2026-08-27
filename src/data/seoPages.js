@@ -267,7 +267,7 @@ export const seoPages = [
     ],
     intro: [
       `Mumbai is India's financial capital. The teams we work with run the gamut — broker startups in BKC, neo-banking founders in Lower Parel, forex platforms in Andheri, and India-out international forex desks routing through Dubai. Every one of them has the same problem: production-grade trading and fintech software is rare, expensive, and hard to ship without security and compliance issues that grow as you scale.`,
-      `Our most public fintech project is EliteFX — a full forex website with client and admin CRMs and native MT5 broker-platform integration. We shipped it in twelve weeks. The MT5 integration alone, which most agencies quote at six months, was eighteen working days.`
+      `A recent fintech engagement was a full forex platform for a broker — public site plus client and admin CRMs, with native MT5 broker-platform integration. We shipped it in twelve weeks. The MT5 integration alone, which most agencies quote at six months, was eighteen working days.`
     ],
     sections: [
       {

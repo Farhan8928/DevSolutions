@@ -1,13 +1,16 @@
 {
   "clients": {
     "remesleep": "/favicons/clients/remesleep.png",
+    "outvue": "/favicons/clients/outvue.png",
+    "bakerandco": "/favicons/clients/bakerandco.png",
     "humanewarriors": "/favicons/clients/humanewarriors.png",
     "howl": "/favicons/clients/howl.png",
     "benzer": "/favicons/clients/benzer.png",
-    "chainthat": "/favicons/clients/chainthat.png",
-    "bakerandco": "/favicons/clients/bakerandco.png",
-    "elitefx": "/favicons/clients/elitefx.png",
-    "autopart": "/favicons/clients/autopart.svg"
+    "mossanomarmo": "/favicons/clients/mossanomarmo.svg",
+    "saumstudio": "/favicons/clients/saumstudio.svg",
+    "autopart": "/favicons/clients/autopart.svg",
+    "zaidelectronics": "/favicons/clients/zaidelectronics.png",
+    "gourifurnishing": "/favicons/clients/gourifurnishing.svg"
   },
   "stack": {
     "react": "/favicons/stack/react.svg",

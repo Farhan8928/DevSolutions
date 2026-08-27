@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ArrowUpRight } from 'lucide-react'
+import { ctaFor, addressFor } from '../data/projects.js'
+import KindIcon from './KindIcon.jsx'
 
 /**
  * Full-screen lightbox showing a single project's screenshot at full size.
@@ -44,18 +46,21 @@ export default function Lightbox({ project, onClose }) {
               <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
               <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
               <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
-              <span className="ml-2 sm:ml-3 truncate font-mono text-[11px] sm:text-xs text-white/55">
-                {project.host}
+              <span className="ml-2 sm:ml-3 inline-flex min-w-0 items-center gap-1.5 truncate font-mono text-[11px] sm:text-xs text-white/55">
+                <KindIcon kind={project.kind} size={12} />
+                <span className="truncate">{addressFor(project)}</span>
               </span>
 
               <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs text-white/85 hover:border-accent-lime/50 hover:text-accent-lime transition"
+                href={ctaFor(project).href}
+                {...(ctaFor(project).external
+                  ? { target: '_blank', rel: 'noopener noreferrer' }
+                  : {})}
+                onClick={ctaFor(project).external ? undefined : onClose}
+                className="ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs text-white/85 hover:border-accent-lime/50 hover:text-accent-lime transition"
               >
-                <span className="hidden sm:inline">Open live site</span>
-                <span className="sm:hidden">Open</span>
+                <span className="hidden sm:inline">{ctaFor(project).label}</span>
+                <span className="sm:hidden">{ctaFor(project).short}</span>
                 <ArrowUpRight size={12} />
               </a>
               <button

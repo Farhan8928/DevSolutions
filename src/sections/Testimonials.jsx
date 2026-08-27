@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Quote, Star } from 'lucide-react'
 import SmartImage from '../components/SmartImage.jsx'
-import { projects } from '../data/projects.js'
+import { projects, ctaFor, addressFor } from '../data/projects.js'
 
 // Map quotes back to real projects so favicons stay in sync with /favicons/clients
 const findProject = (id) => projects.find((p) => p.id === id)
 
+// A quote whose project has been retired from the portfolio would otherwise
+// blow up on `q.project.url`, so unmatched quotes are dropped rather than
+// rendered half-empty.
 const quotes = [
   {
     body:
@@ -17,19 +20,12 @@ const quotes = [
   },
   {
     body:
-      'The MT5 integration alone would have taken us months. DuoStack shipped it inside a polished trader dashboard in weeks.',
-    name: 'Founder',
-    org: 'EliteFX',
-    project: findProject('elitefx')
-  },
-  {
-    body:
       'Brand, motion, performance — everything came together. The site looks like the studio we always wanted to be.',
     name: 'Marketing Director',
     org: 'Howl',
     project: findProject('howl')
   }
-]
+].filter((q) => q.project)
 
 export default function Testimonials() {
   const [i, setI] = useState(0)
@@ -115,14 +111,15 @@ export default function Testimonials() {
               >
                 {/* Real client favicon, not a letter avatar */}
                 <a
-                  href={q.project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={ctaFor(q.project).href}
+                  {...(ctaFor(q.project).external
+                    ? { target: '_blank', rel: 'noopener noreferrer' }
+                    : {})}
                   data-cursor="hover"
                   className="grid h-12 w-12 place-items-center rounded-2xl bg-white/[0.05] border border-white/10 overflow-hidden hover:border-accent-lime/40 transition"
                 >
                   <SmartImage
-                    sources={[q.project.favicon, q.project.faviconRemote]}
+                    sources={[q.project.favicon, q.project.faviconRemote].filter(Boolean)}
                     alt={q.org}
                     className="h-7 w-7"
                     imgClassName="h-7 w-7 object-contain"
@@ -132,12 +129,13 @@ export default function Testimonials() {
                   <p className="text-base font-medium text-white">{q.name}</p>
                   <p className="text-sm text-white/55">{q.org}</p>
                   <a
-                    href={q.project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={ctaFor(q.project).href}
+                    {...(ctaFor(q.project).external
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
                     className="mt-1 inline-block font-mono text-[10px] uppercase tracking-[0.22em] text-accent-lime hover:underline"
                   >
-                    {q.project.host} →
+                    {addressFor(q.project)} →
                   </a>
                 </div>
               </motion.figcaption>

@@ -18,15 +18,19 @@ const __root = path.resolve(path.dirname(__filename), '..')
 
 // ─── Sources ────────────────────────────────────────────────────────────────
 // Clients — host pulled straight from the projects file.
+// Public sites only — private CRMs have no public host to fetch an icon from.
 const clients = [
   { id: 'remesleep',      host: 'remesleep.com' },
+  { id: 'outvue',         host: 'outvue.io' },
+  { id: 'bakerandco',     host: 'bakerandco.ae' },
   { id: 'humanewarriors', host: 'humanewarriors.ch' },
   { id: 'howl',           host: 'howl.in' },
   { id: 'benzer',         host: 'benzerworld.com' },
-  { id: 'chainthat',      host: 'chainthat.com' },
-  { id: 'bakerandco',     host: 'bakerandco.ae' },
-  { id: 'elitefx',        host: 'elitefx.in' },
-  { id: 'autopart',       host: 'autodoorspecialist.com' }
+  { id: 'mossanomarmo',   host: 'mossano-marmo.vercel.app' },
+  { id: 'saumstudio',     host: 'saumstudio.com' },
+  { id: 'autopart',       host: 'autodoorspecialist.com' },
+  { id: 'zaidelectronics', host: 'zaidelectronicsmumbai.com' },
+  { id: 'gourifurnishing', host: 'gourifurnishing.com' }
 ]
 
 // Tech stack — `slug` matches Simple Icons; `host` is fallback for S2.
@@ -84,17 +88,92 @@ const s2 = (host) => `https://www.google.com/s2/favicons?domain=${host}&sz=128`
 const simpleIcons = (slug) => `https://cdn.simpleicons.org/${slug}`
 
 // ─── Pipelines ──────────────────────────────────────────────────────────────
-async function downloadClient(c, dir) {
-  const url = s2(c.host)
-  const dest = path.join(dir, `${c.id}.png`)
-  try {
-    const buf = await fetchBuffer(url)
-    if (buf.length < 100) throw new Error('suspiciously small')
-    await fs.writeFile(dest, buf)
-    return { ok: true, bytes: buf.length, source: 'S2' }
-  } catch (e) {
-    return { ok: false, error: e.message }
+// Google S2 returns 404 for domains it hasn't crawled yet (typically anything
+// registered in the last few weeks). For those we go straight to the origin and
+// read whatever the site declares in its own <head>.
+const EXT_BY_TYPE = {
+  'image/svg+xml': 'svg',
+  'image/png': 'png',
+  'image/x-icon': 'ico',
+  'image/vnd.microsoft.icon': 'ico',
+  'image/jpeg': 'jpg',
+  'image/webp': 'webp'
+}
+
+async function originIconUrls(host) {
+  const urls = []
+  // Some certs cover only www (or only the apex), so try both spellings —
+  // outvue.io fails TLS while www.outvue.io serves fine.
+  const bare = host.replace(/^www\./, '')
+  const hosts = [...new Set([host, `www.${bare}`, bare])]
+
+  for (const h of hosts) {
+    try {
+      const res = await fetch(`https://${h}/`, { headers: HEADERS, redirect: 'follow' })
+      if (!res.ok) continue
+      const html = await res.text()
+      // <link rel="icon|shortcut icon|apple-touch-icon" href="...">
+      const re = /<link[^>]+rel=["'][^"']*\b(?:icon|shortcut icon|apple-touch-icon)\b[^"']*["'][^>]*>/gi
+      for (const tag of html.match(re) ?? []) {
+        const href = tag.match(/href=["']([^"']+)["']/i)?.[1]
+        if (href) urls.push(new URL(href, res.url || `https://${h}/`).href)
+      }
+      if (urls.length) break
+    } catch { /* try the next spelling */ }
   }
+
+  // Conventional paths, tried after anything the page declared.
+  for (const h of hosts) {
+    for (const p of ['/favicon.svg', '/favicon.png', '/favicon.ico', '/apple-touch-icon.png']) {
+      urls.push(`https://${h}${p}`)
+    }
+  }
+  // Prefer SVG (scales cleanly), then PNG, then .ico.
+  const rank = (u) => (/\.svg/i.test(u) ? 0 : /\.png/i.test(u) ? 1 : 2)
+  return [...new Set(urls)].sort((a, b) => rank(a) - rank(b))
+}
+
+// S2 answers with a ~200-byte generic globe for domains it has no real icon
+// for. That's a worse result than the site's own icon, so anything this small
+// is held back and only used if the origin turns up nothing.
+const S2_TRUSTWORTHY_BYTES = 500
+
+async function downloadClient(c, dir) {
+  // 1. Google S2 — one consistent 128px PNG per domain when it has a real one.
+  let weakS2 = null
+  try {
+    const buf = await fetchBuffer(s2(c.host))
+    if (buf.length >= S2_TRUSTWORTHY_BYTES) {
+      await fs.writeFile(path.join(dir, `${c.id}.png`), buf)
+      return { ok: true, bytes: buf.length, ext: 'png', source: 'S2' }
+    }
+    if (buf.length >= 100) weakS2 = buf
+  } catch { /* fall through to the origin */ }
+
+  // 2. The site's own favicon.
+  for (const url of await originIconUrls(c.host)) {
+    try {
+      const res = await fetch(url, { headers: HEADERS, redirect: 'follow' })
+      if (!res.ok) continue
+      const buf = Buffer.from(await res.arrayBuffer())
+      if (buf.length < 100) continue
+      const type = (res.headers.get('content-type') ?? '').split(';')[0].trim().toLowerCase()
+      // Some hosts serve the SPA's index.html for missing assets — reject those.
+      if (type.startsWith('text/')) continue
+      const ext = EXT_BY_TYPE[type] ?? url.split('?')[0].split('.').pop()?.toLowerCase()
+      if (!['svg', 'png', 'ico', 'jpg', 'webp'].includes(ext)) continue
+      await fs.writeFile(path.join(dir, `${c.id}.${ext}`), buf)
+      return { ok: true, bytes: buf.length, ext, source: 'origin' }
+    } catch { /* try the next candidate */ }
+  }
+
+  // 3. Nothing better turned up — fall back to S2's generic icon if we got one.
+  if (weakS2) {
+    await fs.writeFile(path.join(dir, `${c.id}.png`), weakS2)
+    return { ok: true, bytes: weakS2.length, ext: 'png', source: 'S2-generic' }
+  }
+
+  return { ok: false, error: 'no favicon found (S2 404 + origin)' }
 }
 
 async function downloadTool(t, dir) {
@@ -134,7 +213,7 @@ async function main() {
     process.stdout.write(`  ${c.id.padEnd(16)} ${c.host.padEnd(28)} `)
     const r = await downloadClient(c, clientsDir)
     clientResults.push({ ...c, ...r })
-    process.stdout.write(r.ok ? `✓ ${(r.bytes / 1024).toFixed(1)} KB (${r.source})\n` : `⚠ ${r.error}\n`)
+    process.stdout.write(r.ok ? `✓ ${(r.bytes / 1024).toFixed(1)} KB (${r.ext}/${r.source})\n` : `⚠ ${r.error}\n`)
   }
 
   console.log(`\nTech stack (${stack.length})`)
@@ -157,13 +236,27 @@ async function main() {
   )
 
   // Write a small manifest so the data files can read which extension to use.
+  //
+  // A failed download must never drop an entry that already has a good file on
+  // disk — some of these are hand-drawn SVG placeholders, and S2 intermittently
+  // 404s domains it served fine last week. So we resolve each id against the
+  // directory rather than trusting only this run's results.
+  async function resolve(results, dir, urlBase) {
+    const onDisk = await fs.readdir(dir).catch(() => [])
+    const entries = []
+    for (const r of results) {
+      // Prefer the extension we just wrote; otherwise take whatever is there.
+      const preferred = r.ok ? [`${r.id}.${r.ext}`] : []
+      const existing = onDisk.filter((f) => f.replace(/\.[^.]+$/, '') === r.id)
+      const file = preferred.find((f) => onDisk.includes(f)) ?? existing[0]
+      if (file) entries.push([r.id, `${urlBase}/${file}`])
+    }
+    return Object.fromEntries(entries)
+  }
+
   const manifest = {
-    clients: Object.fromEntries(
-      clientResults.filter((r) => r.ok).map((r) => [r.id, `/favicons/clients/${r.id}.png`])
-    ),
-    stack: Object.fromEntries(
-      stackResults.filter((r) => r.ok).map((r) => [r.id, `/favicons/stack/${r.id}.${r.ext}`])
-    )
+    clients: await resolve(clientResults, clientsDir, '/favicons/clients'),
+    stack: await resolve(stackResults, stackDir, '/favicons/stack')
   }
   await fs.writeFile(
     path.join(__root, 'src', 'data', 'favicon-manifest.json'),

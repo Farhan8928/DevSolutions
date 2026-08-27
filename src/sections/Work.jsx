@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, Maximize2 } from 'lucide-react'
-import { projects } from '../data/projects.js'
+import { projects, ctaFor, addressFor } from '../data/projects.js'
 import SmartImage from '../components/SmartImage.jsx'
+import KindIcon from '../components/KindIcon.jsx'
 import Lightbox from '../components/Lightbox.jsx'
 
 export default function Work() {
@@ -45,7 +46,7 @@ export default function Work() {
             </h2>
           </div>
           <p className="md:max-w-sm text-white/65">
-            Eight shipped products across healthcare, fintech, e‑commerce and beyond — and many more under NDA.
+            {projects.length} shipped products across healthcare, SaaS, logistics, e‑commerce and beyond — including client‑internal CRMs we run you through privately.
           </p>
         </div>
 
@@ -61,7 +62,10 @@ export default function Work() {
                 <span className="h-2 w-2 rounded-full bg-rose-400/80" />
                 <span className="h-2 w-2 rounded-full bg-amber-400/80" />
                 <span className="h-2 w-2 rounded-full bg-emerald-400/80" />
-                <span className="ml-2 truncate font-mono text-[11px] text-white/55">{p.host}</span>
+                <span className="ml-2 inline-flex min-w-0 items-center gap-1.5 truncate font-mono text-[11px] text-white/55">
+                  <KindIcon kind={p.kind} size={11} />
+                  <span className="truncate">{addressFor(p)}</span>
+                </span>
                 <button
                   type="button"
                   onClick={() => setZoom(p)}
@@ -80,7 +84,7 @@ export default function Work() {
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${p.accent} pointer-events-none`} />
                 <SmartImage
-                  sources={[p.local, p.shot, p.shot2, p.logo, p.favicon]}
+                  sources={[p.local, p.shot, p.shot2, p.logo, p.favicon].filter(Boolean)}
                   alt={`${p.title} — preview`}
                   className="h-full w-full"
                   imgClassName="h-full w-full object-cover object-top"
@@ -107,12 +111,13 @@ export default function Work() {
                 {/* CTAs — full width, 48px tall */}
                 <div className="mt-5 grid grid-cols-2 gap-2">
                   <a
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-12 items-center justify-center gap-1.5 rounded-full bg-accent-lime text-sm font-medium text-ink-950 active:scale-[0.98] transition"
+                    href={ctaFor(p).href}
+                    {...(ctaFor(p).external
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
+                    className="inline-flex h-12 items-center justify-center gap-1.5 rounded-full bg-accent-lime px-3 text-sm font-medium text-ink-950 active:scale-[0.98] transition"
                   >
-                    Visit site <ArrowUpRight size={14} />
+                    {ctaFor(p).short} <ArrowUpRight size={14} />
                   </a>
                   <button
                     type="button"
@@ -137,7 +142,10 @@ export default function Work() {
                   <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
                   <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
                   <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
-                  <span className="ml-3 truncate font-mono text-xs text-white/55">{current.host}</span>
+                  <span className="ml-3 inline-flex min-w-0 items-center gap-1.5 truncate font-mono text-xs text-white/55">
+                    <KindIcon kind={current.kind} size={12} />
+                    <span className="truncate">{addressFor(current)}</span>
+                  </span>
                   <button
                     type="button"
                     onClick={() => setZoom(current)}
@@ -167,8 +175,8 @@ export default function Work() {
                       className="absolute inset-0"
                     >
                       <SmartImage
-                        sources={[current.local, current.shot, current.shot2, current.logo, current.favicon]}
-                        alt={`${current.title} — live preview`}
+                        sources={[current.local, current.shot, current.shot2, current.logo, current.favicon].filter(Boolean)}
+                        alt={`${current.title} — preview`}
                         className="h-full w-full"
                         imgClassName="h-full w-full object-cover object-top"
                       />
@@ -184,8 +192,17 @@ export default function Work() {
 
                 <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 bg-ink-950/85 px-5 py-4">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/[0.05] border border-white/10 overflow-hidden">
-                      <SmartImage sources={[current.favicon, current.faviconRemote]} alt="" className="h-5 w-5" imgClassName="h-5 w-5 object-contain" />
+                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/[0.05] border border-white/10 overflow-hidden text-white/60">
+                      {current.favicon ? (
+                        <SmartImage
+                          sources={[current.favicon, current.faviconRemote].filter(Boolean)}
+                          alt=""
+                          className="h-5 w-5"
+                          imgClassName="h-5 w-5 object-contain"
+                        />
+                      ) : (
+                        <KindIcon kind={current.kind} size={15} />
+                      )}
                     </div>
                     <div className="min-w-0">
                       <p className="truncate text-[10px] font-mono uppercase tracking-[0.22em] text-white/55">
@@ -195,13 +212,14 @@ export default function Work() {
                     </div>
                   </div>
                   <a
-                    href={current.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={ctaFor(current).href}
+                    {...(ctaFor(current).external
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
                     data-cursor="hover"
                     className="inline-flex items-center gap-1.5 rounded-full bg-accent-lime px-3.5 py-2 text-xs font-medium text-ink-950 hover:-translate-y-0.5 transition-transform"
                   >
-                    Visit site <ArrowUpRight size={13} />
+                    {ctaFor(current).label} <ArrowUpRight size={13} />
                   </a>
                 </div>
               </div>
@@ -228,12 +246,21 @@ export default function Work() {
                   <div className="flex items-start justify-between gap-6">
                     <div className="min-w-0">
                       <div className="flex items-center gap-3 text-xs font-mono text-white/50">
-                        <span className="grid h-5 w-5 place-items-center rounded-md bg-white/[0.06] overflow-hidden">
-                          <SmartImage sources={[p.favicon, p.faviconRemote]} alt="" className="h-4 w-4" imgClassName="h-4 w-4 object-contain" />
+                        <span className="grid h-5 w-5 shrink-0 place-items-center rounded-md bg-white/[0.06] overflow-hidden">
+                          {p.favicon ? (
+                            <SmartImage
+                              sources={[p.favicon, p.faviconRemote].filter(Boolean)}
+                              alt=""
+                              className="h-4 w-4"
+                              imgClassName="h-4 w-4 object-contain"
+                            />
+                          ) : (
+                            <KindIcon kind={p.kind} size={11} />
+                          )}
                         </span>
                         <span>{String(i + 1).padStart(2, '0')}</span>
                         <span>·</span>
-                        <span className="truncate">{p.host}</span>
+                        <span className="truncate">{addressFor(p)}</span>
                         <span>·</span>
                         <span>{p.year}</span>
                       </div>
@@ -249,11 +276,13 @@ export default function Work() {
                     </div>
                     <div className="flex flex-col items-end gap-2 shrink-0">
                       <a
-                        href={p.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href={ctaFor(p).href}
+                        {...(ctaFor(p).external
+                          ? { target: '_blank', rel: 'noopener noreferrer' }
+                          : {})}
                         data-cursor="hover"
-                        aria-label={`Visit ${p.title}`}
+                        aria-label={`${ctaFor(p).label} — ${p.title}`}
+                        title={ctaFor(p).label}
                         className={`grid h-11 w-11 place-items-center rounded-full border transition ${
                           isActive ? 'border-accent-lime bg-accent-lime text-ink-950' : 'border-white/15 text-white/85'
                         }`}

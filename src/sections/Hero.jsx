@@ -36,7 +36,7 @@ export default function Hero() {
             Booking Q3 2026
           </span>
           <span className="chip">
-            <Star size={12} className="text-accent-lime" /> 8 products shipped
+            <Star size={12} className="text-accent-lime" /> 13 products shipped
           </span>
           <span className="chip hidden sm:inline-flex">Remote · India · UAE</span>
           <span className="chip hidden md:inline-flex">

@@ -67,7 +67,7 @@ export default function StudioStatusCard() {
         </p>
         <ul className="mt-3 space-y-2">
           {[
-            { name: 'EliteFX trader v3', when: '2w ago' },
+            { name: 'OutVue attribution v3', when: '2w ago' },
             { name: 'Baker & Co lead routing', when: '4w ago' },
             { name: 'AutoPart booking flow', when: '6w ago' }
           ].map((s) => (

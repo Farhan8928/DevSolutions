@@ -49,7 +49,7 @@ const faqs = [
   },
   {
     q: `Which industries has ${studio.name} shipped products for?`,
-    a: `Healthcare (Remesleep), NGO (Humane Warriors), e-commerce (Benzer World), insurtech (ChainThat), visa CRM (Baker & Co), fintech and forex (EliteFX), automotive (AutoPart) and digital marketing (Howl).`
+    a: `Healthcare (Remesleep), SaaS analytics (OutVue), logistics CRM (Saad Cargo), visa CRM (Baker & Co), NGO (Humane Warriors), e-commerce (Benzer World), natural stone (Mossano Marmo), automotive (AutoPart) and digital marketing (Howl).`
   },
   {
     q: `Do you work with founders outside ${studio.city} or India?`,

@@ -17,15 +17,21 @@ import { chromium, devices } from 'playwright'
 const __filename = fileURLToPath(import.meta.url)
 const __root = path.resolve(path.dirname(__filename), '..')
 
+// Public sites only. Client-internal CRMs (kind: 'private' in projects.js) are
+// captured by logging into a locally-run instance seeded with demo data — see
+// the note in README; their JPGs are committed, not regenerated from here.
 const projects = [
   { id: 'remesleep',      url: 'https://www.remesleep.com/' },
+  { id: 'outvue',         url: 'https://www.outvue.io/' },
+  { id: 'bakerandco',     url: 'https://bakerandco.ae/' },
   { id: 'humanewarriors', url: 'https://humanewarriors.ch/' },
   { id: 'howl',           url: 'https://www.howl.in/' },
   { id: 'benzer',         url: 'https://benzerworld.com/' },
-  { id: 'chainthat',      url: 'https://chainthat.com/' },
-  { id: 'bakerandco',     url: 'https://bakerandco.ae/' },
-  { id: 'elitefx',        url: 'https://www.elitefx.in/' },
-  { id: 'autopart',       url: 'https://www.autodoorspecialist.com/' }
+  { id: 'mossanomarmo',   url: 'https://mossano-marmo.vercel.app/' },
+  { id: 'saumstudio',     url: 'https://www.saumstudio.com/' },
+  { id: 'autopart',       url: 'https://www.autodoorspecialist.com/' },
+  { id: 'zaidelectronics', url: 'https://zaidelectronicsmumbai.com/' },
+  { id: 'gourifurnishing', url: 'https://gourifurnishing.com/' }
 ]
 
 // Match the standard desktop browser hero ratio (16:10 landscape).

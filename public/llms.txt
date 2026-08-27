@@ -39,13 +39,18 @@ About half our revenue is from outside India — UAE, EU, US, and the UK.
 ## Selected work
 
 - Remesleep — sleep and recovery healthcare platform with patient onboarding, clinician dashboards, telehealth.
+- OutVue — growth-spend intelligence SaaS for UK enterprises: blended ROI attribution across ad accounts, scenario modelling, board-ready reporting.
+- Saad Cargo Logistics CRM — railway parcel booking, POD/bilti generation, party ledgers, GST invoicing and SMS status alerts (private client build).
+- SRF Power Genset Sales CRM — generator capacity calculator that sizes a genset from connected load and quotes it, plus leads, inventory, attendance and IndiaMART sync (private client build).
+- Baker & Co Visa CRM — end-to-end visa lead CRM with Meta API and Twilio.
 - Humane Warriors — global NGO website mobilising donors and volunteers.
 - Howl — brand-led digital marketing agency website.
 - Benzer World — headless commerce on Shopify with custom CMS.
-- ChainThat — enterprise insurance technology brand and product site.
-- Baker & Co Visa CRM — end-to-end visa lead CRM with Meta API and Twilio.
-- EliteFX — full forex website plus client and admin CRMs with native MT5 integration.
+- Mossano Marmo — natural-stone sourcing platform for architects: verified slab availability and actual slab photography.
+- Saum Studio — Mumbai interior design studio: residential, commercial and turnkey interiors.
 - AutoPart — booking platform for premium car repair.
+- Zaid Electronics — doorstep TV repair across Mumbai with brand-wise service pages and call/WhatsApp lead capture.
+- Gouri Furnishing — made-to-measure curtains, blinds and mattresses in Thane with free home-measurement booking.
 
 ## Engagement model
 
@@ -63,7 +68,7 @@ We do not run hourly billing. Every engagement is fixed-scope with the price agr
 - NDA-first. We sign before discovery if asked.
 - Senior engineers only — five-plus years of production experience minimum.
 - Source code, designs, infrastructure-as-code, and deployment access transferred to clients on day one of go-live.
-- 100% on-time delivery across all 8 shipped products.
+- 100% on-time delivery across all 13 shipped products.
 - Weekly working demo on Friday, fixed scope on every sprint.
 
 ## Stack
