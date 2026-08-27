@@ -26,7 +26,7 @@ const clients = [
   { id: 'chainthat',      host: 'chainthat.com' },
   { id: 'bakerandco',     host: 'bakerandco.ae' },
   { id: 'elitefx',        host: 'elitefx.in' },
-  { id: 'autopart',       host: 'autopart-web.vercel.app' }
+  { id: 'autopart',       host: 'autodoorspecialist.com' }
 ]
 
 // Tech stack — `slug` matches Simple Icons; `host` is fallback for S2.

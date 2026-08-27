@@ -123,7 +123,7 @@ export const projects = [
     id: 'autopart',
     title: 'AutoPart',
     domain: 'Automotive',
-    host: 'autopart-web.vercel.app',
+    host: 'autodoorspecialist.com',
     year: '2025',
     summary:
       'Booking platform for premium car repair — quote builder, service catalogue and slot management.',

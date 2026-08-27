@@ -25,7 +25,7 @@ const projects = [
   { id: 'chainthat',      url: 'https://chainthat.com/' },
   { id: 'bakerandco',     url: 'https://bakerandco.ae/' },
   { id: 'elitefx',        url: 'https://www.elitefx.in/' },
-  { id: 'autopart',       url: 'https://autopart-web.vercel.app/' }
+  { id: 'autopart',       url: 'https://www.autodoorspecialist.com/' }
 ]
 
 // Match the standard desktop browser hero ratio (16:10 landscape).
