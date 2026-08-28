@@ -38,18 +38,20 @@ About half our revenue is from outside India — UAE, EU, US, and the UK.
 
 ## Selected work
 
-- Remesleep — sleep and recovery healthcare platform with patient onboarding, clinician dashboards, telehealth.
 - OutVue — growth-spend intelligence SaaS for UK enterprises: blended ROI attribution across ad accounts, scenario modelling, board-ready reporting.
-- Saad Cargo Logistics CRM — railway parcel booking, POD/bilti generation, party ledgers, GST invoicing and SMS status alerts (private client build).
-- SRF Power Genset Sales CRM — generator capacity calculator that sizes a genset from connected load and quotes it, plus leads, inventory, attendance and IndiaMART sync (private client build).
-- Baker & Co Visa CRM — end-to-end visa lead CRM with Meta API and Twilio.
-- Humane Warriors — global NGO website mobilising donors and volunteers.
-- Howl — brand-led digital marketing agency website.
-- Benzer World — headless commerce on Shopify with custom CMS.
 - Mossano Marmo — natural-stone sourcing platform for architects: verified slab availability and actual slab photography.
-- Saum Studio — Mumbai interior design studio: residential, commercial and turnkey interiors.
-- AutoPart — booking platform for premium car repair.
+- Benzer World — headless commerce on Shopify with custom CMS: editorial merchandising, faceted collection filtering with sort and switchable grid density, multi-currency storefront.
+- Howl — brand-led site for a 100-strong marketing agency: scroll-driven motion, long-form campaign case studies with outcome metrics, careers and lead capture.
+- Saum Studio — Mumbai interior design studio: editorial project gallery of completed homes tagged by room and location, turnkey interiors, modular kitchens and 3D visualisation.
+- Humane Warriors — global NGO platform: multi-currency one-time and recurring donation flow with live campaign progress, plus a project directory filterable by cause, country and partner.
+- Saad Cargo Logistics CRM — railway parcel booking, POD/bilti generation, party ledgers, GST invoicing and SMS status alerts (private client build).
+- AshShifa (com.ashshifa.app) — Islamic companion app live on Google Play in 176 countries: prayer times with background azan, full Quran page-mode mushaf, qibla, duas, daily-deeds tracker. React Native / Expo.
+- PlusVeda (com.medstock.app) — pharmacy stock, billing and finance platform in closed testing: bill scanning, FEFO batch picking, expiry value-at-risk, multi-warehouse transfers, supplier orders, post-dated cheques and GST invoicing. Android app plus a Windows desktop build. React Native / Expo / Electron.
+- Baker & Co Visa CRM — end-to-end visa lead CRM with Meta API and Twilio.
+- Remesleep — sleep and recovery healthcare platform with patient onboarding, clinician dashboards, telehealth.
+- Zakir Auto Works — car door, power window, sunroof and central-locking specialists in Mumbai, with service catalogue and WhatsApp quote capture.
 - Zaid Electronics — doorstep TV repair across Mumbai with brand-wise service pages and call/WhatsApp lead capture.
+- SRF Power Genset Sales CRM — generator capacity calculator that sizes a genset from connected load and quotes it, plus leads, inventory, attendance and IndiaMART sync (private client build).
 - Gouri Furnishing — made-to-measure curtains, blinds and mattresses in Thane with free home-measurement booking.
 
 ## Engagement model
@@ -68,7 +70,7 @@ We do not run hourly billing. Every engagement is fixed-scope with the price agr
 - NDA-first. We sign before discovery if asked.
 - Senior engineers only — five-plus years of production experience minimum.
 - Source code, designs, infrastructure-as-code, and deployment access transferred to clients on day one of go-live.
-- 100% on-time delivery across all 13 shipped products.
+- 100% on-time delivery across all 15 shipped products.
 - Weekly working demo on Friday, fixed scope on every sprint.
 
 ## Stack

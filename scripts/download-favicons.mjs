@@ -241,17 +241,25 @@ async function main() {
   // disk — some of these are hand-drawn SVG placeholders, and S2 intermittently
   // 404s domains it served fine last week. So we resolve each id against the
   // directory rather than trusting only this run's results.
+  // Built from what is actually in the directory, not just from this run, so
+  // hand-placed icons survive — app-store entries have no public host to fetch
+  // from, so their icons are copied in from the app repo by hand.
   async function resolve(results, dir, urlBase) {
     const onDisk = await fs.readdir(dir).catch(() => [])
-    const entries = []
-    for (const r of results) {
-      // Prefer the extension we just wrote; otherwise take whatever is there.
-      const preferred = r.ok ? [`${r.id}.${r.ext}`] : []
-      const existing = onDisk.filter((f) => f.replace(/\.[^.]+$/, '') === r.id)
-      const file = preferred.find((f) => onDisk.includes(f)) ?? existing[0]
-      if (file) entries.push([r.id, `${urlBase}/${file}`])
+    const preferredExt = new Map(results.filter((r) => r.ok).map((r) => [r.id, r.ext]))
+
+    const byId = new Map()
+    for (const file of onDisk) {
+      const id = file.replace(/\.[^.]+$/, '')
+      const ext = file.split('.').pop()
+      const current = byId.get(id)
+      // This run's extension wins; otherwise first one found stays.
+      if (!current || preferredExt.get(id) === ext) byId.set(id, file)
     }
-    return Object.fromEntries(entries)
+
+    return Object.fromEntries(
+      [...byId.entries()].map(([id, file]) => [id, `${urlBase}/${file}`])
+    )
   }
 
   const manifest = {

@@ -63,7 +63,7 @@ function Counter({ to, suffix = '', duration = 1.6 }) {
 }
 
 const stats = [
-  { value: 13,  suffix: '+', label: 'Products in production', meta: 'Across 11 industries',    icon: TrendingUp },
+  { value: 15,  suffix: '+', label: 'Products in production', meta: 'Web, mobile and desktop',  icon: TrendingUp },
   { value: 24,  suffix: '+', label: 'Founders trusted us',     meta: 'India, UAE, EU, US',     icon: Users2 },
   { value: 96,  suffix: '',  label: 'Avg. Lighthouse score',   meta: 'On every shipped site',  icon: Gauge },
   { value: 100, suffix: '%', label: 'On‑time delivery',        meta: 'Since the studio began', icon: Calendar }
