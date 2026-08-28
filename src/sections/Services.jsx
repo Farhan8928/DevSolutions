@@ -9,6 +9,92 @@ const fadeUp = {
   })
 }
 
+/**
+ * Fixed-scope tiers, priced against the Indian market rather than picked out
+ * of the air: a freelancer WordPress build lands ~₹25k–60k and an agency
+ * business site starts ~₹60k, so Launch sits deliberately at the top of the
+ * one-pager band and Business covers the ₹50k–₹2L range where most enquiries
+ * actually sit. Sprint (~₹2L) matches a basic custom CRM, Pro (~₹6.5L) a
+ * mid-range one.
+ */
+const TIERS = [
+  {
+    k: 'Launch',
+    inr: '₹20k+',
+    usd: '~$240',
+    duration: '7–14 days',
+    bestFor: 'testing an idea, or replacing a one-pager that is costing you leads.',
+    bullets: [
+      'One page, up to 5 sections',
+      'Mobile-first, 90+ Lighthouse',
+      'Enquiry form, WhatsApp and analytics',
+      'Domain, hosting and deploy handled'
+    ],
+    aftercare: '2 revision rounds',
+    cta: 'Start small'
+  },
+  {
+    k: 'Business',
+    inr: '₹75k+',
+    usd: '~$900',
+    duration: '2–4 weeks',
+    bestFor: 'an established business that needs to be found, trusted and called.',
+    bullets: [
+      'Up to 8 pages, custom design',
+      'CMS so your team edits its own copy',
+      'On-page SEO, schema and sitemap',
+      'Google Business and Maps wired up'
+    ],
+    aftercare: '3 revision rounds · 60-day support',
+    cta: 'Get a quote'
+  },
+  {
+    k: 'Sprint',
+    inr: '₹2L+',
+    usd: '~$2.5k',
+    duration: '2–6 weeks',
+    bestFor: 'one real product or feature, scoped tight and actually shipped.',
+    bullets: [
+      'Custom UI on a proper design system',
+      'Auth, roles and a working dashboard',
+      'Payments, WhatsApp or Meta integrations',
+      'Staging and production, CI/CD'
+    ],
+    aftercare: '30-day post-launch support',
+    cta: 'Scope a sprint',
+    highlight: true
+  },
+  {
+    k: 'Pro',
+    inr: '₹6.5L+',
+    usd: '~$8k',
+    duration: '8–12 weeks',
+    bestFor: 'the platform your business actually runs on, not a brochure.',
+    bullets: [
+      'Full-stack build on your infrastructure',
+      'Payments, KYC and role-based access',
+      'Admin and client portals',
+      'Observability, backups and audit logs'
+    ],
+    aftercare: '90-day support · code handed over day one',
+    cta: 'Book a scoping call'
+  }
+]
+
+const INCLUDED = [
+  'Fixed scope and a fixed price agreed before we start',
+  'Source code, designs and deploy access from day one',
+  'A working demo every Friday — no month-long silences',
+  'Core Web Vitals, accessibility and SEO basics done, not sold back to you'
+]
+
+const EXTRAS = [
+  'Copywriting, photography and video production',
+  'Paid ads and ongoing SEO retainers',
+  'Third-party licences and API usage you own directly',
+  'Maintenance once the included support window ends'
+]
+
 export default function Services() {
   return (
     <section id="services" className="relative py-16 md:py-32 border-t border-white/[0.06]">
@@ -133,11 +219,15 @@ export default function Services() {
             }
           />
 
-          {/* Engagement model — wide tile, 4 tiers from ₹20k landing pages
-              up to enterprise embedded engagements. The Sprint tier is the
-              recommended/converting middle option (HBR good-better-best
-              pattern), so any visitor whose budget is in the wide ₹20k–₹25L
-              range can self-qualify without leaving the page. */}
+          {/* Engagement model — four fixed-scope tiers plus a retainer band.
+              Ladder is set against the Indian market, where the highest-volume
+              band for a custom business site is roughly ₹50k–₹2L: without the
+              Business tier there is a 10x gap between Launch and Sprint and
+              most enquiries have nothing to self-select into.
+              Sprint stays the badged middle option (good-better-best), each
+              tier leads with a "best for" line so visitors qualify themselves,
+              and exclusions are stated up front — the single biggest source of
+              scope disputes is what a client assumed was included. */}
           <motion.article
             variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} custom={6}
             className="card relative md:col-span-6 overflow-hidden p-6 md:p-9"
@@ -155,49 +245,16 @@ export default function Services() {
                 </h3>
                 <p className="mt-3 text-sm text-white/55">
                   Honest fixed-scope pricing. No hourly billing, no surprise invoices.
-                  Indian and international rates shown side by side.
+                  Every number below is a starting price for that scope, not a teaser —
+                  Indian and international rates side by side.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                {[
-                  {
-                    k: 'Starter',
-                    duration: '7–14 days',
-                    desc: 'Single landing page or simple brand site',
-                    inr: '₹20k+',
-                    usd: '~$240',
-                    bullets: ['Up to 5 sections', 'Form + analytics', 'Vercel deploy']
-                  },
-                  {
-                    k: 'Sprint',
-                    duration: '2–6 weeks',
-                    desc: 'Fixed-scope custom build · single product or feature',
-                    inr: '₹2L+',
-                    usd: '~$2.5k',
-                    bullets: ['Custom design', 'CMS or auth', '30-day support'],
-                    highlight: true
-                  },
-                  {
-                    k: 'Pro',
-                    duration: '8–12 weeks',
-                    desc: 'Full custom web platform with backend, payments, integrations',
-                    inr: '₹6.5L+',
-                    usd: '~$8k',
-                    bullets: ['Full stack build', 'Payments + KYC', 'CI/CD + observability']
-                  },
-                  {
-                    k: 'Enterprise',
-                    duration: 'Quarterly',
-                    desc: 'Embedded team or always-on retainer',
-                    inr: '₹25L+/qtr',
-                    usd: '~$30k+',
-                    bullets: ['Senior team inside yours', 'Roadmap ownership', 'SLA + on-call']
-                  }
-                ].map((m) => (
+                {TIERS.map((m) => (
                   <div
                     key={m.k}
-                    className={`relative rounded-2xl border p-4 flex flex-col gap-2 ${
+                    className={`relative rounded-2xl border p-5 flex flex-col ${
                       m.highlight
                         ? 'border-accent-lime/50 bg-accent-lime/[0.04]'
                         : 'border-white/10 bg-white/[0.03]'
@@ -205,29 +262,114 @@ export default function Services() {
                   >
                     {m.highlight && (
                       <span className="absolute -top-2 right-3 rounded-full bg-accent-lime px-2 py-0.5 text-[9px] font-mono uppercase tracking-[0.22em] text-ink-950">
-                        Popular
+                        Most picked
                       </span>
                     )}
+
                     <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/45">{m.k}</p>
-                    <p className="text-xl font-semibold tabular-nums">{m.inr}</p>
-                    <p className="text-[11px] text-white/45 -mt-1">{m.usd} · {m.duration}</p>
-                    <p className="mt-1 text-xs text-white/65 leading-relaxed">{m.desc}</p>
-                    <ul className="mt-2 space-y-1">
+                    <p className="mt-2 text-2xl font-semibold tabular-nums leading-none">{m.inr}</p>
+                    <p className="mt-1.5 text-[11px] text-white/45">{m.usd} · {m.duration}</p>
+
+                    <p className="mt-3 text-xs leading-relaxed text-white/70">
+                      <span className="text-white/40">Best for </span>{m.bestFor}
+                    </p>
+
+                    <ul className="mt-3 space-y-1.5 border-t border-white/[0.07] pt-3">
                       {m.bullets.map((b) => (
-                        <li key={b} className="flex items-start gap-1.5 text-[11px] text-white/55">
-                          <span className="mt-1 h-1 w-1 rounded-full bg-accent-lime shrink-0" />
+                        <li key={b} className="flex items-start gap-1.5 text-[11px] leading-relaxed text-white/60">
+                          <span className="mt-[6px] h-1 w-1 shrink-0 rounded-full bg-accent-lime" />
                           {b}
                         </li>
                       ))}
                     </ul>
+
+                    <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-white/35">
+                      {m.aftercare}
+                    </p>
+
+                    {/* mt-auto on the wrapper (not the button) keeps all four
+                        CTAs on one line even though the aftercare text above
+                        wraps to two lines in some tiers — padding on a fixed
+                        h-9 button would change its height instead. */}
+                    <div className="mt-auto pt-4">
+                      <a
+                        href="#contact"
+                        data-cursor="hover"
+                        className={`flex h-9 w-full items-center justify-center gap-1.5 rounded-full text-[11px] font-medium transition ${
+                          m.highlight
+                            ? 'bg-accent-lime text-ink-950 hover:-translate-y-0.5'
+                            : 'border border-white/15 text-white/85 hover:border-white/35 hover:text-white'
+                        }`}
+                      >
+                        {m.cta} <ArrowUpRight size={12} />
+                      </a>
+                    </div>
                   </div>
                 ))}
               </div>
 
+              {/* Retainer sits apart from the fixed-scope tiers — it is a
+                  different product (ongoing capacity, not a delivery), and a
+                  fifth card here would push the row past the point where people
+                  stop comparing and start bouncing. */}
+              <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                <div className="min-w-0">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/45">
+                    Enterprise · ongoing
+                  </p>
+                  <p className="mt-2 text-sm text-white/75 leading-relaxed max-w-2xl">
+                    <span className="text-xl font-semibold tabular-nums text-white">₹25L+</span>
+                    <span className="text-white/45"> /quarter · ~$30k+ </span>
+                    — an embedded senior team inside yours: roadmap ownership, SLA and on-call,
+                    weekly demos, and capacity you can point at whatever is most urgent that sprint.
+                  </p>
+                </div>
+                <a
+                  href="#contact"
+                  data-cursor="hover"
+                  className="inline-flex h-10 shrink-0 items-center justify-center gap-1.5 rounded-full border border-white/15 px-5 text-xs font-medium text-white/85 hover:border-accent-lime/50 hover:text-accent-lime transition"
+                >
+                  Talk about a retainer <ArrowUpRight size={13} />
+                </a>
+              </div>
+
+              {/* Stating exclusions up front is the cheapest scope-creep
+                  insurance there is — most disputes are about what the client
+                  assumed was in the number. */}
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-lime/80">
+                    In every tier
+                  </p>
+                  <ul className="mt-3 space-y-1.5">
+                    {INCLUDED.map((b) => (
+                      <li key={b} className="flex items-start gap-1.5 text-[11px] leading-relaxed text-white/60">
+                        <span className="mt-[6px] h-1 w-1 shrink-0 rounded-full bg-accent-lime" />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/40">
+                    Quoted separately
+                  </p>
+                  <ul className="mt-3 space-y-1.5">
+                    {EXTRAS.map((b) => (
+                      <li key={b} className="flex items-start gap-1.5 text-[11px] leading-relaxed text-white/45">
+                        <span className="mt-[6px] h-1 w-1 shrink-0 rounded-full bg-white/25" />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
               <p className="text-xs text-white/40 leading-relaxed">
                 Prices in INR for Indian clients, USD shown for international reference.
-                Final quotes are scoped after a free 30-minute call. Payment in INR (Razorpay)
-                or USD (Stripe / wire) depending on your location.
+                Final quotes are scoped after a free 30-minute call — you get a fixed number
+                and a fixed date before any money moves. Payment in INR (Razorpay) or USD
+                (Stripe / wire) depending on your location.
               </p>
             </div>
           </motion.article>

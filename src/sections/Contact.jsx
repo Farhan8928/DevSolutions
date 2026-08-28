@@ -11,14 +11,16 @@ const projectTypes = [
   'Fintech / Forex', 'Brand site', 'Other'
 ]
 
-// Indian-first budget bands. Mirrors the four engagement tiers
-// (Starter / Sprint / Pro / Enterprise) with INR-clear numbers, plus
-// a "not sure yet" option so genuinely undecided founders aren't blocked.
+// Indian-first budget bands, aligned to the engagement tiers so a pick here
+// maps to a tier without translation: Launch, Business, Sprint, Pro, then
+// Enterprise. Plus a "not sure yet" option so genuinely undecided founders
+// aren't blocked at the first field.
 const budgets = [
   '< ₹50k',
   '₹50k – ₹2L',
-  '₹2L – ₹10L',
-  '₹10L+',
+  '₹2L – ₹6L',
+  '₹6L – ₹25L',
+  '₹25L+',
   'Not sure yet'
 ]
 
@@ -29,7 +31,7 @@ export default function Contact() {
     email: '',
     company: '',
     type: 'Web platform',
-    budget: '₹2L – ₹10L',
+    budget: '₹2L – ₹6L',
     message: ''
   })
 

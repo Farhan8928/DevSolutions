@@ -31,7 +31,7 @@ export const seoPages = [
       'Senior engineers only — no juniors hidden behind a brand. Two co-founders run every sprint.',
       'Stack defaults: React, Next.js, Vite, TypeScript, Tailwind, NestJS, PostgreSQL/MongoDB.',
       'Mumbai-based, NDA-first, full IP and source-code transfer on day one of go-live.',
-      'Pricing scales: Starter landing pages from ₹20k, Sprint custom builds from ₹2L, full Pro platforms from ₹6.5L.'
+      'Pricing scales: Launch landing pages from ₹20k, Business sites from ₹75k, Sprint custom builds from ₹2L, full Pro platforms from ₹6.5L.'
     ],
     intro: [
       `DuoStack is a Mumbai-based web development studio that designs and ships premium web platforms for ambitious teams. We work with founders across Mumbai — from Andheri and Bandra to Lower Parel, Powai, BKC and Navi Mumbai — and ship to clients in the UAE, the EU, the UK and the US. Every line of code is written by senior engineers with five-plus years of production experience. There are no junior developers hiding behind the brand, no offshore relays, no account managers between you and the people building your product.`,
@@ -48,7 +48,7 @@ export const seoPages = [
       },
       {
         h2: 'How an engagement starts',
-        body: `Email or WhatsApp the founders. You will speak directly with one of us — Farhan or Sameer — within one business day. We sign an NDA before discovery if you ask, then run a one-week scoping sprint to define the build before any production code is written. Engagements are tiered transparently: Starter landing pages from ₹20k, Sprint custom builds from ₹2L, full Pro platforms from ₹6.5L, and Enterprise embedded engagements quoted quarterly. No hourly billing. Source code, designs and infrastructure are 100% transferred to your team on day one of go-live.`
+        body: `Email or WhatsApp the founders. You will speak directly with one of us — Farhan or Sameer — within one business day. We sign an NDA before discovery if you ask, then run a one-week scoping sprint to define the build before any production code is written. Engagements are tiered transparently: Launch landing pages from ₹20k, Business sites from ₹75k, Sprint custom builds from ₹2L, full Pro platforms from ₹6.5L, and Enterprise embedded engagements quoted quarterly. No hourly billing. Source code, designs and infrastructure are 100% transferred to your team on day one of go-live.`
       }
     ],
     faqs: [
@@ -58,7 +58,7 @@ export const seoPages = [
       },
       {
         q: 'What does a typical web development project cost in Mumbai?',
-        a: 'Pricing scales with scope. A Starter landing page or simple brand site starts at ₹20k. A Sprint custom build (single product or feature) starts at ₹2L. A full Pro web platform with backend, payments and integrations starts at ₹6.5L. Enterprise engagements with embedded teams are quoted quarterly from ₹25L. Every engagement is fixed-scope with the price agreed upfront — we do not run hourly billing.'
+        a: 'Pricing scales with scope. A Launch landing page or simple brand site starts at ₹20k. A Business site — up to 8 pages with a CMS, on-page SEO and Google Business setup — starts at ₹75k. A Sprint custom build (single product or feature) starts at ₹2L. A full Pro web platform with backend, payments and integrations starts at ₹6.5L. Enterprise engagements with embedded teams are quoted quarterly from ₹25L. Every engagement is fixed-scope with the price agreed upfront — we do not run hourly billing.'
       },
       {
         q: 'Can you work alongside our existing engineering team?',

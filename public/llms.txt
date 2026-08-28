@@ -14,7 +14,7 @@
 
 ## Services
 
-- [Web development company in Mumbai](https://duostack.in/web-development-company-mumbai/): React, Next.js, Vite. Marketing sites, dashboards, SaaS products. Starter from ₹20k, Sprint from ₹2L, full Pro platforms from ₹6.5L.
+- [Web development company in Mumbai](https://duostack.in/web-development-company-mumbai/): React, Next.js, Vite. Marketing sites, dashboards, SaaS products. Launch from ₹20k, Business sites from ₹75k, Sprint from ₹2L, full Pro platforms from ₹6.5L.
 - [Custom CRM development in Mumbai](https://duostack.in/custom-crm-development-mumbai/): Meta API lead capture, Twilio voice and WhatsApp, role-based routing, Mumbai-region data residency.
 - [React Native app development in Mumbai](https://duostack.in/react-native-app-development-mumbai/): Cross-platform iOS and Android apps; App Store and Play Store submission included.
 - [Shopify development company in Mumbai](https://duostack.in/shopify-development-company-mumbai/): Headless Hydrogen and custom Liquid themes; Razorpay and Stripe; GST-compliant.
@@ -58,10 +58,15 @@ About half our revenue is from outside India — UAE, EU, US, and the UK.
 
 Pricing is tiered transparently. Indian rates first, USD shown for international reference.
 
-- **Starter — ₹20k+ (~$240) · 7–14 days**: single landing page or simple brand site, up to 5 sections, form + analytics, Vercel deploy.
-- **Sprint — ₹2L+ (~$2.5k) · 2–6 weeks**: fixed-scope custom build for a single product or feature, custom design, CMS or auth, 30-day support.
-- **Pro — ₹6.5L+ (~$8k) · 8–12 weeks**: full custom web platform with backend, payments, integrations, CI/CD and observability.
-- **Enterprise — ₹25L+/quarter (~$30k+)**: embedded senior team, roadmap ownership, SLA + on-call.
+- **Launch — ₹20k+ (~$240) · 7–14 days**: one page up to 5 sections, mobile-first, 90+ Lighthouse, enquiry form + WhatsApp + analytics, domain/hosting/deploy handled. 2 revision rounds.
+- **Business — ₹75k+ (~$900) · 2–4 weeks**: up to 8 pages with custom design, CMS your team can edit, on-page SEO with schema and sitemap, Google Business and Maps setup. 3 revision rounds, 60-day support.
+- **Sprint — ₹2L+ (~$2.5k) · 2–6 weeks**: fixed-scope custom build for one product or feature — custom UI on a design system, auth and roles, a working dashboard, payments/WhatsApp/Meta integrations, staging and production with CI/CD. 30-day support.
+- **Pro — ₹6.5L+ (~$8k) · 8–12 weeks**: full custom platform on your infrastructure — payments, KYC, role-based access, admin and client portals, observability, backups and audit logs. 90-day support, code handed over day one.
+- **Enterprise — ₹25L+/quarter (~$30k+)**: embedded senior team, roadmap ownership, SLA + on-call, weekly demos.
+
+Included in every tier: fixed scope and fixed price agreed before start; source code, designs and deploy access from day one; a working demo every Friday; Core Web Vitals, accessibility and SEO basics.
+
+Quoted separately: copywriting, photography and video; paid ads and ongoing SEO retainers; third-party licences and API usage you own directly; maintenance after the included support window.
 
 We do not run hourly billing. Every engagement is fixed-scope with the price agreed upfront. Indian payments via Razorpay; international via Stripe or wire.
 

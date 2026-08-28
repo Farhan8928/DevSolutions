@@ -667,7 +667,7 @@ const neighbourhoodPage = (area) => {
     },
     {
       q: `What does a typical project cost?`,
-      a: `Pricing scales with scope. Starter landing pages start at ₹20k. Sprint custom builds start at ₹2L. Full Pro web platforms start at ₹6.5L. Enterprise engagements quoted quarterly from ₹25L. Every engagement is fixed-scope with the price agreed upfront — no hourly billing.`
+      a: `Pricing scales with scope. Launch landing pages start at ₹20k. Business sites with CMS and SEO start at ₹75k. Sprint custom builds start at ₹2L. Full Pro web platforms start at ₹6.5L. Enterprise engagements quoted quarterly from ₹25L. Every engagement is fixed-scope with the price agreed upfront — no hourly billing.`
     },
     {
       q: `Will my source code stay with me?`,
@@ -760,7 +760,7 @@ ${ldJson}
       ${renderTldr([
         `Senior engineers only — no juniors, no offshore relays. You speak directly with the two co-founders.`,
         `Onsite work available in ${area.name} and across Mumbai Metropolitan Region; remote-first as default.`,
-        `Pricing scales: Starter landing pages from ₹20k, Sprint builds from ₹2L, full Pro platforms from ₹6.5L.`,
+        `Pricing scales: Launch landing pages from ₹20k, Business sites from ₹75k, Sprint builds from ₹2L, full Pro platforms from ₹6.5L.`,
         `100% on-time delivery across 8 shipped products in healthcare, fintech, e-commerce, NGO and automotive.`
       ])}
       ${introHtml}
