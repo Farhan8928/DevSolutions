@@ -127,7 +127,9 @@ export const services = [
     slug: 'interior-design-website-development-mumbai',
     key: 'interior',
     name: 'Interior and architecture websites',
-    pair: 'Interior and architecture website development',
+    // Kept short deliberately: this is interpolated into page titles alongside
+    // a place name, and the longer form pushed them past 70 characters.
+    pair: 'Interior design websites',
     h1: 'Interior design and architecture website development in Mumbai',
     blurb: 'Project galleries that hold up at full-bleed, plus enquiry capture that qualifies.',
     proof: 'Saum Studio, Mossano Marmo and Gouri Furnishing',

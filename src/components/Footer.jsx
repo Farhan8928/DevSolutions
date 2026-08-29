@@ -147,6 +147,7 @@ export default function Footer() {
             <a href="#process" className="text-white/75 hover:text-white">Process</a>
             <a href="#stack" className="text-white/75 hover:text-white">Stack</a>
             <a href="#trust" className="text-white/75 hover:text-white">Trust</a>
+            <a href="/blog/" className="text-white/75 hover:text-white">Blog</a>
             <a href="#contact" className="text-white/75 hover:text-white">Contact</a>
           </div>
 

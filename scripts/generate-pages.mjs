@@ -58,6 +58,10 @@ const { services: ALL_SERVICES } = await import(
   pathToFileURL(join(ROOT, 'src', 'data', 'services.js')).href
 )
 
+const { posts: BLOG_POSTS, CATEGORIES: BLOG_CATEGORIES } = await import(
+  pathToFileURL(join(ROOT, 'src', 'data', 'blog', 'index.js')).href
+)
+
 const { serviceAreas } = await import(
   pathToFileURL(join(ROOT, 'src/data/studio.js')).href
 )
@@ -431,7 +435,7 @@ const renderHeader = () => `
       <nav class="site" aria-label="Primary">
         <a href="/#services">Services</a>
         <a href="/#work">Work</a>
-        <a href="/#process">Process</a>
+        <a href="/blog/">Blog</a>
         <a href="/#contact" class="cta">Start a project</a>
       </nav>
     </div>
@@ -857,7 +861,10 @@ const crossPage = ({ area, service, body }) => {
   const url   = `${SITE_URL}/${slug}/`
   const place = placeLabel(area)
   const h1    = `${service.pair} in ${place}`
-  const title = `${service.pair} in ${place} — ${SITE_NAME}`
+  // Brand suffix only where it still fits inside the ~60 characters Google
+  // shows. A truncated place name reads worse than a missing brand.
+  const bare  = `${service.pair} in ${place}`
+  const title = bare.length + 11 <= 62 ? `${bare} — ${SITE_NAME}` : bare
   const desc  = `${service.pair} for businesses in ${place}. ${service.blurb} Senior engineers only, fixed scope, code handed over on day one.`
 
   const hubSlug = service.slug
@@ -1151,6 +1158,245 @@ ${ldJson}
 }
 
 // ----------------------------------------------------------------------
+// Blog
+//
+// Posts live in src/data/blog/*.js and carry their own build-time guards
+// (word floor, unique slugs and titles, valid category). Rendering here keeps
+// them consistent with the rest of the static pages and out of the client
+// bundle entirely — a blog post is a document, not an application.
+// ----------------------------------------------------------------------
+const mdInline = (s) =>
+  esc(s).replace(/`([^`]+)`/g, '<code>$1</code>')
+
+const renderPostBody = (body) =>
+  body
+    .map((line) =>
+      line.startsWith('## ')
+        ? `<h2>${mdInline(line.slice(3))}</h2>`
+        : `<p>${mdInline(line)}</p>`
+    )
+    .join('')
+
+const postLd = (post, url) => JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog/` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: url }
+      ]
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#post`,
+      headline: post.title,
+      description: post.excerpt,
+      datePublished: post.date,
+      dateModified: post.date,
+      inLanguage: 'en-IN',
+      mainEntityOfPage: url,
+      author: { '@type': 'Organization', name: SITE_NAME, url: `${SITE_URL}/` },
+      publisher: {
+        '@type': 'Organization',
+        name: SITE_NAME,
+        url: `${SITE_URL}/`,
+        logo: { '@type': 'ImageObject', url: `${SITE_URL}/favicon.svg` }
+      },
+      articleSection: BLOG_CATEGORIES.find((c) => c.key === post.category)?.name ?? 'Blog'
+    }
+  ]
+}, null, 2)
+
+const blogShell = ({ url, title, desc, ldJson, crumbs, main }) => `<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(desc)}" />
+<meta name="author" content="${SITE_NAME}" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+<link rel="canonical" href="${url}" />
+<link rel="alternate" hreflang="en-IN" href="${url}" />
+<link rel="alternate" hreflang="x-default" href="${url}" />
+<meta property="og:locale" content="en_IN" />
+<meta property="og:site_name" content="${SITE_NAME}" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="${url}" />
+<meta property="og:title" content="${esc(title)}" />
+<meta property="og:description" content="${esc(desc)}" />
+<meta property="og:image" content="${SITE_URL}/og.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="${esc(title)}" />
+<meta name="twitter:description" content="${esc(desc)}" />
+<meta name="twitter:image" content="${SITE_URL}/og.jpg" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#06070A" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>${PAGE_CSS}</style>
+<script type="application/ld+json">
+${ldJson}
+</script>
+</head>
+<body>
+  ${renderHeader()}
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">${crumbs}</nav>
+    ${main}
+  </main>
+  ${renderFooter()}
+  ${renderDock()}
+</body>
+</html>
+`
+
+const fmtDate = (d) =>
+  new Date(`${d}T00:00:00Z`).toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC'
+  })
+
+const blogPostPage = (post, all) => {
+  const url = `${SITE_URL}/blog/${post.slug}/`
+  const cat = BLOG_CATEGORIES.find((c) => c.key === post.category)
+  // Append the brand only when it still fits inside the ~60 characters Google
+  // shows before truncating. A headline cut off mid-word costs more than the
+  // brand suffix earns, and the brand is already in the breadcrumb and header.
+  const suffix = ` — ${SITE_NAME}`
+  const title = post.title.length + suffix.length <= 60 ? post.title + suffix : post.title
+
+  // Related: same category, nearest by date, excluding self.
+  const related = all
+    .filter((p) => p.category === post.category && p.slug !== post.slug)
+    .slice(0, 4)
+
+  return {
+    slug: `blog/${post.slug}`,
+    html: blogShell({
+      url,
+      title,
+      desc: post.excerpt,
+      ldJson: postLd(post, url),
+      crumbs: `<a href="/">Home</a><span>/</span><a href="/blog/">Blog</a><span>/</span><a href="/blog/${cat.key}/">${esc(cat.name)}</a><span>/</span><span>${esc(post.title)}</span>`,
+      main: `
+    <article>
+      <section class="hero">
+        <span class="eyebrow">${esc(cat.name)} · ${esc(fmtDate(post.date))}</span>
+        <h1>${esc(post.title)}</h1>
+        ${renderByline()}
+        ${renderAeoAnswer(post.excerpt)}
+      </section>
+      ${renderPostBody(post.body)}
+    </article>
+
+    <section class="related" aria-labelledby="related-h">
+      <h2 id="related-h">More on ${esc(cat.name.toLowerCase())}</h2>
+      <ul>
+        ${related.map((p) => `
+          <li>
+            <a class="related-card" href="/blog/${p.slug}/">
+              <span class="related-eyebrow">${esc(fmtDate(p.date))}</span>
+              <span class="related-title">${esc(p.title)}</span>
+              <span class="related-arrow" aria-hidden>→</span>
+            </a>
+          </li>
+        `).join('')}
+      </ul>
+    </section>`
+    })
+  }
+}
+
+const postListHtml = (list) => `
+  <ul class="areas">
+    ${list.map((p) => `<li><a href="/blog/${p.slug}/">${esc(p.title)}</a> — <span style="opacity:.6">${esc(p.excerpt)}</span></li>`).join('')}
+  </ul>`
+
+const blogCategoryPage = (cat, all) => {
+  const url = `${SITE_URL}/blog/${cat.key}/`
+  const list = all.filter((p) => p.category === cat.key)
+  const title = `${cat.name} — ${SITE_NAME} blog`
+  const desc = `${cat.blurb} ${list.length} posts from the DuoStack studio.`
+
+  return {
+    slug: `blog/${cat.key}`,
+    html: blogShell({
+      url, title, desc,
+      ldJson: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: title,
+        description: desc,
+        url,
+        hasPart: list.map((p) => ({
+          '@type': 'BlogPosting',
+          headline: p.title,
+          datePublished: p.date,
+          url: `${SITE_URL}/blog/${p.slug}/`
+        }))
+      }, null, 2),
+      crumbs: `<a href="/">Home</a><span>/</span><a href="/blog/">Blog</a><span>/</span><span>${esc(cat.name)}</span>`,
+      main: `
+    <section class="hero">
+      <span class="eyebrow">Blog · ${esc(cat.name)}</span>
+      <h1>${esc(cat.name)}</h1>
+      ${renderByline()}
+      ${renderAeoAnswer(cat.blurb)}
+    </section>
+    <section>
+      <h2>${list.length} posts</h2>
+      ${postListHtml(list)}
+    </section>`
+    })
+  }
+}
+
+const blogIndexPage = (all) => {
+  const url = `${SITE_URL}/blog/`
+  const title = `Blog — ${SITE_NAME}`
+  const desc = `${all.length} posts on AI tooling, engineering, and building software for India — written from what we actually shipped.`
+
+  return {
+    slug: 'blog',
+    html: blogShell({
+      url, title, desc,
+      ldJson: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Blog',
+        name: title,
+        description: desc,
+        url,
+        publisher: { '@type': 'Organization', name: SITE_NAME, url: `${SITE_URL}/` }
+      }, null, 2),
+      crumbs: `<a href="/">Home</a><span>/</span><span>Blog</span>`,
+      main: `
+    <section class="hero">
+      <span class="eyebrow">Blog · ${all.length} posts</span>
+      <h1>Notes from the studio</h1>
+      ${renderByline()}
+      ${renderAeoAnswer(desc)}
+      <p>Everything here comes from work we actually did. Where a post makes a claim, it names the project it came from.</p>
+    </section>
+    ${BLOG_CATEGORIES.map((c) => {
+      const list = all.filter((p) => p.category === c.key)
+      return `
+    <section>
+      <h2><a href="/blog/${c.key}/">${esc(c.name)}</a></h2>
+      <p>${esc(c.blurb)}</p>
+      ${postListHtml(list.slice(0, 6))}
+      ${list.length > 6 ? `<p><a href="/blog/${c.key}/">All ${list.length} posts in ${esc(c.name.toLowerCase())} →</a></p>` : ''}
+    </section>`
+    }).join('')}`
+    })
+  }
+}
+
+// ----------------------------------------------------------------------
 // Sitemap rebuild
 // ----------------------------------------------------------------------
 const renderSitemap = (extraSlugs = []) => {
@@ -1262,6 +1508,20 @@ for (const pair of pairs) {
   count += 1
 }
 console.log(`✓ cross pages    ${pairs.length} service × area`)
+
+// Blog: index, one page per category, one page per post.
+for (const page of [
+  blogIndexPage(BLOG_POSTS),
+  ...BLOG_CATEGORIES.map((c) => blogCategoryPage(c, BLOG_POSTS)),
+  ...BLOG_POSTS.map((p) => blogPostPage(p, BLOG_POSTS))
+]) {
+  const outDir = join(DIST, page.slug)
+  await ensureDir(outDir)
+  await writeFile(join(outDir, 'index.html'), page.html, 'utf8')
+  extraSlugs.push(page.slug)
+  count += 1
+}
+console.log(`✓ blog           ${BLOG_POSTS.length} posts + ${BLOG_CATEGORIES.length} categories + index`)
 
 // Sitemap
 const sitemap = renderSitemap(extraSlugs)

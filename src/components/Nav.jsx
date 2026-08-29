@@ -3,11 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
 import { LogoLockup } from './Logo.jsx'
 
+// /blog/ is a real route rather than an on-page anchor — it is statically
+// generated, so it needs a full path. Without a link here the posts are
+// reachable only from the sitemap, which is not a route any reader takes.
 const links = [
   { href: '#services', label: 'Services' },
   { href: '#work', label: 'Work' },
   { href: '#process', label: 'Process' },
   { href: '#stack', label: 'Stack' },
+  { href: '/blog/', label: 'Blog' },
   { href: '#contact', label: 'Contact' }
 ]
 
