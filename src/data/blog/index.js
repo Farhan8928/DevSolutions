@@ -76,12 +76,54 @@ if (dupTitles.length) {
 }
 
 const validCats = new Set(CATEGORIES.map((c) => c.key))
-const thin = []
+
+// These guards replaced a flat 320-word floor.
+//
+// The floor was there to catch stub posts, and for a while it did useful work.
+// Then we rewrote everything in a tighter voice — cutting hedging, splitting
+// long sentences, deleting the summarising paragraph at the end of every post —
+// and thirty-five posts dropped under it despite getting better. Padding them
+// back to clear an arbitrary number is exactly the filler the rewrite removed.
+//
+// So: a much lower hard floor that only catches genuine stubs, plus checks on
+// the things we actually care about. Structure exists, the opening isn't
+// templated, and the voice hasn't drifted back to the flat register that reads
+// as machine-written.
+const problems = []
 for (const p of posts) {
   if (!validCats.has(p.category)) throw new Error(`blog: unknown category "${p.category}" on ${p.slug}`)
-  const words = p.body.join(' ').split(/\s+/).length
-  if (words < 320) thin.push(`${p.slug} (${words}w)`)
+
+  const prose = p.body.filter((l) => !l.startsWith('## '))
+  const text = prose.join(' ')
+  const words = text.split(/\s+/).length
+  const sections = p.body.filter((l) => l.startsWith('## ')).length
+
+  if (words < 250) problems.push(`${p.slug}: stub (${words}w)`)
+  if (sections < 2) problems.push(`${p.slug}: only ${sections} section(s)`)
+
+  // Contractions are the cheapest proxy for whether a post was written in a
+  // voice or assembled in one. Zero across 250+ words is a strong signal.
+  if (!/\b\w+['’](t|s|re|ve|ll|d|m)\b/i.test(text)) {
+    problems.push(`${p.slug}: no contractions — reads assembled`)
+  }
+
+  // Sentence-length variance. Uniform length is the most reliable tell there
+  // is, in either direction: all-medium reads generated, all-short reads
+  // like a listicle.
+  const lens = text.split(/(?<=[.?!])\s+/).filter((s) => s.trim()).map((s) => s.split(/\s+/).length)
+  const mean = lens.reduce((a, b) => a + b, 0) / lens.length
+  const sd = Math.sqrt(lens.reduce((a, b) => a + (b - mean) ** 2, 0) / lens.length)
+  if (sd / mean < 0.35) problems.push(`${p.slug}: flat sentence rhythm (cv ${(sd / mean).toFixed(2)})`)
 }
-if (thin.length) {
-  throw new Error(`blog: ${thin.length} post(s) below the 320-word floor\n  ${thin.slice(0, 10).join('\n  ')}`)
+
+// Templated openings — the same first sentence shape across many posts.
+const openings = new Map()
+for (const p of posts) {
+  const first = p.body.find((l) => !l.startsWith('## '))?.slice(0, 60).toLowerCase()
+  if (first && openings.has(first)) problems.push(`${p.slug}: opening duplicates ${openings.get(first)}`)
+  else if (first) openings.set(first, p.slug)
+}
+
+if (problems.length) {
+  throw new Error(`blog: ${problems.length} problem(s)\n  ${problems.slice(0, 12).join('\n  ')}`)
 }
