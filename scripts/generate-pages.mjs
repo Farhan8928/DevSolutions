@@ -51,6 +51,13 @@ const TODAY = new Date().toISOString().slice(0, 10)
 const { seoPages } = await import(
   pathToFileURL(join(ROOT, 'src/data/seoPages.js')).href
 )
+const { areas: ALL_AREAS, crossPairs } = await import(
+  pathToFileURL(join(ROOT, 'src', 'data', 'areas.js')).href
+)
+const { services: ALL_SERVICES } = await import(
+  pathToFileURL(join(ROOT, 'src', 'data', 'services.js')).href
+)
+
 const { serviceAreas } = await import(
   pathToFileURL(join(ROOT, 'src/data/studio.js')).href
 )
@@ -625,15 +632,32 @@ ${ldJson}
 // ----------------------------------------------------------------------
 // Neighbourhood-page renderer (one per Mumbai area)
 // ----------------------------------------------------------------------
+/**
+ * How a place is named in titles and headings.
+ *
+ * Appending ", Mumbai" to everything produces "Navi Mumbai, Mumbai" and
+ * "Thane, Mumbai" — both wrong, and both read as machine-generated to exactly
+ * the local searcher these pages are for. Navi Mumbai, Thane and Panvel are
+ * separate cities/districts, so they get named correctly.
+ */
+const placeLabel = (a) => {
+  const district = a.district ?? 'Mumbai Suburban'
+  if (a.name.includes('Mumbai')) return a.name
+  if (district.startsWith('Mumbai')) return `${a.name}, Mumbai`
+  if (a.name === district) return a.name
+  return `${a.name}, ${district}`
+}
+
 const neighbourhoodPage = (area) => {
   // Avoid double-"mumbai" in slugs like Navi Mumbai (slug already contains it)
   const slug = area.slug.includes('mumbai')
     ? `web-development-${area.slug}`
     : `web-development-${area.slug}-mumbai`
   const url   = `${SITE_URL}/${slug}/`
-  const h1    = `Web development company in ${area.name}, Mumbai`
-  const title = `Web Development Company in ${area.name}, Mumbai — DuoStack`
-  const desc  = `Web development company serving ${area.name}, Mumbai — React, Next.js and custom CMS platforms for founders across the Mumbai region. Senior engineers only.`
+  const place = placeLabel(area)
+  const h1    = `Web development company in ${place}`
+  const title = `Web Development Company in ${place} — DuoStack`
+  const desc  = `Web development company serving ${place} — React, Next.js and custom CMS platforms for founders across the Mumbai region. Senior engineers only.`
   const keyword = `web development company ${area.name} Mumbai`
 
   const intro = [
@@ -641,20 +665,32 @@ const neighbourhoodPage = (area) => {
     `Whether you are a D2C brand off Linking Road, a fintech founder near BKC, a healthtech team in Powai or a hospitality operator in Lower Parel, we ship with the same rigour: pixel-perfect design, Lighthouse 95+ on real devices, observability and analytics in place from week one, and full source-code transfer on day one of go-live. Tap the call or WhatsApp button on this page and you will speak directly with one of the two co-founders inside one business day.`
   ]
 
+  // The rich area record (profile, landmarks, pincodes, per-service relevance)
+  // lives in areas.js. Without it this page is the same boilerplate with a
+  // place name swapped in — which is precisely the doorway pattern. Use it.
+  const rich = ALL_AREAS.find((a) => a.slug === area.slug)
+  const localServices = rich
+    ? ALL_SERVICES.filter((s) => s.key !== 'web' && typeof rich.relevance?.[s.key] === 'string')
+    : []
+
   const sections = [
-    {
-      h2: `Why founders in ${area.name} choose DuoStack`,
-      body: `Three things, repeatedly. First — you talk to the engineers who actually build. There are no account managers, no juniors hidden behind a brand. Second — we ship pixel-perfect code that survives real production traffic and Lighthouse audits, not handover-and-pray deliverables. Third — we sign before we discover. Your roadmap, your stack choices and your customer data stay protected from the very first call.`
+    rich && {
+      h2: `Doing business in ${area.name}`,
+      body: rich.profile
     },
-    {
-      h2: `What we build for ${area.name} teams`,
-      body: `Marketing sites for raising rounds. Internal dashboards that route leads, orders, KYC and operations across multiple roles. Full SaaS products with auth, billing, payments and analytics. Headless Shopify and custom e-commerce. React Native apps for iOS and Android. Fintech and forex dashboards with KYC and MT5 integration. We have shipped each one of these — examples are in the work section of the home page.`
+    rich?.relevance?.web && {
+      h2: `What a ${area.name} web build actually has to solve`,
+      body: rich.relevance.web
+    },
+    rich && {
+      h2: `Areas and pincodes we cover around ${area.name}`,
+      body: `We work across ${area.name} and the wider ${rich.district} area, including pincodes ${rich.pincodes.join(', ')}. Landmarks we get asked about most: ${rich.landmarks.join(', ')}.`
     },
     {
       h2: `Working with you in ${area.name}`,
-      body: `Most engagements run remote-first with onsite days where they help. If you prefer onsite working sessions, ${area.name} is comfortably reachable for both founders. We run weekly Friday demos, async daily updates and a fixed sprint scope so you always know what you are paying for. Source code, designs and infrastructure-as-code are 100% transferred to your team on day one of go-live.`
+      body: `Most engagements run remote-first with onsite days where they earn their place — discovery, kick-off and the occasional working session. We run weekly Friday demos, async updates in between, and a fixed sprint scope so you always know what you are paying for. Source code, designs and infrastructure-as-code are 100% transferred to your team on day one of go-live.`
     }
-  ]
+  ].filter(Boolean)
 
   const faqs = [
     {
@@ -775,6 +811,15 @@ ${ldJson}
     ${renderAreasBlock(slug)}
     ${renderFaqSection(faqs)}
 
+    ${localServices.length ? `
+    <section>
+      <h2>What else we build in ${esc(area.name)}</h2>
+      <p>Each of these is written for what ${esc(area.name)} businesses specifically run into on that kind of build.</p>
+      <ul class="areas">
+        ${localServices.map((s) => `<li><a href="/${s.slug.replace(/-mumbai$/, '')}-${area.slug}${area.slug.includes('mumbai') ? '' : '-mumbai'}/">${esc(s.pair)} in ${esc(area.name)}</a></li>`).join('')}
+      </ul>
+    </section>` : ''}
+
     <section class="related" aria-labelledby="related-h">
       <h2 id="related-h">Other services in Mumbai</h2>
       <ul>
@@ -791,6 +836,312 @@ ${ldJson}
     </section>
   </main>
 
+  ${renderFooter()}
+  ${renderDock()}
+</body>
+</html>
+`
+  }
+}
+
+// ----------------------------------------------------------------------
+// Service × area landing pages
+//
+// The body copy comes from the area's own `relevance` entry for that service
+// — see the note at the top of src/data/areas.js. crossPairs() only yields a
+// pair where that copy actually exists, so this loop cannot emit a page whose
+// only distinguishing feature is a swapped place name.
+// ----------------------------------------------------------------------
+const crossPage = ({ area, service, body }) => {
+  const slug  = `${service.slug.replace(/-mumbai$/, '')}-${area.slug}${area.slug.includes('mumbai') ? '' : '-mumbai'}`
+  const url   = `${SITE_URL}/${slug}/`
+  const place = placeLabel(area)
+  const h1    = `${service.pair} in ${place}`
+  const title = `${service.pair} in ${place} — ${SITE_NAME}`
+  const desc  = `${service.pair} for businesses in ${place}. ${service.blurb} Senior engineers only, fixed scope, code handed over on day one.`
+
+  const hubSlug = service.slug
+  const faqs = [
+    {
+      q: `Do you work with businesses in ${area.name}?`,
+      a: `Yes. ${area.name} is inside our regular onsite radius and we already work across the Mumbai Metropolitan Region. Engagements run remote-first with onsite days for discovery and kick-off where they help. Pincodes covered here include ${area.pincodes.join(', ')}.`
+    },
+    {
+      q: `What does ${service.name.toLowerCase()} cost?`,
+      a: `This scope starts at ${service.from}. Every engagement is fixed-scope with the price and the date agreed before any code is written — we do not run hourly billing. The final number comes out of a free 30-minute scoping call.`
+    },
+    {
+      q: `Have you built this before?`,
+      a: `Yes — ${service.proof}. We only list service lines we can point at shipped work for, and you can see the live builds in the work section of the home page.`
+    },
+    {
+      q: `Who owns the code?`,
+      a: `You do, from day one of go-live. Source code, design files, infrastructure-as-code and deployment access are transferred in full. Your IP stays yours.`
+    }
+  ]
+
+  const ldJson = buildJsonLd({
+    pageUrl: url, pageTitle: title, pageDesc: desc, h1,
+    serviceName: service.name, faqs
+  })
+
+  return {
+    slug,
+    html: `<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(desc)}" />
+<meta name="keywords" content="${esc(`${service.name.toLowerCase()} ${area.name}, ${service.name.toLowerCase()} ${area.name} Mumbai, ${service.name.toLowerCase()} company Mumbai, software development ${area.name}`)}" />
+<meta name="author" content="${SITE_NAME}" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+
+<link rel="canonical" href="${url}" />
+<link rel="alternate" hreflang="en-IN" href="${url}" />
+<link rel="alternate" hreflang="en"    href="${url}" />
+<link rel="alternate" hreflang="x-default" href="${url}" />
+
+<meta name="geo.region" content="IN-MH" />
+<meta name="geo.placename" content="${esc(area.name)}, Mumbai" />
+<meta name="geo.position" content="${area.lat};${area.lng}" />
+<meta name="ICBM" content="${area.lat}, ${area.lng}" />
+
+<meta property="og:locale" content="en_IN" />
+<meta property="og:site_name" content="${SITE_NAME}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="${url}" />
+<meta property="og:title" content="${esc(title)}" />
+<meta property="og:description" content="${esc(desc)}" />
+<meta property="og:image" content="${SITE_URL}/og.jpg" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="${esc(title)}" />
+<meta name="twitter:description" content="${esc(desc)}" />
+<meta name="twitter:image" content="${SITE_URL}/og.jpg" />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#06070A" />
+<meta name="format-detection" content="telephone=yes" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>${PAGE_CSS}</style>
+
+<script type="application/ld+json">
+${ldJson}
+</script>
+</head>
+<body>
+  ${renderHeader()}
+
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a><span>/</span>
+      <a href="/#services">Services</a><span>/</span>
+      <a href="/${hubSlug}/">${esc(service.name)}</a><span>/</span>
+      <span>${esc(area.name)}</span>
+    </nav>
+
+    <section class="hero">
+      <span class="eyebrow">${esc(service.name)} · ${esc(area.name)}, Mumbai</span>
+      <h1>${esc(h1)}</h1>
+      ${renderByline()}
+      ${renderAeoAnswer(`${SITE_NAME} builds ${service.name.toLowerCase()} for businesses in ${area.name}, Mumbai. ${service.blurb} Senior engineers only, fixed-scope pricing from ${service.from}, and full source-code transfer on day one of go-live.`)}
+      ${renderTldr([
+        `What we ship here: ${service.blurb}`,
+        `Already built: ${service.proof}.`,
+        `${service.name} for this scope starts at ${service.from}, fixed-scope — no hourly billing.`,
+        `Covering ${esc(area.name)} and pincodes ${area.pincodes.join(', ')}.`
+      ])}
+      <p>${esc(body)}</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="${tel}">📞 Call ${PHONE_DISPLAY}</a>
+        <a class="btn btn-ghost" href="${wapp}" target="_blank" rel="noopener noreferrer">WhatsApp the founders</a>
+        <a class="btn btn-ghost" href="/#contact">Send a brief</a>
+      </div>
+    </section>
+
+    <section>
+      <h2>Doing business in ${esc(area.name)}</h2>
+      <p>${esc(area.profile)}</p>
+      <p>Landmarks we are asked about most around here: ${esc(area.landmarks.join(', '))}. We cover ${esc(area.name)} and the surrounding ${esc(area.district)} area, including pincodes ${esc(area.pincodes.join(', '))}.</p>
+    </section>
+
+    <section>
+      <h2>How we work with ${esc(area.name)} teams</h2>
+      <p>Remote-first with onsite days where they earn their place — discovery, kick-off and the occasional working session. Weekly demo every Friday, a fixed scope per sprint, and async updates in between so you always know what you are paying for. Source code, designs and infrastructure-as-code transfer to your team on day one of go-live, not at the end of a support period.</p>
+    </section>
+
+    ${renderAreasBlock(slug)}
+    ${renderFaqSection(faqs)}
+
+    <section class="related" aria-labelledby="related-h">
+      <h2 id="related-h">Related services in ${esc(area.name)}</h2>
+      <ul>
+        ${RELATED_FOR(area, service).map((r) => `
+          <li>
+            <a class="related-card" href="/${r.slug}/">
+              <span class="related-eyebrow">${esc(r.eyebrow)}</span>
+              <span class="related-title">${esc(r.title)}</span>
+              <span class="related-arrow" aria-hidden>→</span>
+            </a>
+          </li>
+        `).join('')}
+      </ul>
+    </section>
+  </main>
+
+  ${renderFooter()}
+  ${renderDock()}
+</body>
+</html>
+`
+  }
+}
+
+/**
+ * Sibling links for a cross page: other services genuinely offered in the same
+ * area, plus the service's own Mumbai hub. Keeps the grid internally linked so
+ * crawl depth stays shallow instead of every page hanging off the home page.
+ */
+const RELATED_FOR = (area, service) => {
+  const areaHub = area.slug.includes('mumbai')
+    ? `web-development-${area.slug}`
+    : `web-development-${area.slug}-mumbai`
+
+  const siblings = ALL_SERVICES
+    // `web` has no cross page — its area page IS the area hub, so link there
+    // rather than to a URL the generator never emits.
+    .filter((s) => s.key !== service.key && s.key !== 'web')
+    .filter((s) => typeof area.relevance?.[s.key] === 'string')
+    .slice(0, 3)
+    .map((s) => ({
+      slug: `${s.slug.replace(/-mumbai$/, '')}-${area.slug}${area.slug.includes('mumbai') ? '' : '-mumbai'}`,
+      eyebrow: `${s.name} · ${area.name}`,
+      title: `${s.pair} in ${area.name}`
+    }))
+
+  return [
+    ...siblings,
+    { slug: areaHub, eyebrow: `Web development · ${area.name}`, title: `Everything we build in ${area.name}` },
+    { slug: service.slug, eyebrow: `${service.name} · Mumbai`, title: `${service.pair} across Mumbai` }
+  ]
+}
+
+// ----------------------------------------------------------------------
+// Service hub pages for the lines that have no hand-written seoPages entry.
+// Thinner than the six long-form hubs by design — a hub's job is to route to
+// the area pages beneath it, and inventing 900 words to pad it out is exactly
+// the filler this grid is meant to avoid.
+// ----------------------------------------------------------------------
+const serviceHubPage = (service) => {
+  const url   = `${SITE_URL}/${service.slug}/`
+  const title = `${service.pair} in Mumbai — ${SITE_NAME}`
+  const desc  = `${service.blurb} ${SITE_NAME} is a Mumbai engineering studio — senior engineers only, fixed scope from ${service.from}, code handed over on day one.`
+  const covered = ALL_AREAS.filter((a) => typeof a.relevance?.[service.key] === 'string')
+
+  const faqs = [
+    {
+      q: `What does ${service.name.toLowerCase()} cost in Mumbai?`,
+      a: `This scope starts at ${service.from}, fixed-scope. The price and the delivery date are agreed before any code is written — we do not run hourly billing.`
+    },
+    {
+      q: `Have you shipped this before?`,
+      a: `Yes — ${service.proof}. We do not list a service line we cannot point at live work for.`
+    },
+    {
+      q: `Which parts of Mumbai do you cover?`,
+      a: `We work across the Mumbai Metropolitan Region. For this service we have area pages for ${covered.map((a) => a.name).join(', ')}.`
+    }
+  ]
+
+  const ldJson = buildJsonLd({
+    pageUrl: url, pageTitle: title, pageDesc: desc, h1: service.h1,
+    serviceName: service.name, faqs
+  })
+
+  return {
+    slug: service.slug,
+    html: `<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(desc)}" />
+<meta name="author" content="${SITE_NAME}" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+<link rel="canonical" href="${url}" />
+<link rel="alternate" hreflang="en-IN" href="${url}" />
+<link rel="alternate" hreflang="x-default" href="${url}" />
+<meta name="geo.region" content="IN-MH" />
+<meta name="geo.placename" content="Mumbai" />
+<meta property="og:locale" content="en_IN" />
+<meta property="og:site_name" content="${SITE_NAME}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="${url}" />
+<meta property="og:title" content="${esc(title)}" />
+<meta property="og:description" content="${esc(desc)}" />
+<meta property="og:image" content="${SITE_URL}/og.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="${esc(title)}" />
+<meta name="twitter:description" content="${esc(desc)}" />
+<meta name="twitter:image" content="${SITE_URL}/og.jpg" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#06070A" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>${PAGE_CSS}</style>
+<script type="application/ld+json">
+${ldJson}
+</script>
+</head>
+<body>
+  ${renderHeader()}
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a><span>/</span>
+      <a href="/#services">Services</a><span>/</span>
+      <span>${esc(service.name)}</span>
+    </nav>
+
+    <section class="hero">
+      <span class="eyebrow">${esc(service.name)} · Mumbai, India</span>
+      <h1>${esc(service.h1)}</h1>
+      ${renderByline()}
+      ${renderAeoAnswer(`${SITE_NAME} is a Mumbai engineering studio. ${service.blurb} We have shipped ${service.proof}. Fixed-scope from ${service.from}, senior engineers only, full source-code transfer on day one.`)}
+      ${renderTldr([
+        `${service.blurb}`,
+        `Shipped: ${service.proof}.`,
+        `From ${service.from}, fixed scope — no hourly billing.`,
+        `Area pages below for ${covered.length} parts of the Mumbai region.`
+      ])}
+      <div class="ctas">
+        <a class="btn btn-primary" href="${tel}">📞 Call ${PHONE_DISPLAY}</a>
+        <a class="btn btn-ghost" href="${wapp}" target="_blank" rel="noopener noreferrer">WhatsApp the founders</a>
+        <a class="btn btn-ghost" href="/#contact">Send a brief</a>
+      </div>
+    </section>
+
+    <section>
+      <h2>Where we do this in Mumbai</h2>
+      <p>Each page below is written for what businesses in that specific area actually run into on this kind of build — not the same page with the place name swapped.</p>
+      <ul class="areas">
+        ${covered.map((a) => `<li><a href="/${service.slug.replace(/-mumbai$/, '')}-${a.slug}${a.slug.includes('mumbai') ? '' : '-mumbai'}/">${esc(service.pair)} in ${esc(a.name)}</a></li>`).join('')}
+      </ul>
+    </section>
+
+    ${renderFaqSection(faqs)}
+  </main>
   ${renderFooter()}
   ${renderDock()}
 </body>
@@ -880,8 +1231,40 @@ for (const area of serviceAreas) {
   console.log(`✓ neighbourhood  ${slug}`)
 }
 
+// Service hub pages for lines with no long-form seoPages entry
+const extraSlugs = [...neighbourhoodSlugs]
+const hubSlugs = new Set(seoPages.map((p) => p.slug))
+for (const service of ALL_SERVICES) {
+  if (hubSlugs.has(service.slug)) continue // already rendered from seoPages
+  const { slug, html } = serviceHubPage(service)
+  const outDir = join(DIST, slug)
+  await ensureDir(outDir)
+  await writeFile(join(outDir, 'index.html'), html, 'utf8')
+  extraSlugs.push(slug)
+  count += 1
+  console.log(`✓ service hub    ${slug}`)
+}
+
+// Service × area pages — one per pair that has real copy written for it.
+const pairs = crossPairs(ALL_SERVICES)
+const seenSlugs = new Set(extraSlugs)
+for (const pair of pairs) {
+  const { slug, html } = crossPage(pair)
+  if (seenSlugs.has(slug)) {
+    console.error(`✗ duplicate slug collision: ${slug}`)
+    process.exit(1)
+  }
+  const outDir = join(DIST, slug)
+  await ensureDir(outDir)
+  await writeFile(join(outDir, 'index.html'), html, 'utf8')
+  extraSlugs.push(slug)
+  seenSlugs.add(slug)
+  count += 1
+}
+console.log(`✓ cross pages    ${pairs.length} service × area`)
+
 // Sitemap
-const sitemap = renderSitemap(neighbourhoodSlugs)
+const sitemap = renderSitemap(extraSlugs)
 await writeFile(join(DIST, 'sitemap.xml'), sitemap, 'utf8')
 await writeFile(join(ROOT, 'public', 'sitemap.xml'), sitemap, 'utf8')
 

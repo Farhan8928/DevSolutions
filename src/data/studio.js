@@ -38,16 +38,22 @@ export const studio = {
 // "Service area" block on landing pages and the `areaServed` enumeration in
 // every JSON-LD payload, so Google sees the same coverage statement in
 // rendered DOM and structured data — the consistency that local pack ranks on.
-export const serviceAreas = [
-  { name: 'Andheri',     slug: 'andheri',     lat: 19.1136, lng: 72.8697 },
-  { name: 'Bandra',      slug: 'bandra',      lat: 19.0596, lng: 72.8295 },
-  { name: 'BKC',         slug: 'bkc',         lat: 19.0664, lng: 72.8682 },
-  { name: 'Powai',       slug: 'powai',       lat: 19.1196, lng: 72.9089 },
-  { name: 'Lower Parel', slug: 'lower-parel', lat: 19.0030, lng: 72.8302 },
-  { name: 'Borivali',    slug: 'borivali',    lat: 19.2299, lng: 72.8567 },
-  { name: 'Thane',       slug: 'thane',       lat: 19.2183, lng: 72.9781 },
-  { name: 'Navi Mumbai', slug: 'navi-mumbai', lat: 19.0330, lng: 73.0297 }
-]
+//
+// Derived from areas.js rather than duplicated: that file carries the full
+// per-area profile and per-service relevance copy used by the landing-page
+// grid, and two hand-maintained lists of the same places drift apart quickly.
+import { areas } from './areas.js'
+
+// `district` is carried through deliberately: Thane, Navi Mumbai and Panvel are
+// separate cities/districts, and page titles need it to avoid printing
+// "Thane, Mumbai".
+export const serviceAreas = areas.map(({ name, slug, lat, lng, district }) => ({
+  name,
+  slug,
+  lat,
+  lng,
+  district
+}))
 
 // Two co-founders.
 // Initials are auto-derived from the name in the UI for the avatar tile.
